@@ -18,15 +18,16 @@ SEASONS = ['2017-2018', '2018-2019', '2019-2020', '2020-2021', '2021-2022', '202
 OUTPUT_PATH = 'output'
 
 
-def scrap_fbref():
+def scrap_fbref(fifa_df):
     url, league, season = get_data_info()
     matches = get_matches_data(url)
-    # match_links = get_match_links(url, league)
-    # player_data(match_links, league, season)
+    match_links = get_match_links(url, league)
+    add_players_data(matches, match_links, fifa_df)
 
     # export data
     os.makedirs(OUTPUT_PATH, exist_ok=True)
-    matches.reset_index(drop=True).to_csv(f'{OUTPUT_PATH}/{league.lower()}_{season.lower()}_matches_data.csv', header=True,
+    matches.reset_index(drop=True).to_csv(f'{OUTPUT_PATH}/{league.lower()}_{season.lower()}_matches_data.csv',
+                                          header=True,
                                           index=False, mode='w')
 
     print('Data collected!')
@@ -109,49 +110,51 @@ def get_match_links(url, league):
     return match_links
 
 
-def player_data(match_links, league, season):
-    # loop through all fixtures
-    player_data = pd.DataFrame([])
+def add_players_data(matches, match_links, fifa_df):
+    matches['Home Avg Players Score'] = ''
+    matches['Away Avg Players Score'] = ''
     for count, link in enumerate(match_links):
-        try:
-            tables = pd.read_html(link)
-            for table in tables:
-                try:
-                    table.columns = table.columns.droplevel()
-                except Exception:
-                    continue
+        tables = pd.read_html(link)
+        for table in tables:
+            try:
+                table.columns = table.columns.droplevel()
+            except:
+                continue
 
-            # get player data
-            def get_team_1_player_data():
-                # outfield and goal keeper data stored in seperate tables 
-                data_frames = [tables[3], tables[9]]
+        home_team_players_df = get_team_player_data([tables[3], tables[9]])
+        away_team_players_df = get_team_player_data([tables[10], tables[16]])
 
-                # merge outfield and goal keeper data
-                df = reduce(lambda left, right: pd.merge(left, right,
-                                                         on=['Player', 'Nation', 'Age', 'Min'], how='outer'),
-                            data_frames).iloc[:-1]
+        home_team_avg_score = calculate_avg_score(home_team_players_df['Player'].tolist(), fifa_df)
+        away_team_avg_score = calculate_avg_score(away_team_players_df['Player'].tolist(), fifa_df)
 
-                # assign a home or away value
-                return df.assign(home=1, game_id=count)
-
-            # get second teams  player data        
-            def get_team_2_player_data():
-                data_frames = [tables[10], tables[16]]
-                df = reduce(lambda left, right: pd.merge(left, right,
-                                                         on=['Player', 'Nation', 'Age', 'Min'], how='outer'),
-                            data_frames).iloc[:-1]
-                return df.assign(home=0, game_id=count)
-
-            # combine both team data and export all match data to csv
-            t1 = get_team_1_player_data()
-            t2 = get_team_2_player_data()
-            player_data = pd.concat([player_data, pd.concat([t1, t2]).reset_index()])
-
-            print(f'{count + 1}/{len(match_links)} matches collected')
-            player_data.to_csv(f'{league.lower()}_{season.lower()}_player_data.csv',
-                               header=True, index=False, mode='w')
-        except:
-            print(f'{link}: error')
+        matches.loc[count, 'Home Avg Players Score'] = home_team_avg_score
+        matches.loc[count, 'Away Avg Players Score'] = away_team_avg_score
 
         # sleep for 3 seconds after every game to avoid IP being blocked
         time.sleep(3)
+
+
+def get_team_player_data(df):
+    return reduce(lambda left, right:
+                  pd.merge(left, right,
+                           on=['Player', 'Nation', 'Age', 'Min'], how='outer'),
+                  df).iloc[:-1]
+
+
+def calculate_avg_score(players, fifa_df):
+    total_score = 0
+    for player_name in players:
+        player = find_player(player_name, fifa_df)
+        if player['Overall'].empty:
+            player_overall = 70
+        elif player['Overall'].shape[0] > 1:
+            player_overall = int(player['Overall'].values[0])
+        else:
+            player_overall = int(player['Overall'])
+        total_score += player_overall
+
+    return round(total_score / len(players), 2)
+
+
+def find_player(player_name, fifa_df):
+    return fifa_df[fifa_df['Name'].apply(lambda x: all(part.lower() in x.lower() for part in player_name.split()))]

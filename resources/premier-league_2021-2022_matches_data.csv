@@ -1,381 +1,381 @@
 Game ID,Wk,Day,Date,Time,Home,xG Home,G Home,Away,xG Away,G Away,Score,Home Avg Players Score,Away Avg Players Score
-0,1,Fri,13/08/2021,20:00,Brentford,1.2,2,Arsenal,1.3,0,1,75.36,79.14
-1,1,Sat,14/08/2021,12:30,Manchester Utd,1.5,5,Leeds United,0.5,1,1,78.5,74
-2,1,Sat,14/08/2021,15:00,Leicester City,0.5,1,Wolves,1.3,0,1,77.71,76
-3,1,Sat,14/08/2021,15:00,Burnley,1.5,1,Brighton,1,2,-1,74.5,77.29
-4,1,Sat,14/08/2021,15:00,Chelsea,0.7,3,Crystal Palace,0.2,0,1,79.21,75.14
-5,1,Sat,14/08/2021,15:00,Watford,1.2,3,Aston Villa,1.2,2,1,70.64,77.79
-6,1,Sat,14/08/2021,15:00,Everton,2.4,3,Southampton,0.8,1,1,77,73.43
-7,1,Sat,14/08/2021,17:30,Norwich City,1.4,0,Liverpool,1.6,3,-1,73,78.93
-8,1,Sun,15/08/2021,14:00,Newcastle Utd,1.8,2,West Ham,2.7,4,-1,75.21,77.57
-9,1,Sun,15/08/2021,16:30,Tottenham,1,1,Manchester City,1.8,0,1,76.5,82.07
-11,2,Sat,21/08/2021,12:30,Liverpool,2.7,2,Burnley,0.9,0,1,76.79,76.57
-12,2,Sat,21/08/2021,15:00,Aston Villa,1.2,2,Newcastle Utd,0.7,0,1,84.21,73.07
-13,2,Sat,21/08/2021,15:00,Manchester City,2.6,5,Norwich City,0.1,0,1,72.62,76.64
-14,2,Sat,21/08/2021,15:00,Leeds United,1.2,2,Everton,1.8,2,0,76,75.79
-15,2,Sat,21/08/2021,15:00,Crystal Palace,0.5,0,Brentford,0.9,0,0,77.07,71
-16,2,Sat,21/08/2021,17:30,Brighton,1.3,2,Watford,0.5,0,1,76.71,77.14
-17,2,Sun,22/08/2021,14:00,Wolves,1.7,0,Tottenham,1.7,1,-1,73.5,78.36
-18,2,Sun,22/08/2021,14:00,Southampton,0.7,1,Manchester Utd,1.8,1,0,78.93,80.07
-19,2,Sun,22/08/2021,16:30,Arsenal,0.3,0,Chelsea,3.1,2,-1,77.69,77.64
-20,2,Mon,23/08/2021,20:00,West Ham,2.3,4,Leicester City,0.6,1,1,84.21,79.29
-22,3,Sat,28/08/2021,12:30,Manchester City,4.4,5,Arsenal,0.2,0,1,78.08,76
-23,3,Sat,28/08/2021,15:00,Norwich City,1.5,1,Leicester City,1.5,2,-1,76.64,75.86
-24,3,Sat,28/08/2021,15:00,West Ham,1.3,2,Crystal Palace,1.1,2,0,77,73.64
-25,3,Sat,28/08/2021,15:00,Aston Villa,0.7,1,Brentford,0.9,1,0,77.07,76.69
-26,3,Sat,28/08/2021,15:00,Newcastle Utd,1,2,Southampton,3.6,2,0,79.43,79
-27,3,Sat,28/08/2021,15:00,Brighton,0.7,0,Everton,1.4,2,-1,74.62,74.23
-28,3,Sat,28/08/2021,17:30,Liverpool,2.5,1,Chelsea,0.6,1,0,77,71.07
-29,3,Sun,29/08/2021,14:00,Burnley,1,1,Leeds United,1.2,1,0,76.36,78.79
-30,3,Sun,29/08/2021,14:00,Tottenham,1,1,Watford,0.8,0,1,75.57,77.23
-31,3,Sun,29/08/2021,16:30,Wolves,2.1,0,Manchester Utd,0.6,1,-1,70.38,75.85
-33,4,Sat,11/09/2021,12:30,Crystal Palace,2.1,3,Tottenham,0.1,0,1,80,72.93
-34,4,Sat,11/09/2021,15:00,Watford,0.2,0,Wolves,2.2,2,-1,77.57,74.29
-35,4,Sat,11/09/2021,15:00,Brentford,0.4,0,Brighton,0.3,1,-1,77.29,83.31
-36,4,Sat,11/09/2021,15:00,Arsenal,2.7,1,Norwich City,0.7,0,1,73.77,78.38
-37,4,Sat,11/09/2021,15:00,Manchester Utd,2.5,4,Newcastle Utd,0.4,1,1,78,77.64
-38,4,Sat,11/09/2021,15:00,Leicester City,0.6,0,Manchester City,2.8,1,-1,74.5,79.64
-39,4,Sat,11/09/2021,15:00,Southampton,0.7,0,West Ham,0.7,0,0,76.21,74.43
-40,4,Sat,11/09/2021,17:30,Chelsea,1.3,3,Aston Villa,1.2,0,1,74.93,73.93
-41,4,Sun,12/09/2021,16:30,Leeds United,1.2,0,Liverpool,4.3,3,-1,75.79,75.64
-42,4,Mon,13/09/2021,20:00,Everton,1.4,3,Burnley,1,1,1,84.71,74.07
-44,5,Fri,17/09/2021,20:00,Newcastle Utd,1.3,1,Leeds United,1.5,1,0,73.21,70.36
-45,5,Sat,18/09/2021,12:30,Wolves,0.6,0,Brentford,2.5,2,-1,74.86,80.64
-46,5,Sat,18/09/2021,15:00,Manchester City,1,0,Southampton,0.4,0,0,78.53,75
-47,5,Sat,18/09/2021,15:00,Liverpool,3.1,3,Crystal Palace,0.6,0,1,77.71,78.14
-48,5,Sat,18/09/2021,15:00,Norwich City,1,1,Watford,2.4,3,-1,77,78
-49,5,Sat,18/09/2021,15:00,Burnley,1,0,Arsenal,1.1,1,-1,78.5,79.69
-50,5,Sat,18/09/2021,17:30,Aston Villa,0.8,3,Everton,0.7,0,1,78.36,78.69
-51,5,Sun,19/09/2021,14:00,West Ham,1.6,1,Manchester Utd,2,2,-1,79.36,85.07
-52,5,Sun,19/09/2021,14:00,Brighton,1.7,2,Leicester City,1.6,1,1,78,74.71
-53,5,Sun,19/09/2021,16:30,Tottenham,0.5,0,Chelsea,2.1,3,-1,74.07,78.43
-55,6,Sat,25/09/2021,12:30,Manchester Utd,2.2,0,Aston Villa,1,1,-1,75.21,73.21
-56,6,Sat,25/09/2021,12:30,Chelsea,0.2,0,Manchester City,1.7,1,-1,76,81.17
-57,6,Sat,25/09/2021,15:00,Leicester City,2.4,2,Burnley,0.5,2,0,73.71,75.14
-58,6,Sat,25/09/2021,15:00,Leeds United,1.2,1,West Ham,1.6,2,-1,81.07,77
-59,6,Sat,25/09/2021,15:00,Watford,0.9,1,Newcastle Utd,1.9,1,0,75.14,76.57
-60,6,Sat,25/09/2021,15:00,Everton,1.9,2,Norwich City,0.5,0,1,78.14,75.08
-61,6,Sat,25/09/2021,17:30,Brentford,2.1,3,Liverpool,2.8,3,0,76.23,74.14
-62,6,Sun,26/09/2021,14:00,Southampton,1,0,Wolves,1,1,-1,74.21,72.79
-63,6,Sun,26/09/2021,16:30,Arsenal,1.1,3,Tottenham,1,1,1,77.79,73.79
-64,6,Mon,27/09/2021,20:00,Crystal Palace,1.4,1,Brighton,0.8,1,0,74.38,71.86
-66,7,Sat,02/10/2021,12:30,Manchester Utd,1,1,Everton,1.3,1,0,78.23,78.43
-67,7,Sat,02/10/2021,15:00,Wolves,1,2,Newcastle Utd,0.6,1,1,75.57,76.79
-68,7,Sat,02/10/2021,15:00,Burnley,1.2,0,Norwich City,0.6,0,0,78.82,75.86
-69,7,Sat,02/10/2021,15:00,Chelsea,3.3,3,Southampton,1.3,1,1,80.38,86.25
-70,7,Sat,02/10/2021,15:00,Leeds United,1.3,1,Watford,0.2,0,1,71.36,79.29
-71,7,Sat,02/10/2021,17:30,Brighton,1.1,0,Arsenal,0.4,0,0,77.21,77.86
-72,7,Sun,03/10/2021,14:00,Tottenham,1.3,2,Aston Villa,1.2,1,1,83.86,74.5
-73,7,Sun,03/10/2021,14:00,Crystal Palace,1.5,2,Leicester City,1.2,2,0,73.21,74.36
-74,7,Sun,03/10/2021,14:00,West Ham,1.5,1,Brentford,1.2,2,-1,78.57,75.57
-75,7,Sun,03/10/2021,16:30,Liverpool,0.9,2,Manchester City,1.2,2,0,72.79,78
-77,8,Sat,16/10/2021,12:30,Watford,0.5,0,Liverpool,3.3,5,-1,76.25,77.86
-78,8,Sat,16/10/2021,15:00,Leicester City,2.4,4,Manchester Utd,1.2,2,1,75.29,78.18
-79,8,Sat,16/10/2021,15:00,Manchester City,2.1,2,Burnley,0.9,0,1,81.21,74.79
-80,8,Sat,16/10/2021,15:00,Southampton,1.9,1,Leeds United,0.2,0,1,81.14,78.79
-81,8,Sat,16/10/2021,15:00,Aston Villa,1,2,Wolves,2,3,-1,77.93,72.93
-82,8,Sat,16/10/2021,15:00,Norwich City,1.2,0,Brighton,0.8,0,0,74.21,75.71
-83,8,Sat,16/10/2021,17:30,Brentford,1.4,0,Chelsea,0.3,1,-1,75.64,75.36
-84,8,Sun,17/10/2021,14:00,Everton,0.9,0,West Ham,1.2,1,-1,76.77,72.43
-85,8,Sun,17/10/2021,16:30,Newcastle Utd,0.4,2,Tottenham,1.7,3,-1,73,74.64
-86,8,Mon,18/10/2021,20:00,Arsenal,1.7,2,Crystal Palace,0.7,2,0,77.79,85.36
-88,9,Fri,22/10/2021,20:00,Arsenal,2.7,3,Aston Villa,1.4,1,1,75.36,77.21
-89,9,Sat,23/10/2021,12:30,Chelsea,3.1,7,Norwich City,0.1,0,1,78.29,81.93
-90,9,Sat,23/10/2021,15:00,Leeds United,1.6,1,Wolves,0.9,1,0,77.29,81
-91,9,Sat,23/10/2021,15:00,Crystal Palace,1.9,1,Newcastle Utd,0.3,1,0,74.86,78.64
-92,9,Sat,23/10/2021,15:00,Everton,1.5,2,Watford,3.7,5,-1,82.07,77.86
-93,9,Sat,23/10/2021,15:00,Southampton,1.6,2,Burnley,0.7,2,0,75.42,74.29
-94,9,Sat,23/10/2021,17:30,Brighton,1.3,1,Manchester City,3.8,4,-1,71.71,73.5
-95,9,Sun,24/10/2021,14:00,West Ham,1.3,1,Tottenham,0.7,0,1,86.14,75.86
-96,9,Sun,24/10/2021,14:00,Brentford,1,1,Leicester City,1.5,2,-1,78,78.79
-97,9,Sun,24/10/2021,16:30,Manchester Utd,1.6,0,Liverpool,3.4,5,-1,72.5,74.14
-99,10,Sat,30/10/2021,12:30,Leicester City,1.3,0,Arsenal,0.7,2,-1,76.36,75.64
-100,10,Sat,30/10/2021,15:00,Newcastle Utd,0.2,0,Chelsea,2.2,3,-1,73.5,77.43
-101,10,Sat,30/10/2021,15:00,Liverpool,1.5,2,Brighton,1,2,0,78.6,86.91
-102,10,Sat,30/10/2021,15:00,Burnley,2.3,3,Brentford,0.8,1,1,74.36,72.5
-103,10,Sat,30/10/2021,15:00,Watford,1,0,Southampton,1.8,1,-1,78.71,74.93
-104,10,Sat,30/10/2021,15:00,Manchester City,0.7,0,Crystal Palace,0.7,2,-1,75.86,76.36
-105,10,Sat,30/10/2021,17:30,Tottenham,1,0,Manchester Utd,1.5,3,-1,77.27,75.15
-106,10,Sun,31/10/2021,14:00,Norwich City,0.8,1,Leeds United,0.7,2,-1,75.93,77.93
-107,10,Sun,31/10/2021,16:30,Aston Villa,0.7,1,West Ham,2.3,4,-1,74.46,78.21
-108,10,Mon,01/11/2021,20:00,Wolves,1.7,2,Everton,1.5,1,1,80.5,71.36
-110,11,Fri,05/11/2021,20:00,Southampton,0.6,1,Aston Villa,0.6,0,1,77.14,78.5
-111,11,Sat,06/11/2021,12:30,Manchester Utd,0.9,0,Manchester City,1.6,2,-1,76.23,78.07
-112,11,Sat,06/11/2021,15:00,Brentford,2.5,1,Norwich City,1.2,2,-1,72.29,78.33
-113,11,Sat,06/11/2021,15:00,Chelsea,1.8,1,Burnley,0.7,1,0,72.79,73.29
-114,11,Sat,06/11/2021,15:00,Crystal Palace,1.9,2,Wolves,0.3,0,1,78.36,77.86
-115,11,Sat,06/11/2021,17:30,Brighton,1.5,1,Newcastle Utd,0.3,1,0,76.46,74
-116,11,Sun,07/11/2021,14:00,Everton,0.6,0,Tottenham,0.7,0,0,75.15,75.86
-117,11,Sun,07/11/2021,14:00,Leeds United,1.3,1,Leicester City,0.7,1,0,78.29,80.5
-118,11,Sun,07/11/2021,14:00,Arsenal,1.6,1,Watford,0.5,0,1,84.07,75.43
-119,11,Sun,07/11/2021,16:30,West Ham,1,3,Liverpool,1.2,2,1,76.79,73.21
-121,12,Sat,20/11/2021,12:30,Leicester City,0.4,0,Chelsea,2,3,-1,75.64,78.79
-122,12,Sat,20/11/2021,15:00,Wolves,1.4,1,West Ham,0.4,0,1,80.86,74.07
-123,12,Sat,20/11/2021,15:00,Watford,2.7,4,Manchester Utd,1.4,1,1,72.57,76.29
-124,12,Sat,20/11/2021,15:00,Norwich City,0.5,2,Southampton,1,1,1,77.14,74.36
-125,12,Sat,20/11/2021,15:00,Aston Villa,0.7,2,Brighton,0.4,0,1,74.71,76.25
-126,12,Sat,20/11/2021,15:00,Newcastle Utd,1.5,3,Brentford,0.9,3,0,77.38,72.21
-127,12,Sat,20/11/2021,15:00,Burnley,1.5,3,Crystal Palace,1.9,3,0,84.5,77.64
-128,12,Sat,20/11/2021,17:30,Liverpool,4.3,4,Arsenal,0.4,0,1,78.14,78
-129,12,Sun,21/11/2021,14:00,Manchester City,2.5,3,Everton,0.2,0,1,75.79,72.71
-130,12,Sun,21/11/2021,16:30,Tottenham,2.1,2,Leeds United,1.4,1,1,74.21,75.5
-132,13,Sat,27/11/2021,12:30,Arsenal,2.5,2,Newcastle Utd,0.3,0,1,77.77,76.93
-133,13,Sat,27/11/2021,15:00,Crystal Palace,1,1,Aston Villa,0.5,2,-1,76.25,74.29
-134,13,Sat,27/11/2021,15:00,Liverpool,2.9,4,Southampton,1,0,1,71.71,79.21
-135,13,Sat,27/11/2021,15:00,Norwich City,1.6,0,Wolves,0.3,0,0,78.57,84
-136,13,Sat,27/11/2021,17:30,Brighton,2.1,0,Leeds United,0.6,0,0,75.93,79.93
-137,13,Sun,28/11/2021,14:00,Brentford,1.2,1,Everton,1,0,1,77.21,75.07
-138,13,Sun,28/11/2021,14:00,Leicester City,2.1,4,Watford,2.8,2,1,78.14,81.57
-139,13,Sun,28/11/2021,14:00,Manchester City,2.1,2,West Ham,0.2,1,1,77.71,78.71
-140,13,Sun,28/11/2021,16:30,Chelsea,2.7,1,Manchester Utd,0.9,1,0,77,74.86
-142,14,Tue,30/11/2021,19:30,Newcastle Utd,1.1,1,Norwich City,1.2,1,0,76.29,79.57
-143,14,Tue,30/11/2021,20:15,Leeds United,1.4,1,Crystal Palace,1.1,0,1,71.5,86.21
-144,14,Wed,01/12/2021,19:30,Southampton,1.5,2,Leicester City,1.5,2,0,73.21,74.5
-145,14,Wed,01/12/2021,19:30,West Ham,1.3,1,Brighton,1.3,1,0,76.86,72.43
-146,14,Wed,01/12/2021,19:30,Wolves,0.7,0,Burnley,0.2,0,0,78.36,76
-147,14,Wed,01/12/2021,19:30,Watford,1,1,Chelsea,0.9,2,-1,78.14,77.93
-148,14,Wed,01/12/2021,20:15,Aston Villa,0.8,1,Manchester City,1,2,-1,76.5,82.36
-149,14,Wed,01/12/2021,20:15,Everton,0.7,1,Liverpool,2.4,4,-1,73.43,72.21
-150,14,Thu,02/12/2021,19:30,Tottenham,1.9,2,Brentford,0.3,0,1,85.92,76.36
-151,14,Thu,02/12/2021,20:15,Manchester Utd,1.9,3,Arsenal,1.4,2,1,79.93,78.79
-153,15,Sat,04/12/2021,12:30,West Ham,1.8,3,Chelsea,1.1,2,1,78.5,72.36
-154,15,Sat,04/12/2021,15:00,Newcastle Utd,1,1,Burnley,0.6,0,1,73,78.43
-155,15,Sat,04/12/2021,15:00,Southampton,1.6,1,Brighton,1.6,1,0,74.43,78
-156,15,Sat,04/12/2021,15:00,Wolves,0.1,0,Liverpool,2.7,1,-1,76.57,76.5
-157,15,Sat,04/12/2021,17:30,Watford,0.8,1,Manchester City,3.1,3,-1,75.07,75.15
-158,15,Sun,05/12/2021,14:00,Leeds United,1.2,2,Brentford,1,2,0,72.14,78.14
-159,15,Sun,05/12/2021,14:00,Tottenham,1.6,3,Norwich City,1.2,0,1,85,72.36
-160,15,Sun,05/12/2021,14:00,Manchester Utd,0.9,1,Crystal Palace,0.5,0,1,76.43,75.79
-161,15,Sun,05/12/2021,16:30,Aston Villa,2.1,2,Leicester City,1.1,1,1,75.71,73.29
-162,15,Mon,06/12/2021,20:00,Everton,0.9,2,Arsenal,1,1,1,82.14,76.77
-164,16,Fri,10/12/2021,20:00,Brentford,1.6,2,Watford,0.5,1,1,79.93,75.93
-165,16,Sat,11/12/2021,12:30,Manchester City,3.2,1,Wolves,0.2,0,1,72.21,81.93
-166,16,Sat,11/12/2021,15:00,Liverpool,2.2,1,Aston Villa,0.2,0,1,75.46,79.15
-167,16,Sat,11/12/2021,15:00,Arsenal,1.8,3,Southampton,0.6,0,1,75.64,84.29
-168,16,Sat,11/12/2021,15:00,Chelsea,2.5,3,Leeds United,1.4,2,1,76.86,79.29
-169,16,Sat,11/12/2021,17:30,Norwich City,1.2,0,Manchester Utd,2,1,-1,77.79,73.71
-170,16,Sun,12/12/2021,14:00,Burnley,0.8,0,West Ham,0.8,0,0,84.67,76.69
-171,16,Sun,12/12/2021,14:00,Leicester City,2.6,4,Newcastle Utd,1,0,1,72.86,81.5
-172,16,Sun,12/12/2021,16:30,Crystal Palace,1.8,3,Everton,1,1,1,77.29,74.57
-174,17,Tue,14/12/2021,19:45,Norwich City,0.5,0,Aston Villa,2,2,-1,76.93,73.5
-175,17,Tue,14/12/2021,20:00,Manchester City,3.1,7,Leeds United,0.3,0,1,76.57,79.14
-176,17,Wed,15/12/2021,19:30,Brighton,1.2,0,Wolves,1,1,-1,73.77,77.07
-177,17,Wed,15/12/2021,19:30,Crystal Palace,1.2,2,Southampton,0.6,2,0,74.43,72.14
-178,17,Wed,15/12/2021,20:00,Arsenal,2.8,2,West Ham,0.4,0,1,72.36,76.43
-179,17,Thu,16/12/2021,19:45,Chelsea,2.9,1,Everton,0.6,1,0,76.71,79.21
-180,17,Thu,16/12/2021,20:00,Liverpool,2.7,3,Newcastle Utd,0.3,1,1,79.57,76.71
-182,18,Sat,18/12/2021,17:30,Leeds United,1.6,1,Arsenal,3.5,4,-1,78.43,73.14
-183,18,Sun,19/12/2021,14:00,Wolves,0.2,0,Chelsea,0.9,0,0,81.5,86.08
-184,18,Sun,19/12/2021,14:15,Newcastle Utd,0.3,0,Manchester City,2.9,4,-1,72.29,77.71
-185,18,Sun,19/12/2021,16:30,Tottenham,3,2,Liverpool,1.1,2,0,75.07,77.29
-187,19,Sun,26/12/2021,15:00,West Ham,1.6,2,Southampton,1.2,3,-1,73.93,77.62
-188,19,Sun,26/12/2021,15:00,Manchester City,3.6,6,Leicester City,2.7,3,1,75.62,77.14
-189,19,Sun,26/12/2021,15:00,Norwich City,0.1,0,Arsenal,2.5,5,-1,78,78.71
-190,19,Sun,26/12/2021,15:00,Tottenham,2.3,3,Crystal Palace,0.2,0,1,78.07,76.14
-191,19,Sun,26/12/2021,17:30,Aston Villa,0.4,1,Chelsea,2.6,3,-1,74.07,75.14
-192,19,Sun,26/12/2021,20:00,Brighton,0.8,2,Brentford,0.7,0,1,77.54,72.43
-193,19,Mon,27/12/2021,20:00,Newcastle Utd,1.3,1,Manchester Utd,1.6,1,0,77.93,75.71
-195,20,Tue,28/12/2021,15:00,Southampton,0.4,1,Tottenham,2.3,1,0,72.79,76.08
-196,20,Tue,28/12/2021,15:00,Crystal Palace,1.9,3,Norwich City,0.9,0,1,77.62,72.21
-197,20,Tue,28/12/2021,15:00,Watford,1.6,1,West Ham,3.6,4,-1,74.86,74.07
-198,20,Tue,28/12/2021,20:00,Leicester City,0.4,1,Liverpool,2.3,0,1,77.71,78.57
-199,20,Wed,29/12/2021,19:30,Chelsea,0.7,1,Brighton,0.9,1,0,76.29,74
-200,20,Wed,29/12/2021,20:15,Brentford,0.4,0,Manchester City,1.1,1,-1,78.29,75.64
-201,20,Thu,30/12/2021,20:15,Manchester Utd,2.4,3,Burnley,1.1,1,1,77.71,79.21
-203,21,Sat,01/01/2022,12:30,Arsenal,0.8,1,Manchester City,2,2,-1,74.93,78.86
-204,21,Sat,01/01/2022,15:00,Watford,0.3,0,Tottenham,2.2,1,-1,72.36,72.5
-205,21,Sat,01/01/2022,17:30,Crystal Palace,2.4,2,West Ham,2.2,3,-1,75.21,78.07
-206,21,Sun,02/01/2022,14:00,Leeds United,1.9,3,Burnley,1,1,1,74.69,76.57
-207,21,Sun,02/01/2022,14:00,Brentford,0.6,2,Aston Villa,0.8,1,1,78.5,78.17
-208,21,Sun,02/01/2022,14:00,Everton,1.6,2,Brighton,1.7,3,-1,74.62,76.23
-209,21,Sun,02/01/2022,16:30,Chelsea,1.2,2,Liverpool,1.3,2,0,74,86.25
-210,21,Mon,03/01/2022,17:30,Manchester Utd,0.8,0,Wolves,0.7,1,-1,76.21,79.57
-212,18,Tue,11/01/2022,19:45,Southampton,1.4,4,Brentford,0.5,1,1,77.07,77.71
-213,18,Wed,12/01/2022,19:45,West Ham,2.5,2,Norwich City,0.3,0,1,78.36,77.29
-215,22,Fri,14/01/2022,20:00,Brighton,2,1,Crystal Palace,0.2,1,0,78.58,72.21
-216,22,Sat,15/01/2022,12:30,Manchester City,1,1,Chelsea,0.3,0,1,77.79,76.93
-217,22,Sat,15/01/2022,15:00,Norwich City,1,2,Everton,0.6,1,1,75.31,77.79
-218,22,Sat,15/01/2022,15:00,Newcastle Utd,1.2,1,Watford,1.4,1,0,78.64,73.71
-219,22,Sat,15/01/2022,15:00,Wolves,2.5,3,Southampton,0.8,1,1,72.43,76.71
-220,22,Sat,15/01/2022,17:30,Aston Villa,1.9,2,Manchester Utd,1,2,0,86.62,75.29
-221,22,Sun,16/01/2022,14:00,West Ham,2.4,2,Leeds United,2.2,3,-1,78.07,75.42
-222,22,Sun,16/01/2022,14:00,Liverpool,2.7,3,Brentford,0.7,0,1,79.86,77
-224,24,Tue,18/01/2022,20:00,Brighton,0.7,1,Chelsea,0.7,1,0,77.85,73.93
-226,17,Wed,19/01/2022,19:30,Leicester City,1.2,2,Tottenham,3.1,3,-1,75.36,76
-227,17,Wed,19/01/2022,20:00,Brentford,2.3,1,Manchester Utd,2.3,3,-1,72.29,77.57
-229,23,Fri,21/01/2022,20:00,Watford,1.2,0,Norwich City,1.1,3,-1,77.5,78.36
-230,23,Sat,22/01/2022,12:30,Everton,1.6,0,Aston Villa,0.8,1,-1,75.31,79.79
-231,23,Sat,22/01/2022,15:00,Leeds United,0.7,0,Newcastle Utd,0.9,1,-1,78,75.64
-232,23,Sat,22/01/2022,15:00,Manchester Utd,1.9,1,West Ham,0.3,0,1,77.79,78
-233,23,Sat,22/01/2022,15:00,Brentford,1.1,1,Wolves,0.2,2,-1,78.29,78
-234,23,Sat,22/01/2022,17:30,Southampton,0.8,1,Manchester City,1.8,1,0,78.08,77.38
-235,23,Sun,23/01/2022,14:00,Crystal Palace,2.2,1,Liverpool,1.9,3,-1,78.71,71.14
-236,23,Sun,23/01/2022,14:00,Arsenal,1.2,0,Burnley,0.4,0,0,81.31,75.36
-237,23,Sun,23/01/2022,14:00,Leicester City,1.4,1,Brighton,1.1,1,0,73.86,76.64
-238,23,Sun,23/01/2022,16:30,Chelsea,1.2,2,Tottenham,0.5,0,1,79.5,72.71
-240,17,Sat,05/02/2022,18:00,Burnley,0.6,0,Watford,0.8,0,0,76.57,78.64
-242,24,Tue,08/02/2022,19:45,West Ham,0.8,1,Watford,0.3,0,1,74.86,77.86
-243,24,Tue,08/02/2022,19:45,Newcastle Utd,1.9,3,Everton,0.7,1,1,76.07,77.23
-244,24,Tue,08/02/2022,20:00,Burnley,0.4,1,Manchester Utd,1.8,1,0,75,78.5
-245,24,Wed,09/02/2022,19:45,Tottenham,1.4,2,Southampton,2.2,3,-1,71.23,75.93
-246,24,Wed,09/02/2022,19:45,Norwich City,0.4,1,Crystal Palace,1.3,1,0,80.64,73.5
-247,24,Wed,09/02/2022,19:45,Manchester City,1.9,2,Brentford,0.4,0,1,81.79,76.07
-248,24,Wed,09/02/2022,20:00,Aston Villa,1.6,3,Leeds United,1.8,3,0,73.79,72.93
-249,24,Thu,10/02/2022,19:45,Liverpool,1.8,2,Leicester City,0.5,0,1,74.86,77.5
-250,24,Thu,10/02/2022,19:45,Wolves,0.8,0,Arsenal,1.8,1,-1,76,74.86
-252,25,Sat,12/02/2022,12:30,Manchester Utd,2.1,1,Southampton,0.8,1,0,78.33,78
-253,25,Sat,12/02/2022,15:00,Everton,2.7,3,Leeds United,0.3,0,1,76.93,77.29
-254,25,Sat,12/02/2022,15:00,Brentford,1.6,0,Crystal Palace,0.3,0,0,76,86.38
-255,25,Sat,12/02/2022,15:00,Watford,0.5,0,Brighton,1.6,2,-1,78.23,75.29
-256,25,Sat,12/02/2022,17:30,Norwich City,0.4,0,Manchester City,4.6,4,-1,75.43,77.5
-257,25,Sun,13/02/2022,14:00,Newcastle Utd,0.5,1,Aston Villa,0.6,0,1,76.43,74.14
-258,25,Sun,13/02/2022,14:00,Burnley,1.5,0,Liverpool,1.7,1,-1,77.5,77.57
-259,25,Sun,13/02/2022,14:00,Tottenham,1.2,0,Wolves,1.3,2,-1,78.5,73.57
-260,25,Sun,13/02/2022,16:30,Leicester City,1.4,2,West Ham,1.1,2,0,75.23,78.93
-262,18,Tue,15/02/2022,20:15,Manchester Utd,1.7,2,Brighton,0.7,0,1,72.86,76.57
-264,26,Sat,19/02/2022,12:30,West Ham,0.6,1,Newcastle Utd,0.8,1,0,72.08,81.21
-265,26,Sat,19/02/2022,15:00,Aston Villa,1.3,0,Watford,1.2,1,-1,86.58,78.15
-266,26,Sat,19/02/2022,15:00,Arsenal,1.7,2,Brentford,0.6,1,1,78.86,76.5
-267,26,Sat,19/02/2022,15:00,Southampton,2.5,2,Everton,0.3,0,1,75.36,71.14
-268,26,Sat,19/02/2022,15:00,Liverpool,3.6,3,Norwich City,0.6,1,1,73.86,76.57
-269,26,Sat,19/02/2022,15:00,Brighton,0.6,0,Burnley,0.7,3,-1,73,78.57
-270,26,Sat,19/02/2022,15:00,Crystal Palace,0.5,0,Chelsea,0.9,1,-1,74.5,78.29
-271,26,Sat,19/02/2022,17:30,Manchester City,2.1,2,Tottenham,1.4,3,-1,78.29,80.07
-272,26,Sun,20/02/2022,14:00,Leeds United,1.8,2,Manchester Utd,2.2,4,-1,76.93,75.58
-273,26,Sun,20/02/2022,16:30,Wolves,0.5,2,Leicester City,1.7,1,1,77.79,78.36
-275,13,Wed,23/02/2022,19:30,Burnley,0.9,1,Tottenham,0.7,0,1,74,72.29
-277,18,Wed,23/02/2022,19:30,Watford,1.4,1,Crystal Palace,1.1,4,-1,75.69,75.14
-279,19,Wed,23/02/2022,19:45,Liverpool,5.9,6,Leeds United,0.2,0,1,81.5,76.57
-281,20,Thu,24/02/2022,19:45,Arsenal,3.1,2,Wolves,1,1,1,78.07,78.5
-283,27,Fri,25/02/2022,20:00,Southampton,2.6,2,Norwich City,0.6,0,1,75.79,77.36
-284,27,Sat,26/02/2022,12:30,Leeds United,1.5,0,Tottenham,1.9,4,-1,75.27,74.07
-285,27,Sat,26/02/2022,15:00,Crystal Palace,1,1,Burnley,0.2,1,0,78.86,80.79
-286,27,Sat,26/02/2022,15:00,Manchester Utd,2.8,0,Watford,0.6,0,0,77.07,76
-287,27,Sat,26/02/2022,15:00,Brighton,0.7,0,Aston Villa,1,2,-1,78.5,77.29
-288,27,Sat,26/02/2022,15:00,Brentford,0.4,0,Newcastle Utd,2.7,2,-1,79.64,72.29
-289,27,Sat,26/02/2022,17:30,Everton,0.5,0,Manchester City,1.8,1,-1,74.29,79.14
-290,27,Sun,27/02/2022,14:00,West Ham,1.8,1,Wolves,0.7,0,1,74.64,73.79
-292,22,Tue,01/03/2022,19:45,Burnley,0.9,0,Leicester City,1.5,2,-1,74.57,85.69
-294,28,Sat,05/03/2022,12:30,Leicester City,0.4,1,Leeds United,1.7,0,1,79.29,76.93
-295,28,Sat,05/03/2022,15:00,Newcastle Utd,1.7,2,Brighton,1.5,1,1,77.46,76.33
-296,28,Sat,05/03/2022,15:00,Aston Villa,2.5,4,Southampton,1.1,0,1,78.43,77.29
-297,28,Sat,05/03/2022,15:00,Burnley,0.7,0,Chelsea,2.3,4,-1,75.36,81.07
-298,28,Sat,05/03/2022,15:00,Wolves,0.7,0,Crystal Palace,2.7,2,-1,74.86,76
-299,28,Sat,05/03/2022,15:00,Norwich City,1,1,Brentford,2,3,-1,77.57,73.79
-300,28,Sat,05/03/2022,17:30,Liverpool,2.4,1,West Ham,1.3,0,1,76.62,77.5
-301,28,Sun,06/03/2022,14:00,Watford,1,2,Arsenal,1,3,-1,80.54,78.43
-302,28,Sun,06/03/2022,16:30,Manchester City,2.7,4,Manchester Utd,0.5,1,1,73.5,79.93
-303,28,Mon,07/03/2022,20:00,Tottenham,2.5,5,Everton,0.2,0,1,72.36,75.21
-305,19,Thu,10/03/2022,19:30,Wolves,0.7,4,Watford,0.6,0,1,76.86,78.5
-307,21,Thu,10/03/2022,19:30,Southampton,1.1,1,Newcastle Utd,0.6,2,-1,72.64,74.64
-309,30,Thu,10/03/2022,19:30,Norwich City,1,1,Chelsea,1.8,3,-1,78.64,78.5
-311,20,Thu,10/03/2022,19:45,Leeds United,0.2,0,Aston Villa,1.5,3,-1,72.29,76.14
-313,29,Sat,12/03/2022,12:30,Brighton,0.5,0,Liverpool,2.2,2,-1,77.43,77.57
-314,29,Sat,12/03/2022,15:00,Brentford,1.9,2,Burnley,0.7,0,1,78.15,74.93
-315,29,Sat,12/03/2022,17:30,Manchester Utd,1,3,Tottenham,1.5,2,1,80.07,76.93
-316,29,Sun,13/03/2022,14:00,Chelsea,1.1,1,Newcastle Utd,0.3,0,1,76.38,77.86
-317,29,Sun,13/03/2022,14:00,Southampton,1.4,1,Watford,1.7,2,-1,78.71,80.71
-318,29,Sun,13/03/2022,14:00,West Ham,1.2,2,Aston Villa,1.1,1,1,78,76.07
-319,29,Sun,13/03/2022,14:00,Everton,0.4,0,Wolves,0.8,1,-1,85.93,77.29
-320,29,Sun,13/03/2022,14:00,Leeds United,2.5,2,Norwich City,1.5,1,1,74.64,73.64
-321,29,Sun,13/03/2022,16:30,Arsenal,2.4,2,Leicester City,0.4,0,1,80.5,77.71
-322,29,Mon,14/03/2022,20:00,Crystal Palace,0.6,0,Manchester City,2.8,0,0,78.36,78.36
-324,16,Wed,16/03/2022,19:30,Brighton,0.7,0,Tottenham,2.2,2,-1,72.93,76.86
-326,27,Wed,16/03/2022,20:15,Arsenal,0.5,0,Liverpool,0.8,2,-1,77.79,74.21
-328,20,Thu,17/03/2022,19:45,Everton,0.7,1,Newcastle Utd,0.9,0,1,78.21,76.79
-330,30,Fri,18/03/2022,20:00,Wolves,1.2,2,Leeds United,2,3,-1,76.5,74.79
-331,30,Sat,19/03/2022,12:30,Aston Villa,0.5,0,Arsenal,1.3,1,-1,77.21,79.07
-332,30,Sun,20/03/2022,14:00,Leicester City,1,2,Brentford,1.3,1,1,77.93,79.64
-333,30,Sun,20/03/2022,16:30,Tottenham,3,3,West Ham,0.6,1,1,72.45,74.14
-335,31,Sat,02/04/2022,12:30,Liverpool,2.2,2,Watford,0.6,0,1,78.36,72.93
-336,31,Sat,02/04/2022,15:00,Wolves,1.3,2,Aston Villa,2.1,1,1,74.36,76.5
-337,31,Sat,02/04/2022,15:00,Leeds United,1.2,1,Southampton,1.4,1,0,74.57,84.14
-338,31,Sat,02/04/2022,15:00,Chelsea,1.3,1,Brentford,1.8,4,-1,78.5,74.86
-339,31,Sat,02/04/2022,15:00,Burnley,0.1,0,Manchester City,1.8,2,-1,75.86,78.57
-340,31,Sat,02/04/2022,15:00,Brighton,2.8,0,Norwich City,0.4,0,0,77.36,79.64
-341,31,Sat,02/04/2022,17:30,Manchester Utd,0.9,1,Leicester City,0.8,1,0,77.21,76.07
-342,31,Sun,03/04/2022,14:00,West Ham,1.2,2,Everton,0.7,1,1,76.5,71.5
-343,31,Sun,03/04/2022,16:30,Tottenham,3.1,5,Newcastle Utd,0.5,1,1,75.5,74.62
-344,31,Mon,04/04/2022,20:00,Crystal Palace,1.5,3,Arsenal,0.8,0,1,78.93,75.93
-346,19,Wed,06/04/2022,19:30,Burnley,2,3,Everton,2.4,2,1,78.93,77.93
-348,32,Fri,08/04/2022,20:00,Newcastle Utd,1.5,1,Wolves,0.4,0,1,77.29,75.43
-349,32,Sat,09/04/2022,12:30,Everton,0.4,1,Manchester Utd,0.8,0,1,71.93,77.71
-350,32,Sat,09/04/2022,15:00,Arsenal,1.9,1,Brighton,0.6,2,-1,80.14,74.79
-351,32,Sat,09/04/2022,15:00,Southampton,0.5,0,Chelsea,4.2,6,-1,83.29,78.57
-352,32,Sat,09/04/2022,15:00,Watford,1.1,0,Leeds United,0.7,3,-1,78.07,79.07
-353,32,Sat,09/04/2022,17:30,Aston Villa,1.6,0,Tottenham,1.1,4,-1,74.86,79.57
-354,32,Sun,10/04/2022,14:00,Brentford,1.4,2,West Ham,0.3,0,1,77.92,71.86
-355,32,Sun,10/04/2022,14:00,Leicester City,1,2,Crystal Palace,1.4,1,1,71.77,76.54
-356,32,Sun,10/04/2022,14:00,Norwich City,1.7,2,Burnley,1.7,0,1,75.07,84.57
-357,32,Sun,10/04/2022,16:30,Manchester City,1.3,2,Liverpool,1.3,2,0,78.07,80.43
-359,33,Sat,16/04/2022,12:30,Tottenham,0.5,0,Brighton,0.6,1,-1,74.71,79.07
-360,33,Sat,16/04/2022,15:00,Manchester Utd,1.9,3,Norwich City,1.5,2,1,72.08,76.14
-361,33,Sat,16/04/2022,15:00,Watford,1.7,1,Brentford,1.9,2,-1,74.21,72.29
-362,33,Sat,16/04/2022,15:00,Southampton,0.8,1,Arsenal,1.7,0,1,78.64,75.86
-363,33,Sun,17/04/2022,14:15,Newcastle Utd,1.8,2,Leicester City,0.6,1,1,77.43,84.45
-364,33,Sun,17/04/2022,14:15,West Ham,2.2,1,Burnley,1.8,1,0,76,76.07
-366,30,Tue,19/04/2022,20:00,Liverpool,2,4,Manchester Utd,0.1,0,1,73.79,77.43
-368,18,Wed,20/04/2022,19:45,Everton,1.8,1,Leicester City,0.9,1,0,77.86,74.5
-370,25,Wed,20/04/2022,19:45,Chelsea,0.7,2,Arsenal,2,4,-1,75.71,75.08
-372,30,Wed,20/04/2022,19:45,Newcastle Utd,0.9,1,Crystal Palace,0.5,0,1,75.21,76.14
-373,30,Wed,20/04/2022,20:00,Manchester City,1.3,3,Brighton,0.2,0,1,79.86,74.29
-374,30,Thu,21/04/2022,19:45,Burnley,1.5,2,Southampton,0.9,0,1,78.07,77.43
-376,34,Sat,23/04/2022,12:30,Arsenal,2.3,3,Manchester Utd,1.8,1,1,84.57,77.43
-377,34,Sat,23/04/2022,15:00,Leicester City,0.3,0,Aston Villa,0.9,0,0,80.36,75.43
-378,34,Sat,23/04/2022,15:00,Manchester City,3.6,5,Watford,0.5,1,1,74.85,78.43
-379,34,Sat,23/04/2022,15:00,Norwich City,0.6,0,Newcastle Utd,1.9,3,-1,78,72.36
-380,34,Sat,23/04/2022,17:30,Brentford,0.9,0,Tottenham,0.6,0,0,79.36,74.62
-381,34,Sun,24/04/2022,14:00,Brighton,1.7,2,Southampton,0.9,2,0,73,77.29
-382,34,Sun,24/04/2022,14:00,Burnley,1.4,1,Wolves,0.6,0,1,75.93,78
-383,34,Sun,24/04/2022,14:00,Chelsea,3,1,West Ham,0.5,0,1,78.64,75.79
-384,34,Sun,24/04/2022,16:30,Liverpool,1.7,2,Everton,0.4,0,1,71.6,74.62
-385,34,Mon,25/04/2022,20:00,Crystal Palace,1.9,0,Leeds United,0.5,0,0,78.23,80.57
-387,37,Thu,28/04/2022,19:45,Manchester Utd,0.5,1,Chelsea,1.9,1,0,75.31,79.64
-389,35,Sat,30/04/2022,12:30,Newcastle Utd,0.2,0,Liverpool,2.3,1,-1,78.08,78.21
-390,35,Sat,30/04/2022,15:00,Watford,1,1,Burnley,1.6,2,-1,78.07,78.21
-391,35,Sat,30/04/2022,15:00,Wolves,0.7,0,Brighton,2.6,3,-1,77.71,79.71
-392,35,Sat,30/04/2022,15:00,Aston Villa,1.8,2,Norwich City,0.5,0,1,81.14,76.79
-393,35,Sat,30/04/2022,15:00,Southampton,0.6,1,Crystal Palace,1.1,2,-1,73.93,77.86
-394,35,Sat,30/04/2022,17:30,Leeds United,1.3,0,Manchester City,2.4,4,-1,73.92,76.5
-395,35,Sun,01/05/2022,14:00,Tottenham,1.2,3,Leicester City,0.5,1,1,81.14,73.15
-396,35,Sun,01/05/2022,14:00,Everton,0.8,1,Chelsea,0.8,0,1,77.86,73.07
-397,35,Sun,01/05/2022,16:30,West Ham,0.5,1,Arsenal,0.9,2,-1,77.64,78.79
-398,35,Mon,02/05/2022,20:00,Manchester Utd,2,3,Brentford,0.6,0,1,72.79,84.64
-400,36,Sat,07/05/2022,15:00,Crystal Palace,2.2,1,Watford,0.4,0,1,73.23,73.57
-401,36,Sat,07/05/2022,15:00,Brentford,2.6,3,Southampton,1.4,0,1,85.92,79.21
-402,36,Sat,07/05/2022,15:00,Chelsea,1.7,2,Wolves,2,2,0,76.86,77.64
-403,36,Sat,07/05/2022,15:00,Burnley,1.9,1,Aston Villa,2.1,3,-1,80.5,74.83
-404,36,Sat,07/05/2022,17:30,Brighton,2.3,4,Manchester Utd,0.9,0,1,75.25,72.23
-405,36,Sat,07/05/2022,19:45,Liverpool,1.3,1,Tottenham,0.9,1,0,75.93,81.21
-406,36,Sun,08/05/2022,14:00,Leicester City,1.5,1,Everton,1.1,2,-1,76,74.5
-407,36,Sun,08/05/2022,14:00,Norwich City,0.8,0,West Ham,3,4,-1,73.07,80.64
-408,36,Sun,08/05/2022,14:00,Arsenal,2,2,Leeds United,0.3,1,1,77.29,74.43
-409,36,Sun,08/05/2022,16:30,Manchester City,3.1,5,Newcastle Utd,0.8,0,1,86.67,78.36
-411,33,Tue,10/05/2022,20:00,Aston Villa,1.4,1,Liverpool,1.8,2,-1,78.57,71.07
-412,33,Wed,11/05/2022,19:30,Leeds United,0.4,0,Chelsea,1.3,3,-1,74.43,76.29
-414,21,Wed,11/05/2022,19:45,Leicester City,2,3,Norwich City,1.1,0,1,81.64,75.79
-416,30,Wed,11/05/2022,19:45,Watford,0.3,0,Everton,0.7,0,0,79.29,76.57
-418,33,Wed,11/05/2022,20:15,Wolves,0.5,1,Manchester City,2.3,5,-1,77.29,78.71
-420,22,Thu,12/05/2022,19:45,Tottenham,2.7,3,Arsenal,0.5,0,1,74.86,72.86
-422,37,Sun,15/05/2022,12:00,Tottenham,2.2,1,Burnley,0.7,0,1,76.54,86.64
-423,37,Sun,15/05/2022,14:00,Leeds United,1.6,1,Brighton,2.2,1,0,81.5,80.57
-424,37,Sun,15/05/2022,14:00,Watford,1.4,1,Leicester City,2.5,5,-1,79.79,76.86
-425,37,Sun,15/05/2022,14:00,Wolves,0.9,1,Norwich City,1.1,1,0,77.07,72.79
-426,37,Sun,15/05/2022,14:00,Aston Villa,1,1,Crystal Palace,1.4,1,0,79.14,78.5
-427,37,Sun,15/05/2022,14:00,West Ham,1.1,2,Manchester City,2.4,2,0,77.36,76.29
-428,37,Sun,15/05/2022,16:30,Everton,2.1,2,Brentford,1.4,3,-1,85.92,80.29
-429,37,Mon,16/05/2022,20:00,Newcastle Utd,1.6,2,Arsenal,0.6,0,1,76.93,72.43
-430,37,Tue,17/05/2022,19:45,Southampton,0.1,1,Liverpool,1.3,2,-1,73.64,80.62
-432,33,Thu,19/05/2022,19:45,Everton,0.8,3,Crystal Palace,1.1,2,1,84.29,72.29
-434,18,Thu,19/05/2022,20:00,Aston Villa,1.5,1,Burnley,1.6,1,0,75.38,78.69
-436,27,Thu,19/05/2022,20:00,Chelsea,1.6,1,Leicester City,0.1,1,0,74.29,75.77
-438,38,Sun,22/05/2022,16:00,Brentford,0.8,1,Leeds United,1.3,2,-1,79.86,76.31
-439,38,Sun,22/05/2022,16:00,Leicester City,3.4,4,Southampton,1.1,1,1,76.36,78.64
-440,38,Sun,22/05/2022,16:00,Crystal Palace,0.6,1,Manchester Utd,0.7,0,1,74.64,77.93
-441,38,Sun,22/05/2022,16:00,Arsenal,4.2,5,Everton,1.1,1,1,80.5,79.07
-442,38,Sun,22/05/2022,16:00,Brighton,1.6,3,West Ham,0.2,1,1,78.08,74.15
-443,38,Sun,22/05/2022,16:00,Norwich City,0.5,0,Tottenham,3.4,5,-1,77.53,80.8
-444,38,Sun,22/05/2022,16:00,Manchester City,3.4,3,Aston Villa,0.2,2,1,76.14,76.21
-445,38,Sun,22/05/2022,16:00,Liverpool,2.7,3,Wolves,1.3,1,1,78.93,77.23
-446,38,Sun,22/05/2022,16:00,Burnley,1.6,1,Newcastle Utd,1.8,2,-1,78.07,73.33
-447,38,Sun,22/05/2022,16:00,Chelsea,2.2,2,Watford,0.6,1,1,71.93,78.14
+0,1,Fri,13/08/2021,20:00,Brentford,1.2,2,Arsenal,1.3,0,1,73.07,77.5
+1,1,Sat,14/08/2021,12:30,Manchester Utd,1.5,5,Leeds United,0.5,1,1,81.93,75
+2,1,Sat,14/08/2021,15:00,Leicester City,0.5,1,Wolves,1.3,0,1,79.36,77.21
+3,1,Sat,14/08/2021,15:00,Burnley,1.5,1,Brighton,1,2,-1,75.93,75.21
+4,1,Sat,14/08/2021,15:00,Chelsea,0.7,3,Crystal Palace,0.2,0,1,79.79,74.86
+5,1,Sat,14/08/2021,15:00,Watford,1.2,3,Aston Villa,1.2,2,1,72.29,78
+6,1,Sat,14/08/2021,15:00,Everton,2.4,3,Southampton,0.8,1,1,78.07,73.93
+7,1,Sat,14/08/2021,17:30,Norwich City,1.4,0,Liverpool,1.6,3,-1,72.71,80
+8,1,Sun,15/08/2021,14:00,Newcastle Utd,1.8,2,West Ham,2.7,4,-1,75,78.71
+9,1,Sun,15/08/2021,16:30,Tottenham,1,1,Manchester City,1.8,0,1,78.36,82
+11,2,Sat,21/08/2021,12:30,Liverpool,2.7,2,Burnley,0.9,0,1,75.93,75.36
+12,2,Sat,21/08/2021,15:00,Aston Villa,1.2,2,Newcastle Utd,0.7,0,1,83.71,72.57
+13,2,Sat,21/08/2021,15:00,Manchester City,2.6,5,Norwich City,0.1,0,1,74.15,78.93
+14,2,Sat,21/08/2021,15:00,Leeds United,1.2,2,Everton,1.8,2,0,76.17,73.64
+15,2,Sat,21/08/2021,15:00,Crystal Palace,0.5,0,Brentford,0.9,0,0,75.21,72.21
+16,2,Sat,21/08/2021,17:30,Brighton,1.3,2,Watford,0.5,0,1,78,78.86
+17,2,Sun,22/08/2021,14:00,Wolves,1.7,0,Tottenham,1.7,1,-1,75.07,82
+18,2,Sun,22/08/2021,14:00,Southampton,0.7,1,Manchester Utd,1.8,1,0,78.21,81.93
+19,2,Sun,22/08/2021,16:30,Arsenal,0.3,0,Chelsea,3.1,2,-1,78.85,79.5
+20,2,Mon,23/08/2021,20:00,West Ham,2.3,4,Leicester City,0.6,1,1,84.57,79.07
+22,3,Sat,28/08/2021,12:30,Manchester City,4.4,5,Arsenal,0.2,0,1,79.46,76.17
+23,3,Sat,28/08/2021,15:00,Norwich City,1.5,1,Leicester City,1.5,2,-1,76.5,73.86
+24,3,Sat,28/08/2021,15:00,West Ham,1.3,2,Crystal Palace,1.1,2,0,75.77,74.64
+25,3,Sat,28/08/2021,15:00,Aston Villa,0.7,1,Brentford,0.9,1,0,74.93,78.38
+26,3,Sat,28/08/2021,15:00,Newcastle Utd,1,2,Southampton,3.6,2,0,80.29,81.21
+27,3,Sat,28/08/2021,15:00,Brighton,0.7,0,Everton,1.4,2,-1,76,75.31
+28,3,Sat,28/08/2021,17:30,Liverpool,2.5,1,Chelsea,0.6,1,0,78.77,72.64
+29,3,Sun,29/08/2021,14:00,Burnley,1,1,Leeds United,1.2,1,0,78.36,82.29
+30,3,Sun,29/08/2021,14:00,Tottenham,1,1,Watford,0.8,0,1,76.07,78.62
+31,3,Sun,29/08/2021,16:30,Wolves,2.1,0,Manchester Utd,0.6,1,-1,72.54,78.54
+33,4,Sat,11/09/2021,12:30,Crystal Palace,2.1,3,Tottenham,0.1,0,1,80,72.57
+34,4,Sat,11/09/2021,15:00,Watford,0.2,0,Wolves,2.2,2,-1,81.21,74.07
+35,4,Sat,11/09/2021,15:00,Brentford,0.4,0,Brighton,0.3,1,-1,79.71,83.77
+36,4,Sat,11/09/2021,15:00,Arsenal,2.7,1,Norwich City,0.7,0,1,75,79.54
+37,4,Sat,11/09/2021,15:00,Manchester Utd,2.5,4,Newcastle Utd,0.4,1,1,80.21,77.14
+38,4,Sat,11/09/2021,15:00,Leicester City,0.6,0,Manchester City,2.8,1,-1,75.71,80.5
+39,4,Sat,11/09/2021,15:00,Southampton,0.7,0,West Ham,0.7,0,0,78.43,75.86
+40,4,Sat,11/09/2021,17:30,Chelsea,1.3,3,Aston Villa,1.2,0,1,74.71,74.57
+41,4,Sun,12/09/2021,16:30,Leeds United,1.2,0,Liverpool,4.3,3,-1,78.07,73.64
+42,4,Mon,13/09/2021,20:00,Everton,1.4,3,Burnley,1,1,1,84.64,75
+44,5,Fri,17/09/2021,20:00,Newcastle Utd,1.3,1,Leeds United,1.5,1,0,72.71,72.93
+45,5,Sat,18/09/2021,12:30,Wolves,0.6,0,Brentford,2.5,2,-1,76.14,80.36
+46,5,Sat,18/09/2021,15:00,Manchester City,1,0,Southampton,0.4,0,0,77.8,76.93
+47,5,Sat,18/09/2021,15:00,Liverpool,3.1,3,Crystal Palace,0.6,0,1,78.93,81.64
+48,5,Sat,18/09/2021,15:00,Norwich City,1,1,Watford,2.4,3,-1,76.29,80
+49,5,Sat,18/09/2021,15:00,Burnley,1,0,Arsenal,1.1,1,-1,79.93,82.85
+50,5,Sat,18/09/2021,17:30,Aston Villa,0.8,3,Everton,0.7,0,1,81.5,77.31
+51,5,Sun,19/09/2021,14:00,West Ham,1.6,1,Manchester Utd,2,2,-1,81.64,85.36
+52,5,Sun,19/09/2021,14:00,Brighton,1.7,2,Leicester City,1.6,1,1,80,76.14
+53,5,Sun,19/09/2021,16:30,Tottenham,0.5,0,Chelsea,2.1,3,-1,74.14,79.64
+55,6,Sat,25/09/2021,12:30,Manchester Utd,2.2,0,Aston Villa,1,1,-1,76.29,73.14
+56,6,Sat,25/09/2021,12:30,Chelsea,0.2,0,Manchester City,1.7,1,-1,74.07,82.17
+57,6,Sat,25/09/2021,15:00,Leicester City,2.4,2,Burnley,0.5,2,0,74.57,77.71
+58,6,Sat,25/09/2021,15:00,Leeds United,1.2,1,West Ham,1.6,2,-1,80.29,78.64
+59,6,Sat,25/09/2021,15:00,Watford,0.9,1,Newcastle Utd,1.9,1,0,75.64,75.21
+60,6,Sat,25/09/2021,15:00,Everton,1.9,2,Norwich City,0.5,0,1,81.93,76.31
+61,6,Sat,25/09/2021,17:30,Brentford,2.1,3,Liverpool,2.8,3,0,78.46,74.07
+62,6,Sun,26/09/2021,14:00,Southampton,1,0,Wolves,1,1,-1,75.64,72.79
+63,6,Sun,26/09/2021,16:30,Arsenal,1.1,3,Tottenham,1,1,1,79.14,74.43
+64,6,Mon,27/09/2021,20:00,Crystal Palace,1.4,1,Brighton,0.8,1,0,75.38,74.57
+66,7,Sat,02/10/2021,12:30,Manchester Utd,1,1,Everton,1.3,1,0,79.38,77.29
+67,7,Sat,02/10/2021,15:00,Wolves,1,2,Newcastle Utd,0.6,1,1,75.57,78.71
+68,7,Sat,02/10/2021,15:00,Burnley,1.2,0,Norwich City,0.6,0,0,80.27,73.36
+69,7,Sat,02/10/2021,15:00,Chelsea,3.3,3,Southampton,1.3,1,1,81.38,86.58
+70,7,Sat,02/10/2021,15:00,Leeds United,1.3,1,Watford,0.2,0,1,74,80.64
+71,7,Sat,02/10/2021,17:30,Brighton,1.1,0,Arsenal,0.4,0,0,79.07,81.14
+72,7,Sun,03/10/2021,14:00,Tottenham,1.3,2,Aston Villa,1.2,1,1,82.86,75.86
+73,7,Sun,03/10/2021,14:00,Crystal Palace,1.5,2,Leicester City,1.2,2,0,74.14,74.5
+74,7,Sun,03/10/2021,14:00,West Ham,1.5,1,Brentford,1.2,2,-1,77.71,78.14
+75,7,Sun,03/10/2021,16:30,Liverpool,0.9,2,Manchester City,1.2,2,0,72.79,76.07
+77,8,Sat,16/10/2021,12:30,Watford,0.5,0,Liverpool,3.3,5,-1,77.92,79
+78,8,Sat,16/10/2021,15:00,Leicester City,2.4,4,Manchester Utd,1.2,2,1,74.93,79.55
+79,8,Sat,16/10/2021,15:00,Manchester City,2.1,2,Burnley,0.9,0,1,80.64,75.5
+80,8,Sat,16/10/2021,15:00,Southampton,1.9,1,Leeds United,0.2,0,1,80.29,78.14
+81,8,Sat,16/10/2021,15:00,Aston Villa,1,2,Wolves,2,3,-1,79,72.86
+82,8,Sat,16/10/2021,15:00,Norwich City,1.2,0,Brighton,0.8,0,0,74.29,77.29
+83,8,Sat,16/10/2021,17:30,Brentford,1.4,0,Chelsea,0.3,1,-1,75.57,75.07
+84,8,Sun,17/10/2021,14:00,Everton,0.9,0,West Ham,1.2,1,-1,77.85,74.57
+85,8,Sun,17/10/2021,16:30,Newcastle Utd,0.4,2,Tottenham,1.7,3,-1,74.43,76.07
+86,8,Mon,18/10/2021,20:00,Arsenal,1.7,2,Crystal Palace,0.7,2,0,76.21,85.21
+88,9,Fri,22/10/2021,20:00,Arsenal,2.7,3,Aston Villa,1.4,1,1,73.64,79.07
+89,9,Sat,23/10/2021,12:30,Chelsea,3.1,7,Norwich City,0.1,0,1,81.29,83
+90,9,Sat,23/10/2021,15:00,Leeds United,1.6,1,Wolves,0.9,1,0,79.36,80.36
+91,9,Sat,23/10/2021,15:00,Crystal Palace,1.9,1,Newcastle Utd,0.3,1,0,75.14,80.07
+92,9,Sat,23/10/2021,15:00,Everton,1.5,2,Watford,3.7,5,-1,82.86,76.29
+93,9,Sat,23/10/2021,15:00,Southampton,1.6,2,Burnley,0.7,2,0,76.58,73
+94,9,Sat,23/10/2021,17:30,Brighton,1.3,1,Manchester City,3.8,4,-1,73.71,74.79
+95,9,Sun,24/10/2021,14:00,West Ham,1.3,1,Tottenham,0.7,0,1,86.29,75.71
+96,9,Sun,24/10/2021,14:00,Brentford,1,1,Leicester City,1.5,2,-1,79.29,81.29
+97,9,Sun,24/10/2021,16:30,Manchester Utd,1.6,0,Liverpool,3.4,5,-1,71.79,74.86
+99,10,Sat,30/10/2021,12:30,Leicester City,1.3,0,Arsenal,0.7,2,-1,77.5,76.36
+100,10,Sat,30/10/2021,15:00,Newcastle Utd,0.2,0,Chelsea,2.2,3,-1,75.14,76.43
+101,10,Sat,30/10/2021,15:00,Liverpool,1.5,2,Brighton,1,2,0,80.87,86.36
+102,10,Sat,30/10/2021,15:00,Burnley,2.3,3,Brentford,0.8,1,1,72.93,72.29
+103,10,Sat,30/10/2021,15:00,Watford,1,0,Southampton,1.8,1,-1,80.21,76.14
+104,10,Sat,30/10/2021,15:00,Manchester City,0.7,0,Crystal Palace,0.7,2,-1,75.71,77.64
+105,10,Sat,30/10/2021,17:30,Tottenham,1,0,Manchester Utd,1.5,3,-1,75.6,74.92
+106,10,Sun,31/10/2021,14:00,Norwich City,0.8,1,Leeds United,0.7,2,-1,76.86,79.21
+107,10,Sun,31/10/2021,16:30,Aston Villa,0.7,1,West Ham,2.3,4,-1,75,80.14
+108,10,Mon,01/11/2021,20:00,Wolves,1.7,2,Everton,1.5,1,1,79.71,74.36
+110,11,Fri,05/11/2021,20:00,Southampton,0.6,1,Aston Villa,0.6,0,1,79.21,80.29
+111,11,Sat,06/11/2021,12:30,Manchester Utd,0.9,0,Manchester City,1.6,2,-1,78.15,78.93
+112,11,Sat,06/11/2021,15:00,Brentford,2.5,1,Norwich City,1.2,2,-1,74.07,80.6
+113,11,Sat,06/11/2021,15:00,Chelsea,1.8,1,Burnley,0.7,1,0,73,74.86
+114,11,Sat,06/11/2021,15:00,Crystal Palace,1.9,2,Wolves,0.3,0,1,78.07,75.5
+115,11,Sat,06/11/2021,17:30,Brighton,1.5,1,Newcastle Utd,0.3,1,0,75.54,72.71
+116,11,Sun,07/11/2021,14:00,Everton,0.6,0,Tottenham,0.7,0,0,76.38,75.71
+117,11,Sun,07/11/2021,14:00,Leeds United,1.3,1,Leicester City,0.7,1,0,78.36,80.14
+118,11,Sun,07/11/2021,14:00,Arsenal,1.6,1,Watford,0.5,0,1,82.43,76.57
+119,11,Sun,07/11/2021,16:30,West Ham,1,3,Liverpool,1.2,2,1,78.36,73.86
+121,12,Sat,20/11/2021,12:30,Leicester City,0.4,0,Chelsea,2,3,-1,76,77.86
+122,12,Sat,20/11/2021,15:00,Wolves,1.4,1,West Ham,0.4,0,1,81.29,74.29
+123,12,Sat,20/11/2021,15:00,Watford,2.7,4,Manchester Utd,1.4,1,1,72.71,77.14
+124,12,Sat,20/11/2021,15:00,Norwich City,0.5,2,Southampton,1,1,1,74.86,75.43
+125,12,Sat,20/11/2021,15:00,Aston Villa,0.7,2,Brighton,0.4,0,1,73.14,77.92
+126,12,Sat,20/11/2021,15:00,Newcastle Utd,1.5,3,Brentford,0.9,3,0,79.23,73.64
+127,12,Sat,20/11/2021,15:00,Burnley,1.5,3,Crystal Palace,1.9,3,0,85.08,79
+128,12,Sat,20/11/2021,17:30,Liverpool,4.3,4,Arsenal,0.4,0,1,79.71,80.64
+129,12,Sun,21/11/2021,14:00,Manchester City,2.5,3,Everton,0.2,0,1,75.64,72.79
+130,12,Sun,21/11/2021,16:30,Tottenham,2.1,2,Leeds United,1.4,1,1,74.79,75.5
+132,13,Sat,27/11/2021,12:30,Arsenal,2.5,2,Newcastle Utd,0.3,0,1,79,75
+133,13,Sat,27/11/2021,15:00,Crystal Palace,1,1,Aston Villa,0.5,2,-1,77.58,75.79
+134,13,Sat,27/11/2021,15:00,Liverpool,2.9,4,Southampton,1,0,1,73.93,80.79
+135,13,Sat,27/11/2021,15:00,Norwich City,1.6,0,Wolves,0.3,0,0,77.21,83.83
+136,13,Sat,27/11/2021,17:30,Brighton,2.1,0,Leeds United,0.6,0,0,77.71,80.57
+137,13,Sun,28/11/2021,14:00,Brentford,1.2,1,Everton,1,0,1,78.64,73.5
+138,13,Sun,28/11/2021,14:00,Leicester City,2.1,4,Watford,2.8,2,1,80.86,80.07
+139,13,Sun,28/11/2021,14:00,Manchester City,2.1,2,West Ham,0.2,1,1,78.86,80.64
+140,13,Sun,28/11/2021,16:30,Chelsea,2.7,1,Manchester Utd,0.9,1,0,76.08,76.07
+142,14,Tue,30/11/2021,19:30,Newcastle Utd,1.1,1,Norwich City,1.2,1,0,77.14,80.57
+143,14,Tue,30/11/2021,20:15,Leeds United,1.4,1,Crystal Palace,1.1,0,1,73.64,86.43
+144,14,Wed,01/12/2021,19:30,Southampton,1.5,2,Leicester City,1.5,2,0,74.64,72.93
+145,14,Wed,01/12/2021,19:30,West Ham,1.3,1,Brighton,1.3,1,0,78.43,72.07
+146,14,Wed,01/12/2021,19:30,Wolves,0.7,0,Burnley,0.2,0,0,80.29,75.57
+147,14,Wed,01/12/2021,19:30,Watford,1,1,Chelsea,0.9,2,-1,76.5,78.79
+148,14,Wed,01/12/2021,20:15,Aston Villa,0.8,1,Manchester City,1,2,-1,77.29,80.36
+149,14,Wed,01/12/2021,20:15,Everton,0.7,1,Liverpool,2.4,4,-1,72.21,73.93
+150,14,Thu,02/12/2021,19:30,Tottenham,1.9,2,Brentford,0.3,0,1,86,78
+151,14,Thu,02/12/2021,20:15,Manchester Utd,1.9,3,Arsenal,1.4,2,1,80.57,77.86
+153,15,Sat,04/12/2021,12:30,West Ham,1.8,3,Chelsea,1.1,2,1,80.71,73.07
+154,15,Sat,04/12/2021,15:00,Newcastle Utd,1,1,Burnley,0.6,0,1,72.86,80.64
+155,15,Sat,04/12/2021,15:00,Southampton,1.6,1,Brighton,1.6,1,0,76,79.23
+156,15,Sat,04/12/2021,15:00,Wolves,0.1,0,Liverpool,2.7,1,-1,77.64,76.07
+157,15,Sat,04/12/2021,17:30,Watford,0.8,1,Manchester City,3.1,3,-1,75.29,76.69
+158,15,Sun,05/12/2021,14:00,Leeds United,1.2,2,Brentford,1,2,0,72.29,76.93
+159,15,Sun,05/12/2021,14:00,Tottenham,1.6,3,Norwich City,1.2,0,1,84.07,73.21
+160,15,Sun,05/12/2021,14:00,Manchester Utd,0.9,1,Crystal Palace,0.5,0,1,75.07,77.71
+161,15,Sun,05/12/2021,16:30,Aston Villa,2.1,2,Leicester City,1.1,1,1,75.57,73.36
+162,15,Mon,06/12/2021,20:00,Everton,0.9,2,Arsenal,1,1,1,80,77.85
+164,16,Fri,10/12/2021,20:00,Brentford,1.6,2,Watford,0.5,1,1,81.21,75.5
+165,16,Sat,11/12/2021,12:30,Manchester City,3.2,1,Wolves,0.2,0,1,71,80.21
+166,16,Sat,11/12/2021,15:00,Liverpool,2.2,1,Aston Villa,0.2,0,1,77.92,81.54
+167,16,Sat,11/12/2021,15:00,Arsenal,1.8,3,Southampton,0.6,0,1,75.14,83.64
+168,16,Sat,11/12/2021,15:00,Chelsea,2.5,3,Leeds United,1.4,2,1,78.29,80.07
+169,16,Sat,11/12/2021,17:30,Norwich City,1.2,0,Manchester Utd,2,1,-1,78.93,74.86
+170,16,Sun,12/12/2021,14:00,Burnley,0.8,0,West Ham,0.8,0,0,85,77.08
+171,16,Sun,12/12/2021,14:00,Leicester City,2.6,4,Newcastle Utd,1,0,1,71.93,80.21
+172,16,Sun,12/12/2021,16:30,Crystal Palace,1.8,3,Everton,1,1,1,78.79,74.57
+174,17,Tue,14/12/2021,19:45,Norwich City,0.5,0,Aston Villa,2,2,-1,75,72.43
+175,17,Tue,14/12/2021,20:00,Manchester City,3.1,7,Leeds United,0.3,0,1,76,81.36
+176,17,Wed,15/12/2021,19:30,Brighton,1.2,0,Wolves,1,1,-1,75.08,78.71
+177,17,Wed,15/12/2021,19:30,Crystal Palace,1.2,2,Southampton,0.6,2,0,74.86,70.79
+178,17,Wed,15/12/2021,20:00,Arsenal,2.8,2,West Ham,0.4,0,1,74.07,77.5
+179,17,Thu,16/12/2021,19:45,Chelsea,2.9,1,Everton,0.6,1,0,78.79,80.71
+180,17,Thu,16/12/2021,20:00,Liverpool,2.7,3,Newcastle Utd,0.3,1,1,80.5,75.5
+182,18,Sat,18/12/2021,17:30,Leeds United,1.6,1,Arsenal,3.5,4,-1,80.64,75.29
+183,18,Sun,19/12/2021,14:00,Wolves,0.2,0,Chelsea,0.9,0,0,80.07,86.25
+184,18,Sun,19/12/2021,14:15,Newcastle Utd,0.3,0,Manchester City,2.9,4,-1,74,78.86
+185,18,Sun,19/12/2021,16:30,Tottenham,3,2,Liverpool,1.1,2,0,74.86,78.07
+187,19,Sun,26/12/2021,15:00,West Ham,1.6,2,Southampton,1.2,3,-1,72.71,77.38
+188,19,Sun,26/12/2021,15:00,Manchester City,3.6,6,Leicester City,2.7,3,1,76.92,75.79
+189,19,Sun,26/12/2021,15:00,Norwich City,0.1,0,Arsenal,2.5,5,-1,80.46,79.36
+190,19,Sun,26/12/2021,15:00,Tottenham,2.3,3,Crystal Palace,0.2,0,1,80.21,78.57
+191,19,Sun,26/12/2021,17:30,Aston Villa,0.4,1,Chelsea,2.6,3,-1,74.57,73.36
+192,19,Sun,26/12/2021,20:00,Brighton,0.8,2,Brentford,0.7,0,1,78.77,71.57
+193,19,Mon,27/12/2021,20:00,Newcastle Utd,1.3,1,Manchester Utd,1.6,1,0,75.43,74.79
+195,20,Tue,28/12/2021,15:00,Southampton,0.4,1,Tottenham,2.3,1,0,72.5,77.69
+196,20,Tue,28/12/2021,15:00,Crystal Palace,1.9,3,Norwich City,0.9,0,1,76.85,73.93
+197,20,Tue,28/12/2021,15:00,Watford,1.6,1,West Ham,3.6,4,-1,75.86,74.57
+198,20,Tue,28/12/2021,20:00,Leicester City,0.4,1,Liverpool,2.3,0,1,77.71,81
+199,20,Wed,29/12/2021,19:30,Chelsea,0.7,1,Brighton,0.9,1,0,77.21,74.21
+200,20,Wed,29/12/2021,20:15,Brentford,0.4,0,Manchester City,1.1,1,-1,78.5,73.71
+201,20,Thu,30/12/2021,20:15,Manchester Utd,2.4,3,Burnley,1.1,1,1,75.07,82.57
+203,21,Sat,01/01/2022,12:30,Arsenal,0.8,1,Manchester City,2,2,-1,73.07,80.29
+204,21,Sat,01/01/2022,15:00,Watford,0.3,0,Tottenham,2.2,1,-1,73.86,71.79
+205,21,Sat,01/01/2022,17:30,Crystal Palace,2.4,2,West Ham,2.2,3,-1,76,77.93
+206,21,Sun,02/01/2022,14:00,Leeds United,1.9,3,Burnley,1,1,1,75.15,76.29
+207,21,Sun,02/01/2022,14:00,Brentford,0.6,2,Aston Villa,0.8,1,1,80.5,79.58
+208,21,Sun,02/01/2022,14:00,Everton,1.6,2,Brighton,1.7,3,-1,72.94,77.23
+209,21,Sun,02/01/2022,16:30,Chelsea,1.2,2,Liverpool,1.3,2,0,75.29,86.58
+210,21,Mon,03/01/2022,17:30,Manchester Utd,0.8,0,Wolves,0.7,1,-1,75.21,79.93
+212,18,Tue,11/01/2022,19:45,Southampton,1.4,4,Brentford,0.5,1,1,77.57,75.07
+213,18,Wed,12/01/2022,19:45,West Ham,2.5,2,Norwich City,0.3,0,1,81.71,78.71
+215,22,Fri,14/01/2022,20:00,Brighton,2,1,Crystal Palace,0.2,1,0,79.92,73.93
+216,22,Sat,15/01/2022,12:30,Manchester City,1,1,Chelsea,0.3,0,1,77.21,76.71
+217,22,Sat,15/01/2022,15:00,Norwich City,1,2,Everton,0.6,1,1,76.46,81.14
+218,22,Sat,15/01/2022,15:00,Newcastle Utd,1.2,1,Watford,1.4,1,0,79.36,75.43
+219,22,Sat,15/01/2022,15:00,Wolves,2.5,3,Southampton,0.8,1,1,71.57,75.71
+220,22,Sat,15/01/2022,17:30,Aston Villa,1.9,2,Manchester Utd,1,2,0,86.54,73.57
+221,22,Sun,16/01/2022,14:00,West Ham,2.4,2,Leeds United,2.2,3,-1,77.57,75.67
+222,22,Sun,16/01/2022,14:00,Liverpool,2.7,3,Brentford,0.7,0,1,79.79,78.5
+224,24,Tue,18/01/2022,20:00,Brighton,0.7,1,Chelsea,0.7,1,0,81.08,75.43
+226,17,Wed,19/01/2022,19:30,Leicester City,1.2,2,Tottenham,3.1,3,-1,73.5,75.57
+227,17,Wed,19/01/2022,20:00,Brentford,2.3,1,Manchester Utd,2.3,3,-1,73.93,75.64
+229,23,Fri,21/01/2022,20:00,Watford,1.2,0,Norwich City,1.1,3,-1,77.07,78.07
+230,23,Sat,22/01/2022,12:30,Everton,1.6,0,Aston Villa,0.8,1,-1,76.46,81.36
+231,23,Sat,22/01/2022,15:00,Leeds United,0.7,0,Newcastle Utd,0.9,1,-1,78.57,75.93
+232,23,Sat,22/01/2022,15:00,Manchester Utd,1.9,1,West Ham,0.3,0,1,79,79.21
+233,23,Sat,22/01/2022,15:00,Brentford,1.1,1,Wolves,0.2,2,-1,81.07,75.64
+234,23,Sat,22/01/2022,17:30,Southampton,0.8,1,Manchester City,1.8,1,0,79,76.62
+235,23,Sun,23/01/2022,14:00,Crystal Palace,2.2,1,Liverpool,1.9,3,-1,78.86,72.71
+236,23,Sun,23/01/2022,14:00,Arsenal,1.2,0,Burnley,0.4,0,0,79.92,73.5
+237,23,Sun,23/01/2022,14:00,Leicester City,1.4,1,Brighton,1.1,1,0,75.07,77.36
+238,23,Sun,23/01/2022,16:30,Chelsea,1.2,2,Tottenham,0.5,0,1,80.5,71.64
+240,17,Sat,05/02/2022,18:00,Burnley,0.6,0,Watford,0.8,0,0,75.79,81
+242,24,Tue,08/02/2022,19:45,West Ham,0.8,1,Watford,0.3,0,1,75.29,81.29
+243,24,Tue,08/02/2022,19:45,Newcastle Utd,1.9,3,Everton,0.7,1,1,77.93,79.08
+244,24,Tue,08/02/2022,20:00,Burnley,0.4,1,Manchester Utd,1.8,1,0,76.25,79.07
+245,24,Wed,09/02/2022,19:45,Tottenham,1.4,2,Southampton,2.2,3,-1,72.46,75.57
+246,24,Wed,09/02/2022,19:45,Norwich City,0.4,1,Crystal Palace,1.3,1,0,81.36,74.5
+247,24,Wed,09/02/2022,19:45,Manchester City,1.9,2,Brentford,0.4,0,1,79.79,77.5
+248,24,Wed,09/02/2022,20:00,Aston Villa,1.6,3,Leeds United,1.8,3,0,75,72.64
+249,24,Thu,10/02/2022,19:45,Liverpool,1.8,2,Leicester City,0.5,0,1,75.29,78.5
+250,24,Thu,10/02/2022,19:45,Wolves,0.8,0,Arsenal,1.8,1,-1,75.62,76.21
+252,25,Sat,12/02/2022,12:30,Manchester Utd,2.1,1,Southampton,0.8,1,0,76.42,77.5
+253,25,Sat,12/02/2022,15:00,Everton,2.7,3,Leeds United,0.3,0,1,75.07,76.5
+254,25,Sat,12/02/2022,15:00,Brentford,1.6,0,Crystal Palace,0.3,0,0,77.14,86.46
+255,25,Sat,12/02/2022,15:00,Watford,0.5,0,Brighton,1.6,2,-1,79.15,76.64
+256,25,Sat,12/02/2022,17:30,Norwich City,0.4,0,Manchester City,4.6,4,-1,76.57,79.71
+257,25,Sun,13/02/2022,14:00,Newcastle Utd,0.5,1,Aston Villa,0.6,0,1,78.5,74.86
+258,25,Sun,13/02/2022,14:00,Burnley,1.5,0,Liverpool,1.7,1,-1,76.57,75.5
+259,25,Sun,13/02/2022,14:00,Tottenham,1.2,0,Wolves,1.3,2,-1,78.36,75
+260,25,Sun,13/02/2022,16:30,Leicester City,1.4,2,West Ham,1.1,2,0,76.46,80.5
+262,18,Tue,15/02/2022,20:15,Manchester Utd,1.7,2,Brighton,0.7,0,1,72.14,74.86
+264,26,Sat,19/02/2022,12:30,West Ham,0.6,1,Newcastle Utd,0.8,1,0,73.77,79.57
+265,26,Sat,19/02/2022,15:00,Aston Villa,1.3,0,Watford,1.2,1,-1,86.25,81.77
+266,26,Sat,19/02/2022,15:00,Arsenal,1.7,2,Brentford,0.6,1,1,79.86,76.86
+267,26,Sat,19/02/2022,15:00,Southampton,2.5,2,Everton,0.3,0,1,76.43,72.86
+268,26,Sat,19/02/2022,15:00,Liverpool,3.6,3,Norwich City,0.6,1,1,75.07,76.29
+269,26,Sat,19/02/2022,15:00,Brighton,0.6,0,Burnley,0.7,3,-1,72.14,80.5
+270,26,Sat,19/02/2022,15:00,Crystal Palace,0.5,0,Chelsea,0.9,1,-1,75.36,78.5
+271,26,Sat,19/02/2022,17:30,Manchester City,2.1,2,Tottenham,1.4,3,-1,76.07,81.29
+272,26,Sun,20/02/2022,14:00,Leeds United,1.8,2,Manchester Utd,2.2,4,-1,75.21,76.75
+273,26,Sun,20/02/2022,16:30,Wolves,0.5,2,Leicester City,1.7,1,1,80.79,79.36
+275,13,Wed,23/02/2022,19:30,Burnley,0.9,1,Tottenham,0.7,0,1,74.93,74.14
+277,18,Wed,23/02/2022,19:30,Watford,1.4,1,Crystal Palace,1.1,4,-1,76.85,77.14
+279,19,Wed,23/02/2022,19:45,Liverpool,5.9,6,Leeds United,0.2,0,1,79.79,78.43
+281,20,Thu,24/02/2022,19:45,Arsenal,3.1,2,Wolves,1,1,1,76.29,79.43
+283,27,Fri,25/02/2022,20:00,Southampton,2.6,2,Norwich City,0.6,0,1,77.07,76.79
+284,27,Sat,26/02/2022,12:30,Leeds United,1.5,0,Tottenham,1.9,4,-1,76.33,73.93
+285,27,Sat,26/02/2022,15:00,Crystal Palace,1,1,Burnley,0.2,1,0,78.71,79.71
+286,27,Sat,26/02/2022,15:00,Manchester Utd,2.8,0,Watford,0.6,0,0,78.43,73.71
+287,27,Sat,26/02/2022,15:00,Brighton,0.7,0,Aston Villa,1,2,-1,79.43,78.64
+288,27,Sat,26/02/2022,15:00,Brentford,0.4,0,Newcastle Utd,2.7,2,-1,80.57,74.07
+289,27,Sat,26/02/2022,17:30,Everton,0.5,0,Manchester City,1.8,1,-1,75.93,78.86
+290,27,Sun,27/02/2022,14:00,West Ham,1.8,1,Wolves,0.7,0,1,75.29,74.5
+292,22,Tue,01/03/2022,19:45,Burnley,0.9,0,Leicester City,1.5,2,-1,76.07,85.69
+294,28,Sat,05/03/2022,12:30,Leicester City,0.4,1,Leeds United,1.7,0,1,82.07,78.14
+295,28,Sat,05/03/2022,15:00,Newcastle Utd,1.7,2,Brighton,1.5,1,1,78.54,76.92
+296,28,Sat,05/03/2022,15:00,Aston Villa,2.5,4,Southampton,1.1,0,1,79.21,76.71
+297,28,Sat,05/03/2022,15:00,Burnley,0.7,0,Chelsea,2.3,4,-1,75.57,79.36
+298,28,Sat,05/03/2022,15:00,Wolves,0.7,0,Crystal Palace,2.7,2,-1,76.36,75.85
+299,28,Sat,05/03/2022,15:00,Norwich City,1,1,Brentford,2,3,-1,76.79,73.36
+300,28,Sat,05/03/2022,17:30,Liverpool,2.4,1,West Ham,1.3,0,1,77.92,80.64
+301,28,Sun,06/03/2022,14:00,Watford,1,2,Arsenal,1,3,-1,79,75.43
+302,28,Sun,06/03/2022,16:30,Manchester City,2.7,4,Manchester Utd,0.5,1,1,74.71,82.29
+303,28,Mon,07/03/2022,20:00,Tottenham,2.5,5,Everton,0.2,0,1,73.86,74.57
+305,19,Thu,10/03/2022,19:30,Wolves,0.7,4,Watford,0.6,0,1,74.64,79.64
+307,21,Thu,10/03/2022,19:30,Southampton,1.1,1,Newcastle Utd,0.6,2,-1,73.14,76.21
+309,30,Thu,10/03/2022,19:30,Norwich City,1,1,Chelsea,1.8,3,-1,79.43,75.79
+311,20,Thu,10/03/2022,19:45,Leeds United,0.2,0,Aston Villa,1.5,3,-1,74.21,74.57
+313,29,Sat,12/03/2022,12:30,Brighton,0.5,0,Liverpool,2.2,2,-1,76.57,77.57
+314,29,Sat,12/03/2022,15:00,Brentford,1.9,2,Burnley,0.7,0,1,78.92,76.43
+315,29,Sat,12/03/2022,17:30,Manchester Utd,1,3,Tottenham,1.5,2,1,81.29,79.43
+316,29,Sun,13/03/2022,14:00,Chelsea,1.1,1,Newcastle Utd,0.3,0,1,77.31,78.86
+317,29,Sun,13/03/2022,14:00,Southampton,1.4,1,Watford,1.7,2,-1,81.71,78.93
+318,29,Sun,13/03/2022,14:00,West Ham,1.2,2,Aston Villa,1.1,1,1,76.64,75.64
+319,29,Sun,13/03/2022,14:00,Everton,0.4,0,Wolves,0.8,1,-1,85.29,74.07
+320,29,Sun,13/03/2022,14:00,Leeds United,2.5,2,Norwich City,1.5,1,1,76.29,74.57
+321,29,Sun,13/03/2022,16:30,Arsenal,2.4,2,Leicester City,0.4,0,1,78.64,80
+322,29,Mon,14/03/2022,20:00,Crystal Palace,0.6,0,Manchester City,2.8,0,0,78.57,77.21
+324,16,Wed,16/03/2022,19:30,Brighton,0.7,0,Tottenham,2.2,2,-1,72.14,75.93
+326,27,Wed,16/03/2022,20:15,Arsenal,0.5,0,Liverpool,0.8,2,-1,74.36,74.36
+328,20,Thu,17/03/2022,19:45,Everton,0.7,1,Newcastle Utd,0.9,0,1,80.43,77.86
+330,30,Fri,18/03/2022,20:00,Wolves,1.2,2,Leeds United,2,3,-1,75.93,74.79
+331,30,Sat,19/03/2022,12:30,Aston Villa,0.5,0,Arsenal,1.3,1,-1,78.07,81.57
+332,30,Sun,20/03/2022,14:00,Leicester City,1,2,Brentford,1.3,1,1,76.79,80.86
+333,30,Sun,20/03/2022,16:30,Tottenham,3,3,West Ham,0.6,1,1,74.55,75.86
+335,31,Sat,02/04/2022,12:30,Liverpool,2.2,2,Watford,0.6,0,1,77.86,72.21
+336,31,Sat,02/04/2022,15:00,Wolves,1.3,2,Aston Villa,2.1,1,1,74.71,75.93
+337,31,Sat,02/04/2022,15:00,Leeds United,1.2,1,Southampton,1.4,1,0,75,83.93
+338,31,Sat,02/04/2022,15:00,Chelsea,1.3,1,Brentford,1.8,4,-1,79.07,76.29
+339,31,Sat,02/04/2022,15:00,Burnley,0.1,0,Manchester City,1.8,2,-1,76.93,80.93
+340,31,Sat,02/04/2022,15:00,Brighton,2.8,0,Norwich City,0.4,0,0,78.64,78.36
+341,31,Sat,02/04/2022,17:30,Manchester Utd,0.9,1,Leicester City,0.8,1,0,79.57,74.36
+342,31,Sun,03/04/2022,14:00,West Ham,1.2,2,Everton,0.7,1,1,75.14,72.79
+343,31,Sun,03/04/2022,16:30,Tottenham,3.1,5,Newcastle Utd,0.5,1,1,73.21,75.92
+344,31,Mon,04/04/2022,20:00,Crystal Palace,1.5,3,Arsenal,0.8,0,1,81.29,76.64
+346,19,Wed,06/04/2022,19:30,Burnley,2,3,Everton,2.4,2,1,75.5,80.14
+348,32,Fri,08/04/2022,20:00,Newcastle Utd,1.5,1,Wolves,0.4,0,1,78.21,76.5
+349,32,Sat,09/04/2022,12:30,Everton,0.4,1,Manchester Utd,0.8,0,1,71.93,78.64
+350,32,Sat,09/04/2022,15:00,Arsenal,1.9,1,Brighton,0.6,2,-1,78.86,75
+351,32,Sat,09/04/2022,15:00,Southampton,0.5,0,Chelsea,4.2,6,-1,82.86,77.36
+352,32,Sat,09/04/2022,15:00,Watford,1.1,0,Leeds United,0.7,3,-1,78.14,79.86
+353,32,Sat,09/04/2022,17:30,Aston Villa,1.6,0,Tottenham,1.1,4,-1,75,79.86
+354,32,Sun,10/04/2022,14:00,Brentford,1.4,2,West Ham,0.3,0,1,79.25,70.93
+355,32,Sun,10/04/2022,14:00,Leicester City,1,2,Crystal Palace,1.4,1,1,73.92,77.38
+356,32,Sun,10/04/2022,14:00,Norwich City,1.7,2,Burnley,1.7,0,1,75.29,84.36
+357,32,Sun,10/04/2022,16:30,Manchester City,1.3,2,Liverpool,1.3,2,0,78.5,78.86
+359,33,Sat,16/04/2022,12:30,Tottenham,0.5,0,Brighton,0.6,1,-1,74.71,75.36
+360,33,Sat,16/04/2022,15:00,Manchester Utd,1.9,3,Norwich City,1.5,2,1,73.69,78.29
+361,33,Sat,16/04/2022,15:00,Watford,1.7,1,Brentford,1.9,2,-1,75.07,72.14
+362,33,Sat,16/04/2022,15:00,Southampton,0.8,1,Arsenal,1.7,0,1,78.71,75.29
+363,33,Sun,17/04/2022,14:15,Newcastle Utd,1.8,2,Leicester City,0.6,1,1,78.43,84.55
+364,33,Sun,17/04/2022,14:15,West Ham,2.2,1,Burnley,1.8,1,0,75.93,74.36
+366,30,Tue,19/04/2022,20:00,Liverpool,2,4,Manchester Utd,0.1,0,1,74.43,77.57
+368,18,Wed,20/04/2022,19:45,Everton,1.8,1,Leicester City,0.9,1,0,77.79,76.07
+370,25,Wed,20/04/2022,19:45,Chelsea,0.7,2,Arsenal,2,4,-1,74.07,75
+372,30,Wed,20/04/2022,19:45,Newcastle Utd,0.9,1,Crystal Palace,0.5,0,1,74.57,76.93
+373,30,Wed,20/04/2022,20:00,Manchester City,1.3,3,Brighton,0.2,0,1,78.64,75.14
+374,30,Thu,21/04/2022,19:45,Burnley,1.5,2,Southampton,0.9,0,1,75.29,78.43
+376,34,Sat,23/04/2022,12:30,Arsenal,2.3,3,Manchester Utd,1.8,1,1,84.64,77.79
+377,34,Sat,23/04/2022,15:00,Leicester City,0.3,0,Aston Villa,0.9,0,0,81.64,76.07
+378,34,Sat,23/04/2022,15:00,Manchester City,3.6,5,Watford,0.5,1,1,76.15,77.29
+379,34,Sat,23/04/2022,15:00,Norwich City,0.6,0,Newcastle Utd,1.9,3,-1,80.93,73.36
+380,34,Sat,23/04/2022,17:30,Brentford,0.9,0,Tottenham,0.6,0,0,80.57,75.92
+381,34,Sun,24/04/2022,14:00,Brighton,1.7,2,Southampton,0.9,2,0,72.71,79.93
+382,34,Sun,24/04/2022,14:00,Burnley,1.4,1,Wolves,0.6,0,1,73.79,75.79
+383,34,Sun,24/04/2022,14:00,Chelsea,3,1,West Ham,0.5,0,1,79.36,76.07
+384,34,Sun,24/04/2022,16:30,Liverpool,1.7,2,Everton,0.4,0,1,74.13,74.31
+385,34,Mon,25/04/2022,20:00,Crystal Palace,1.9,0,Leeds United,0.5,0,0,76.15,80.5
+387,37,Thu,28/04/2022,19:45,Manchester Utd,0.5,1,Chelsea,1.9,1,0,73.54,80.86
+389,35,Sat,30/04/2022,12:30,Newcastle Utd,0.2,0,Liverpool,2.3,1,-1,79.31,79.43
+390,35,Sat,30/04/2022,15:00,Watford,1,1,Burnley,1.6,2,-1,77.71,79.43
+391,35,Sat,30/04/2022,15:00,Wolves,0.7,0,Brighton,2.6,3,-1,79.14,80.43
+392,35,Sat,30/04/2022,15:00,Aston Villa,1.8,2,Norwich City,0.5,0,1,80.29,75.93
+393,35,Sat,30/04/2022,15:00,Southampton,0.6,1,Crystal Palace,1.1,2,-1,74.14,78.64
+394,35,Sat,30/04/2022,17:30,Leeds United,1.3,0,Manchester City,2.4,4,-1,74,75.86
+395,35,Sun,01/05/2022,14:00,Tottenham,1.2,3,Leicester City,0.5,1,1,80,73.69
+396,35,Sun,01/05/2022,14:00,Everton,0.8,1,Chelsea,0.8,0,1,78.71,71.86
+397,35,Sun,01/05/2022,16:30,West Ham,0.5,1,Arsenal,0.9,2,-1,76.93,80.71
+398,35,Mon,02/05/2022,20:00,Manchester Utd,2,3,Brentford,0.6,0,1,71.29,84.36
+400,36,Sat,07/05/2022,15:00,Crystal Palace,2.2,1,Watford,0.4,0,1,74.08,75.71
+401,36,Sat,07/05/2022,15:00,Brentford,2.6,3,Southampton,1.4,0,1,86.08,82.79
+402,36,Sat,07/05/2022,15:00,Chelsea,1.7,2,Wolves,2,2,0,77.71,79.14
+403,36,Sat,07/05/2022,15:00,Burnley,1.9,1,Aston Villa,2.1,3,-1,79.25,75.75
+404,36,Sat,07/05/2022,17:30,Brighton,2.3,4,Manchester Utd,0.9,0,1,76.58,73.92
+405,36,Sat,07/05/2022,19:45,Liverpool,1.3,1,Tottenham,0.9,1,0,77.14,79.57
+406,36,Sun,08/05/2022,14:00,Leicester City,1.5,1,Everton,1.1,2,-1,77.14,74.93
+407,36,Sun,08/05/2022,14:00,Norwich City,0.8,0,West Ham,3,4,-1,72.57,79.29
+408,36,Sun,08/05/2022,14:00,Arsenal,2,2,Leeds United,0.3,1,1,74.64,75.93
+409,36,Sun,08/05/2022,16:30,Manchester City,3.1,5,Newcastle Utd,0.8,0,1,86.92,79
+411,33,Tue,10/05/2022,20:00,Aston Villa,1.4,1,Liverpool,1.8,2,-1,81.36,73.07
+412,33,Wed,11/05/2022,19:30,Leeds United,0.4,0,Chelsea,1.3,3,-1,76.36,76
+414,21,Wed,11/05/2022,19:45,Leicester City,2,3,Norwich City,1.1,0,1,82.36,76.71
+416,30,Wed,11/05/2022,19:45,Watford,0.3,0,Everton,0.7,0,0,80.57,76.5
+418,33,Wed,11/05/2022,20:15,Wolves,0.5,1,Manchester City,2.3,5,-1,78.5,78.86
+420,22,Thu,12/05/2022,19:45,Tottenham,2.7,3,Arsenal,0.5,0,1,75.5,72.14
+422,37,Sun,15/05/2022,12:00,Tottenham,2.2,1,Burnley,0.7,0,1,75.69,86.36
+423,37,Sun,15/05/2022,14:00,Leeds United,1.6,1,Brighton,2.2,1,0,79.79,81.43
+424,37,Sun,15/05/2022,14:00,Watford,1.4,1,Leicester City,2.5,5,-1,82.64,74.86
+425,37,Sun,15/05/2022,14:00,Wolves,0.9,1,Norwich City,1.1,1,0,75.21,72.14
+426,37,Sun,15/05/2022,14:00,Aston Villa,1,1,Crystal Palace,1.4,1,0,79.14,79.43
+427,37,Sun,15/05/2022,14:00,West Ham,1.1,2,Manchester City,2.4,2,0,78.21,76
+428,37,Sun,15/05/2022,16:30,Everton,2.1,2,Brentford,1.4,3,-1,86.15,81.79
+429,37,Mon,16/05/2022,20:00,Newcastle Utd,1.6,2,Arsenal,0.6,0,1,80.07,71.93
+430,37,Tue,17/05/2022,19:45,Southampton,0.1,1,Liverpool,1.3,2,-1,74.64,78.85
+432,33,Thu,19/05/2022,19:45,Everton,0.8,3,Crystal Palace,1.1,2,1,84.36,73.86
+434,18,Thu,19/05/2022,20:00,Aston Villa,1.5,1,Burnley,1.6,1,0,73.85,79.15
+436,27,Thu,19/05/2022,20:00,Chelsea,1.6,1,Leicester City,0.1,1,0,75.64,77.15
+438,38,Sun,22/05/2022,16:00,Brentford,0.8,1,Leeds United,1.3,2,-1,81.14,77.15
+439,38,Sun,22/05/2022,16:00,Leicester City,3.4,4,Southampton,1.1,1,1,77.14,75.43
+440,38,Sun,22/05/2022,16:00,Crystal Palace,0.6,1,Manchester Utd,0.7,0,1,75.93,78
+441,38,Sun,22/05/2022,16:00,Arsenal,4.2,5,Everton,1.1,1,1,81.43,79.71
+442,38,Sun,22/05/2022,16:00,Brighton,1.6,3,West Ham,0.2,1,1,78.38,75.77
+443,38,Sun,22/05/2022,16:00,Norwich City,0.5,0,Tottenham,3.4,5,-1,76.53,79.07
+444,38,Sun,22/05/2022,16:00,Manchester City,3.4,3,Aston Villa,0.2,2,1,77,75.5
+445,38,Sun,22/05/2022,16:00,Liverpool,2.7,3,Wolves,1.3,1,1,80.64,78
+446,38,Sun,22/05/2022,16:00,Burnley,1.6,1,Newcastle Utd,1.8,2,-1,78.8,74.4
+447,38,Sun,22/05/2022,16:00,Chelsea,2.2,2,Watford,0.6,1,1,72.21,78.86

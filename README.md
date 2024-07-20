@@ -1,5 +1,7 @@
 Guide for Teams Data:
 
+Rk - League Rank
+Squad - Squad name
 MP - Matches Played
 W - Wins
 D - Draw

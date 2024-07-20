@@ -158,3 +158,44 @@ def calculate_avg_score(players, fifa_df):
 
 def find_player(player_name, fifa_df):
     return fifa_df[fifa_df['Name'].apply(lambda x: all(part.lower() in x.lower() for part in player_name.split()))]
+
+def match_prev_league():
+    years = [2019, 2020, 2021, 2022, 2023]
+    for year in years:
+        # every match will be matched with the previous league's stats
+        matches_file_name = f'premier-league_{year}-{year+1}_matches_data.csv'
+        teams_file_name = f'premier-league_{year-1}-{year}_teams_data.csv'
+        matches = pd.read_csv(f'./resources/{matches_file_name}')
+        teams = pd.read_csv(f'./resources/{teams_file_name}')
+
+        # Specify the columns you want to keep from the teams data
+        desired_columns = ['Squad', 'Rk', 'MP', 'W', 'D', 'L', 'GF', 'GA', 'Pts', 'Pts/MP']
+
+        # Select and rename the desired columns for home and away teams
+        teams_home = teams[desired_columns].copy()
+        teams_home.columns = [f'Prev_{col}_Home' if col != 'Squad' else col for col in teams_home.columns]
+
+        teams_away = teams[desired_columns].copy()
+        teams_away.columns = [f'Prev_{col}_Away' if col != 'Squad' else col for col in teams_away.columns]
+
+        # Merge the Home team stats with matches
+        matches = matches.merge(teams_home, left_on='Home', right_on='Squad', how='left')
+
+        # Merge the Away team stats with matches
+        matches = matches.merge(teams_away, left_on='Away', right_on='Squad', how='left')
+
+        # Drop the duplicated 'Squad' columns
+        matches = matches.drop(columns=['Squad_x', 'Squad_y'])
+
+        # Save the updated DataFrame to a new CSV file
+        output_file_name = f'./resources/premier-league_{year}-{year + 1}_matches_with_stats.csv'
+
+        # Check if the file exists and remove it if it does
+        if os.path.exists(output_file_name):
+            os.remove(output_file_name)
+
+        matches.to_csv(output_file_name, index=False)
+
+        print(f'Merged stats for year {year}-{year + 1} and saved to {output_file_name}')
+
+

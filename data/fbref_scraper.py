@@ -159,12 +159,13 @@ def calculate_avg_score(players, fifa_df):
 def find_player(player_name, fifa_df):
     return fifa_df[fifa_df['Name'].apply(lambda x: all(part.lower() in x.lower() for part in player_name.split()))]
 
+
 def match_prev_league():
     years = [2019, 2020, 2021, 2022, 2023]
     for year in years:
         # every match will be matched with the previous league's stats
-        matches_file_name = f'premier-league_{year}-{year+1}_matches_data.csv'
-        teams_file_name = f'premier-league_{year-1}-{year}_teams_data.csv'
+        matches_file_name = f'premier-league_{year}-{year + 1}_matches_data.csv'
+        teams_file_name = f'premier-league_{year - 1}-{year}_teams_data.csv'
         matches = pd.read_csv(f'./resources/{matches_file_name}')
         teams = pd.read_csv(f'./resources/{teams_file_name}')
 
@@ -199,3 +200,128 @@ def match_prev_league():
         print(f'Merged stats for year {year}-{year + 1} and saved to {output_file_name}')
 
 
+def load_premier_league_data(start_year, end_year, base_path='./resources'):
+    # Initialize DataFrame with the first year's data
+    df = pd.read_csv(f'{base_path}/premier-league_{start_year}-{start_year + 1}_matches_data.csv')
+
+    # Loop through the remaining years and concatenate the data
+    for year in range(start_year + 1, end_year + 1):
+        matches_file_name = f'premier-league_{year}-{year + 1}_matches_data.csv'
+        matches = pd.read_csv(f'{base_path}/{matches_file_name}')
+        df = pd.concat([df, matches], axis=0, ignore_index=True)
+
+    return df
+
+
+def agg_prev_games():
+    df = load_premier_league_data(2019, 2023)
+
+    # Function to calculate points from score
+    def calculate_points(row):
+        if row['G Home'] > row['G Away']:
+            return 3, 0  # Home win
+        elif row['G Home'] < row['G Away']:
+            return 0, 3  # Away win
+        else:
+            return 1, 1  # Draw
+
+    # Calculate points for each match
+    df[['Home Points', 'Away Points']] = df.apply(calculate_points, axis=1, result_type='expand')
+
+    # Combine Home and Away points into a single dictionary
+    team_stats_history = {
+        team: {'points': [], 'goals_for': [], 'goals_against': [], 'cumulative_points': 0}
+        for team in pd.concat([df['Home'], df['Away']]).unique()
+    }
+
+    # Function to calculate average of last 50 matches
+    def calculate_avg(lst):
+        if len(lst) == 0:
+            return 0
+        else:
+            return sum(lst[-50:]) / len(lst[-50:])
+
+    # Lists to store the aggregated stats for each match
+    home_avg_points = []
+    away_avg_points = []
+    home_avg_goals_for = []
+    away_avg_goals_for = []
+    home_avg_goals_against = []
+    away_avg_goals_against = []
+    home_matches_played = []
+    away_matches_played = []
+    home_points_per_match = []
+    away_points_per_match = []
+    home_cumulative_points = []
+    away_cumulative_points = []
+
+    # Iterate over each match and calculate aggregated stats
+    for index, row in df.iterrows():
+        home_team = row['Home']
+        away_team = row['Away']
+
+        # Calculate averages
+        home_avg_points.append(calculate_avg(team_stats_history[home_team]['points']))
+        away_avg_points.append(calculate_avg(team_stats_history[away_team]['points']))
+
+        home_avg_goals_for.append(calculate_avg(team_stats_history[home_team]['goals_for']))
+        away_avg_goals_for.append(calculate_avg(team_stats_history[away_team]['goals_for']))
+
+        home_avg_goals_against.append(calculate_avg(team_stats_history[home_team]['goals_against']))
+        away_avg_goals_against.append(calculate_avg(team_stats_history[away_team]['goals_against']))
+
+        home_matches_played.append(len(team_stats_history[home_team]['points']))
+        away_matches_played.append(len(team_stats_history[away_team]['points']))
+
+        if len(team_stats_history[home_team]['points']) == 0:
+            home_points_per_match.append(0)
+        else:
+            home_points_per_match.append(
+                sum(team_stats_history[home_team]['points']) / len(team_stats_history[home_team]['points']))
+
+        if len(team_stats_history[away_team]['points']) == 0:
+            away_points_per_match.append(0)
+        else:
+            away_points_per_match.append(
+                sum(team_stats_history[away_team]['points']) / len(team_stats_history[away_team]['points']))
+
+        # Add cumulative points so far
+        home_cumulative_points.append(team_stats_history[home_team]['cumulative_points'])
+        away_cumulative_points.append(team_stats_history[away_team]['cumulative_points'])
+
+        # Update stats history
+        team_stats_history[home_team]['points'].append(row['Home Points'])
+        team_stats_history[home_team]['goals_for'].append(row['G Home'])
+        team_stats_history[home_team]['goals_against'].append(row['G Away'])
+        team_stats_history[home_team]['cumulative_points'] += row['Home Points']
+
+        team_stats_history[away_team]['points'].append(row['Away Points'])
+        team_stats_history[away_team]['goals_for'].append(row['G Away'])
+        team_stats_history[away_team]['goals_against'].append(row['G Home'])
+        team_stats_history[away_team]['cumulative_points'] += row['Away Points']
+
+    # Add aggregated stats columns to the DataFrame
+    df['Home Avg Points'] = home_avg_points
+    df['Away Avg Points'] = away_avg_points
+    df['Home Avg Goals For'] = home_avg_goals_for
+    df['Away Avg Goals For'] = away_avg_goals_for
+    df['Home Avg Goals Against'] = home_avg_goals_against
+    df['Away Avg Goals Against'] = away_avg_goals_against
+    df['Home Matches Played'] = home_matches_played
+    df['Away Matches Played'] = away_matches_played
+    df['Home Points/Match'] = home_points_per_match
+    df['Away Points/Match'] = away_points_per_match
+    df['Home Cumulative Points'] = home_cumulative_points
+    df['Away Cumulative Points'] = away_cumulative_points
+
+    df = df.round(2)
+
+    # Save the updated DataFrame to a new CSV file
+    output_file_name = f'./resources/premier-league_matches_merged.csv'
+
+    # Check if the file exists and remove it if it does
+    if os.path.exists(output_file_name):
+        os.remove(output_file_name)
+
+    df.to_csv(output_file_name, index=False)
+    print('merged and added aggregate')

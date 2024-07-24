@@ -14,11 +14,23 @@ LEAGUES = {
     'Ligue-1': '13',
     'Bundesliga': '20'
 }
-SEASONS = ['2017-2018', '2018-2019', '2019-2020', '2020-2021', '2021-2022', '2022-2023', '2023-2024']
+SEASONS = ['2023-2024', '2022-2023', '2021-2022', '2020-2021', '2019-2020', '2018-2019', '2017-2018']
+
+RESOURCES_PATH = 'resources'
+FIFA_INPUT_PATH = RESOURCES_PATH + '/fifa_24_ratings.csv'
+
 OUTPUT_PATH = 'output'
 
+STATISTICS = [0, 0, 0]
 
-def scrap_fbref(fifa_df):
+
+def load_fifa():
+    fifa_df = pd.read_csv(FIFA_INPUT_PATH)
+    return fifa_df
+
+
+def scrap_fbref():
+    fifa_df = load_fifa()
     url, league, season = get_data_info()
     matches = get_matches_data(url)
     match_links = get_match_links(url, league)
@@ -30,36 +42,15 @@ def scrap_fbref(fifa_df):
                                           header=True,
                                           index=False, mode='w')
 
+    print(STATISTICS)
+
     print('Data collected!')
 
 
 def get_data_info():
-    while True:
-        # select league [Premier League / La Liga / Serie A / Ligue 1 / Bundesliga]
-        # league = input('Select League (Premier League / La Liga / Serie A / Ligue 1 / Bundesliga): ')
-        league = 'Premier-League'
-        league = league.replace(' ', '-')
-
-        # check if input valid
-        if league not in LEAGUES:
-            print('League not valid, try again')
-            continue
-
-        league_id = LEAGUES[league]
-        break
-
-    while True:
-        # select season after 2017 as XG only available from 2017,
-        # season = input('Select Season (2017-2018, 2018-2019, 2019-2020, 2020-2021, 2021-2022, 2022-2023, 2023-2024): ')
-        season = '2023-2024'
-
-        # check if input valid
-        if season not in SEASONS:
-            print('Season not valid, try again')
-            continue
-        break
-
-    url = f'https://fbref.com/en/comps/{league_id}/{season}/schedule/{season}-{league}-Scores-and-Fixtures'
+    league = 'Premier-League'
+    season = '2023-2024'
+    url = f'https://fbref.com/en/comps/{LEAGUES[league]}/{season}/schedule/{season}-{league}-Scores-and-Fixtures'
     return url, league, season
 
 
@@ -130,8 +121,10 @@ def add_players_data(matches, match_links, fifa_df):
         matches.loc[count, 'Home Avg Players Score'] = home_team_avg_score
         matches.loc[count, 'Away Avg Players Score'] = away_team_avg_score
 
+        print(f'Done match number: {count}')
+
         # sleep for 3 seconds after every game to avoid IP being blocked
-        time.sleep(3)
+        time.sleep(5)
 
 
 def get_team_player_data(df):
@@ -147,10 +140,13 @@ def calculate_avg_score(players, fifa_df):
         player = find_player(player_name, fifa_df)
         if player['Overall'].empty:
             player_overall = 70
+            STATISTICS[0] += 1
         elif player['Overall'].shape[0] > 1:
             player_overall = int(player['Overall'].values[0])
+            STATISTICS[1] += 1
         else:
-            player_overall = int(player['Overall'])
+            player_overall = int(player['Overall'].values[0])
+            STATISTICS[2] += 1
         total_score += player_overall
 
     return round(total_score / len(players), 2)

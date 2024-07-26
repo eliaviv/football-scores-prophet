@@ -221,21 +221,33 @@ def agg_prev_games():
         else:
             return 1, 1  # Draw
 
-    # Calculate points for each match
+    # Function to calculate expected score from xG
+    def calculate_xscore(row):
+        if row['xG Home'] > row['xG Away']:
+            return 1  # Home win
+        elif row['xG Home'] < row['xG Away']:
+            return -1  # Away win
+        else:
+            return 0  # Draw
+
+    # Calculate points and xScore for each match
     df[['Home Points', 'Away Points']] = df.apply(calculate_points, axis=1, result_type='expand')
+    df['xScore'] = df.apply(calculate_xscore, axis=1)
 
     # Combine Home and Away points into a single dictionary
-    team_stats_history = {
-        team: {'points': [], 'goals_for': [], 'goals_against': [], 'cumulative_points': 0}
-        for team in pd.concat([df['Home'], df['Away']]).unique()
-    }
+    team_stats_history = {team: {'points': [], 'goals_for': [], 'goals_against': []} for team in
+                          pd.concat([df['Home'], df['Away']]).unique()}
 
-    # Function to calculate average of last 50 matches
-    def calculate_avg(lst):
+    # Function to calculate average of last N matches
+    def calculate_avg(lst, n=50):
         if len(lst) == 0:
             return 0
         else:
-            return sum(lst[-50:]) / len(lst[-50:])
+            return sum(lst[-n:]) / len(lst[-n:])
+
+    # Initialize head-to-head statistics
+    head_to_head_stats = {(home, away): {'points': [], 'goals_for': [], 'goals_against': []} for home in
+                          df['Home'].unique() for away in df['Away'].unique()}
 
     # Lists to store the aggregated stats for each match
     home_avg_points = []
@@ -248,8 +260,22 @@ def agg_prev_games():
     away_matches_played = []
     home_points_per_match = []
     away_points_per_match = []
-    home_cumulative_points = []
-    away_cumulative_points = []
+
+    # Form indicators
+    home_form_points = []
+    away_form_points = []
+    home_form_goals_for = []
+    away_form_goals_for = []
+    home_form_goals_against = []
+    away_form_goals_against = []
+
+    # Head-to-head statistics
+    home_head_to_head_points = []
+    away_head_to_head_points = []
+    home_head_to_head_goals_for = []
+    away_head_to_head_goals_for = []
+    home_head_to_head_goals_against = []
+    away_head_to_head_goals_against = []
 
     # Iterate over each match and calculate aggregated stats
     for index, row in df.iterrows():
@@ -281,20 +307,45 @@ def agg_prev_games():
             away_points_per_match.append(
                 sum(team_stats_history[away_team]['points']) / len(team_stats_history[away_team]['points']))
 
-        # Add cumulative points so far
-        home_cumulative_points.append(team_stats_history[home_team]['cumulative_points'])
-        away_cumulative_points.append(team_stats_history[away_team]['cumulative_points'])
+        # Calculate form indicators (last 5 matches)
+        home_form_points.append(calculate_avg(team_stats_history[home_team]['points'], 5))
+        away_form_points.append(calculate_avg(team_stats_history[away_team]['points'], 5))
+
+        home_form_goals_for.append(calculate_avg(team_stats_history[home_team]['goals_for'], 5))
+        away_form_goals_for.append(calculate_avg(team_stats_history[away_team]['goals_for'], 5))
+
+        home_form_goals_against.append(calculate_avg(team_stats_history[home_team]['goals_against'], 5))
+        away_form_goals_against.append(calculate_avg(team_stats_history[away_team]['goals_against'], 5))
+
+        # Calculate head-to-head statistics (last 5 matches)
+        home_head_to_head_points.append(calculate_avg(head_to_head_stats[(home_team, away_team)]['points'], 5))
+        away_head_to_head_points.append(calculate_avg(head_to_head_stats[(away_team, home_team)]['points'], 5))
+
+        home_head_to_head_goals_for.append(calculate_avg(head_to_head_stats[(home_team, away_team)]['goals_for'], 5))
+        away_head_to_head_goals_for.append(calculate_avg(head_to_head_stats[(away_team, home_team)]['goals_for'], 5))
+
+        home_head_to_head_goals_against.append(
+            calculate_avg(head_to_head_stats[(home_team, away_team)]['goals_against'], 5))
+        away_head_to_head_goals_against.append(
+            calculate_avg(head_to_head_stats[(away_team, home_team)]['goals_against'], 5))
 
         # Update stats history
         team_stats_history[home_team]['points'].append(row['Home Points'])
         team_stats_history[home_team]['goals_for'].append(row['G Home'])
         team_stats_history[home_team]['goals_against'].append(row['G Away'])
-        team_stats_history[home_team]['cumulative_points'] += row['Home Points']
 
         team_stats_history[away_team]['points'].append(row['Away Points'])
         team_stats_history[away_team]['goals_for'].append(row['G Away'])
         team_stats_history[away_team]['goals_against'].append(row['G Home'])
-        team_stats_history[away_team]['cumulative_points'] += row['Away Points']
+
+        # Update head-to-head stats history
+        head_to_head_stats[(home_team, away_team)]['points'].append(row['Home Points'])
+        head_to_head_stats[(home_team, away_team)]['goals_for'].append(row['G Home'])
+        head_to_head_stats[(home_team, away_team)]['goals_against'].append(row['G Away'])
+
+        head_to_head_stats[(away_team, home_team)]['points'].append(row['Away Points'])
+        head_to_head_stats[(away_team, home_team)]['goals_for'].append(row['G Away'])
+        head_to_head_stats[(away_team, home_team)]['goals_against'].append(row['G Home'])
 
     # Add aggregated stats columns to the DataFrame
     df['Home Avg Points'] = home_avg_points
@@ -307,8 +358,18 @@ def agg_prev_games():
     df['Away Matches Played'] = away_matches_played
     df['Home Points/Match'] = home_points_per_match
     df['Away Points/Match'] = away_points_per_match
-    df['Home Cumulative Points'] = home_cumulative_points
-    df['Away Cumulative Points'] = away_cumulative_points
+    df['Home Form Points'] = home_form_points
+    df['Away Form Points'] = away_form_points
+    df['Home Form Goals For'] = home_form_goals_for
+    df['Away Form Goals For'] = away_form_goals_for
+    df['Home Form Goals Against'] = home_form_goals_against
+    df['Away Form Goals Against'] = away_form_goals_against
+    df['Home Head-to-Head Points'] = home_head_to_head_points
+    df['Away Head-to-Head Points'] = away_head_to_head_points
+    df['Home Head-to-Head Goals For'] = home_head_to_head_goals_for
+    df['Away Head-to-Head Goals For'] = away_head_to_head_goals_for
+    df['Home Head-to-Head Goals Against'] = home_head_to_head_goals_against
+    df['Away Head-to-Head Goals Against'] = away_head_to_head_goals_against
 
     df = df.round(2)
 

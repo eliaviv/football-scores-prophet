@@ -6,8 +6,8 @@ from data.fifa_scraper import scrap_fifa
 
 def main():
     # fifa_df = load_fifa()
-    # scrap_fbref()
-    agg_prev_games()
+    scrap_fbref()
+    # agg_prev_games()
 
 def load_fifa():
     fifa_df = pd.read_csv('output/fifa_24_ratings.csv')

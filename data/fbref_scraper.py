@@ -104,6 +104,8 @@ def get_match_links(url, league):
 def add_players_data(matches, match_links, fifa_df):
     matches['Home Avg Players Score'] = ''
     matches['Away Avg Players Score'] = ''
+    matches['Home Star Player Count'] = ''
+    matches['Away Star Player Count'] = ''
     for count, link in enumerate(match_links):
         tables = pd.read_html(link)
         for table in tables:
@@ -117,9 +119,13 @@ def add_players_data(matches, match_links, fifa_df):
 
         home_team_avg_score = calculate_avg_score(home_team_players_df['Player'].tolist(), fifa_df)
         away_team_avg_score = calculate_avg_score(away_team_players_df['Player'].tolist(), fifa_df)
+        home_star_player_count = count_star_players(home_team_players_df['Player'].tolist(), fifa_df)
+        away_star_player_count = count_star_players(away_team_players_df['Player'].tolist(), fifa_df)
 
         matches.loc[count, 'Home Avg Players Score'] = home_team_avg_score
         matches.loc[count, 'Away Avg Players Score'] = away_team_avg_score
+        matches.loc[count, 'Home Star Player Count'] = home_star_player_count
+        matches.loc[count, 'Away Star Player Count'] = away_star_player_count
 
         print(f'Done match number: {count}')
 
@@ -134,8 +140,25 @@ def get_team_player_data(df):
                   df).iloc[:-1]
 
 
+def count_star_players(players, fifa_df):
+    count = 0
+    for player_name in players:
+        player = find_player(player_name, fifa_df)
+        if player['Overall'].empty:
+            player_overall = 70
+        elif player['Overall'].shape[0] > 1:
+            player_overall = int(player['Overall'].values[0])
+        else:
+            player_overall = int(player['Overall'].values[0])
+        if player_overall >= 85:
+            count += 1
+
+    return count
+
+
 def calculate_avg_score(players, fifa_df):
     total_score = 0
+    extra_weights = 0
     for player_name in players:
         player = find_player(player_name, fifa_df)
         if player['Overall'].empty:
@@ -147,9 +170,17 @@ def calculate_avg_score(players, fifa_df):
         else:
             player_overall = int(player['Overall'].values[0])
             STATISTICS[2] += 1
-        total_score += player_overall
+        # 1 weight is already counted
+        if player_overall >= 90:
+            extra_weights += 9
+            total_score += player_overall * 10
+        elif player_overall >= 85:
+            extra_weights += 4
+            total_score += player_overall * 5
+        else:
+            total_score += player_overall
 
-    return round(total_score / len(players), 2)
+    return round(total_score / (len(players) + extra_weights), 2)
 
 
 def find_player(player_name, fifa_df):

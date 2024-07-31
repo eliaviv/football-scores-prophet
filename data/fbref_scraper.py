@@ -1,4 +1,3 @@
-import os
 import random
 import time
 from datetime import datetime
@@ -8,23 +7,18 @@ import numpy as np
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup as soup
-from db import sqlite_client
 
 LEAGUES = {
     # 'Premier-League': '9',
     # 'Serie-A': '11',
     # 'La-Liga': '12',
-    # 'Ligue-1': '13',
-    # 'Bundesliga': '20'
+    'Ligue-1': '13',
+    'Bundesliga': '20'
 }
 SEASONS = ['2019-2020', '2020-2021', '2021-2022', '2022-2023', '2023-2024']
-RESOURCES_PATH = 'resources'
-OUTPUT_PATH = 'output'
 
 
-def scrap_fbref():
-    db_client = sqlite_client.SQLiteClient()
-
+def scrap_fbref(db_client):
     for league in LEAGUES.keys():
         for season in SEASONS:
             print(f'Start scrapping league: {league} and season: {season}')

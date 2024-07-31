@@ -1,68 +1,61 @@
 import os
 
+import pandas as pd
 
-def load_fifa(season):
-    year = season.split('-')[1]
-    year_short_cut = year[2] + year[3]
-    fifa_input_file = RESOURCES_PATH + f'/fifa_{year_short_cut}_ratings.csv'
-    fifa_df = pd.read_csv(fifa_input_file)
-    return fifa_df
+RESOURCES_PATH = 'resources'
+OUTPUT_PATH = 'output'
 
 
-def export_data():
-    # export data
-    os.makedirs(OUTPUT_PATH, exist_ok=True)
-    matches.reset_index(drop=True).to_csv(f'{OUTPUT_PATH}/{league.lower()}_{season.lower()}_matches_data.csv',
-                                          header=True,
-                                          index=False, mode='w')
+def add_players_data(db_client):
+    matches_df = load_matches_df(db_client)
+    add_columns_to_match_df(matches_df)
 
-
-def add_players_data(matches, match_links, fifa_df):
     statistics = [0, 0, 0]
-    matches['Home Avg Players Score'] = ''
-    matches['Away Avg Players Score'] = ''
-    matches['Home Star Player Count'] = ''
-    matches['Away Star Player Count'] = ''
-    matches['Players Found %'] = ''
-    for count, link in enumerate(match_links):
-        tables = pd.read_html(link)
-        for table in tables:
-            try:
-                table.columns = table.columns.droplevel()
-            except:
-                continue
 
-        try:
-            home_team_players_df = get_team_player_data([tables[3], tables[9]])
-            away_team_players_df = get_team_player_data([tables[10], tables[16]])
-        except Exception as e:
-            continue
+    for i, match_row in matches_df.iterrows():
+        fifa_df = load_fifa(match_row['Season'])
+        home_team_players_df = load_team_player_data(db_client, match_row['Game ID'], 1)
+        away_team_players_df = load_team_player_data(db_client, match_row['Game ID'], 0)
 
         home_team_avg_score = calculate_avg_score(home_team_players_df['Player'].tolist(), fifa_df, statistics)
         away_team_avg_score = calculate_avg_score(away_team_players_df['Player'].tolist(), fifa_df, statistics)
         home_star_player_count = count_star_players(home_team_players_df['Player'].tolist(), fifa_df)
         away_star_player_count = count_star_players(away_team_players_df['Player'].tolist(), fifa_df)
 
-        matches.loc[count, 'Home Avg Players Score'] = home_team_avg_score
-        matches.loc[count, 'Away Avg Players Score'] = away_team_avg_score
-        matches.loc[count, 'Home Star Player Count'] = home_star_player_count
-        matches.loc[count, 'Away Star Player Count'] = away_star_player_count
+        matches_df.loc[i, 'Home Avg Players Score'] = home_team_avg_score
+        matches_df.loc[i, 'Away Avg Players Score'] = away_team_avg_score
+        matches_df.loc[i, 'Home Star Player Count'] = home_star_player_count
+        matches_df.loc[i, 'Away Star Player Count'] = away_star_player_count
 
-        matches.loc[count, 'Players Found %'] = round(((statistics[1] + statistics[2]) /
-                                                       (statistics[0] + statistics[1] + statistics[2])), 2)
+        matches_df.loc[i, 'Players Found %'] = round(((statistics[1] + statistics[2]) /
+                                                      (statistics[0] + statistics[1] + statistics[2])), 2)
         statistics = [0, 0, 0]
 
-        print(f'Done match number: {count + 1}')
-
-        # sleep for 2 seconds after every game to avoid IP being blocked
-        time.sleep(2)
+        print(f'Done match number: {i + 1}')
 
 
-def get_team_player_data(df):
-    return reduce(lambda left, right:
-                  pd.merge(left, right,
-                           on=['Player', 'Nation', 'Age', 'Min'], how='outer'),
-                  df).iloc[:-1]
+def load_matches_df(db_client):
+    return db_client.find_all_matches()
+
+
+def load_fifa(season):
+    year = season.split('-')[1]
+    year_shortcut = year[2] + year[3]
+    fifa_input_file = RESOURCES_PATH + f'/fifa_{year_shortcut}_ratings.csv'
+    fifa_df = pd.read_csv(fifa_input_file)
+    return fifa_df
+
+
+def load_team_player_data(db_client, match_id, is_home):
+    return db_client.find_players_by_match_id_and_is_home(match_id, is_home)
+
+
+def add_columns_to_match_df(matches_df):
+    matches_df['Home Avg Players Score'] = ''
+    matches_df['Away Avg Players Score'] = ''
+    matches_df['Home Star Player Count'] = ''
+    matches_df['Away Star Player Count'] = ''
+    matches_df['Players Found %'] = ''
 
 
 def count_star_players(players, fifa_df):
@@ -341,3 +334,11 @@ def agg_prev_games():
 
     df.to_csv(output_file_name, index=False)
     print('merged and added aggregate')
+
+
+def export_data(matches_df, league, season):
+    # export data
+    os.makedirs(OUTPUT_PATH, exist_ok=True)
+    matches_df.reset_index(drop=True).to_csv(f'{OUTPUT_PATH}/{league.lower()}_{season.lower()}_matches_data.csv',
+                                             header=True,
+                                             index=False, mode='w')

@@ -96,14 +96,18 @@ class SQLiteClient:
 
     def persist_match(self, match_row):
         match = Match(
-            match_row["Game ID"], match_row["Wk"], match_row["Day"], match_row["Date"], match_row["Time"], match_row["Home"],
+            match_row["Game ID"], match_row["Wk"], match_row["Day"], match_row["Date"], match_row["Time"],
+            match_row["Home"],
             match_row["xG Home"], match_row["G Home"], match_row["Away"], match_row["xG Away"], match_row["G Away"],
             match_row["League"], match_row["Season"], match_row["Score"], match_row["Match Link"]
         )
         sql = '''INSERT INTO matches(game_id, wk, day, date, time, home, xg_home, g_home, away, xg_away, g_away, league, season, score, match_link)
                  VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)'''
         cur = self.conn.cursor()
-        cur.execute(sql, (match.game_id, match.wk, match.day, match.date, match.time, match.home, match.xg_home, match.g_home, match.away, match.xg_away, match.g_away, match.league, match.season, match.score, match.match_link))
+        cur.execute(sql, (
+            match.game_id, match.wk, match.day, match.date, match.time, match.home, match.xg_home, match.g_home,
+            match.away,
+            match.xg_away, match.g_away, match.league, match.season, match.score, match.match_link))
         self.conn.commit()
         return cur.lastrowid
 
@@ -124,24 +128,48 @@ class SQLiteClient:
                  VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)'''
         cur = self.conn.cursor()
         cur.execute(sql, (
-            player.player, player.number, player.nation, player.pos, player.age, player.minutes, player.goals, player.assists, player.pk, player.pk_att, player.shots,
-            player.shots_on_target, player.crd_y, player.crd_r, player.touches, player.tackles, player.interceptions, player.blocks, player.xg, player.npxg, player.xag,
-            player.sca, player.gca, player.cmp_x, player.cmp_pct_x, player.prgp, player.carries, player.prgc, player.succ_dribbles,
+            player.player, player.number, player.nation, player.pos, player.age, player.minutes, player.goals,
+            player.assists, player.pk, player.pk_att, player.shots,
+            player.shots_on_target, player.crd_y, player.crd_r, player.touches, player.tackles, player.interceptions,
+            player.blocks, player.xg, player.npxg, player.xag,
+            player.sca, player.gca, player.cmp_x, player.cmp_pct_x, player.prgp, player.carries, player.prgc,
+            player.succ_dribbles,
             player.match_id, player.is_home))
         self.conn.commit()
         return cur.lastrowid
 
     def find_players_by_match_id_and_is_home(self, match_id, is_home):
         sql = '''SELECT * FROM players WHERE match_id = ? AND is_home = ?'''
-        df = pd.read_sql_query(sql, self.conn, params=(match_id, is_home))
-        return df
+        players_df = pd.read_sql_query(sql, self.conn, params=(match_id, is_home))
+        return self._rename_player_columns(players_df)
 
     def find_all_matches(self):
         sql = '''SELECT * FROM matches'''
-        df = pd.read_sql_query(sql, self.conn)
-        return df
+        matches_df = pd.read_sql_query(sql, self.conn)
+        return self._rename_matche_columns(matches_df)
 
     def find_matches_by_date_time_home_away(self, date, time, home, away):
         sql = '''SELECT * FROM matches WHERE date = ? AND time = ? AND home = ? AND away = ?'''
-        df = pd.read_sql_query(sql, self.conn, params=(date, time, home, away))
-        return df
+        matches_df = pd.read_sql_query(sql, self.conn, params=(date, time, home, away))
+        return self._rename_matche_columns(matches_df)
+
+    def _rename_matche_columns(self, matches_df):
+        return matches_df.rename(columns={'game_id': 'Game ID', 'wk': 'Wk', 'day': 'Day', 'date': 'Date',
+                                          'time': 'Time', 'home': 'Home', 'xg_home': 'xG Home', 'g_home': 'G Home',
+                                          'away': 'Away', 'xg_away': 'xG Away', 'g_away': 'G Away', 'league': 'League',
+                                          'season': 'Season', 'score': 'Score', 'match_link': 'Match Link'})
+
+    def _rename_player_columns(self, matches_df):
+        return matches_df.rename(columns={'player': 'Player', 'number': 'Number', 'nation': 'Nation', 'pos': 'Position',
+                                          'age': 'Age', 'minutes': 'Minutes Played', 'goals': 'Goals',
+                                          'assists': 'Assists', 'pk': 'Penalty Kicks',
+                                          'pk_att': 'Penalty Kicks Attempted', 'shots': 'Shots',
+                                          'shots_on_target': 'Shots On Target', 'crd_y': 'Yellow Cards',
+                                          'crd_r': 'Red Cards', 'touches': 'Ball Touches', 'tackles': 'Tackles',
+                                          'interceptions': 'Interceptions', 'blocks': 'Blocks', 'xg': 'Expected Goals',
+                                          'npxg': 'Non Penalty Expected Goals', 'xag': 'Expected Assists',
+                                          'sca': 'Shot Creating Actions', 'gca': 'Goal Creating Actions',
+                                          'cmp_x': 'Passes Completed', 'cmp_pct_x': 'Passes Completed Percentage',
+                                          'prgp': 'Progressive Passes', 'carries': 'Carries',
+                                          'prgc': 'Progressive Carries', 'succ_dribbles': 'Successful Dribbles',
+                                          'match_id': 'Game ID', 'is_home': 'Is Home'})

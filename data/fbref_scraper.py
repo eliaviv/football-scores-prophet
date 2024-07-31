@@ -1,6 +1,7 @@
 import os
 import random
 import time
+from datetime import datetime
 from functools import reduce
 
 import numpy as np
@@ -10,11 +11,11 @@ from bs4 import BeautifulSoup as soup
 from db import sqlite_client
 
 LEAGUES = {
-    'Premier-League': '9',
-    'Serie-A': '11',
-    'La-Liga': '12',
-    'Ligue-1': '13',
-    'Bundesliga': '20'
+    # 'Premier-League': '9',
+    # 'Serie-A': '11',
+    # 'La-Liga': '12',
+    # 'Ligue-1': '13',
+    # 'Bundesliga': '20'
 }
 SEASONS = ['2019-2020', '2020-2021', '2021-2022', '2022-2023', '2023-2024']
 RESOURCES_PATH = 'resources'
@@ -26,6 +27,8 @@ def scrap_fbref():
 
     for league in LEAGUES.keys():
         for season in SEASONS:
+            print(f'Start scrapping league: {league} and season: {season}')
+
             url = f'https://fbref.com/en/comps/{LEAGUES[league]}/{season}/schedule/{season}-{league}-Scores-and-Fixtures'
             matches_df = get_matches_data(url, league, season)
             for i, match_row in matches_df.iterrows():
@@ -34,14 +37,15 @@ def scrap_fbref():
                     continue
 
                 home_team_players_df, away_team_players_df = get_players_data(match_row['Match Link'])
-                db_client.persist_match(match_row)
-                db_client.persist_players(home_team_players_df, match_row['Game ID'], 1)
-                db_client.persist_players(away_team_players_df, match_row['Game ID'], 0)
+                # db_client.persist_match(match_row)
+                # db_client.persist_players(home_team_players_df, match_row['Game ID'], 1)
+                # db_client.persist_players(away_team_players_df, match_row['Game ID'], 0)
 
                 print(f'Done match number: {i + 1}')
+
                 time.sleep(5)
 
-            print('Data collected!')
+            print(f'Data collected for league: {league} and season: {season}')
 
 
 def get_matches_data(url, league, season):
@@ -49,11 +53,37 @@ def get_matches_data(url, league, season):
     tables = pd.read_html(url)
     matches_df = arrange_matches_data(tables, league, season)
     match_links = get_match_links(url, league)
-    matches_df['Match Link'] = match_links
+    add_match_links_to_match_df(match_links, matches_df)
     matches_df = matches_df[
         ['Game ID', 'Wk', 'Day', 'Date', 'Time', 'Home', 'xG Home', 'G Home', 'Away', 'xG Away', 'G Away', 'League', 'Season', 'Match Link', 'Score']]
 
     return matches_df
+
+
+def add_match_links_to_match_df(match_links, matches_df):
+    if matches_df.shape[0] > len(match_links):
+        raise ValueError('Not enough match links')
+
+    if matches_df.shape[0] == len(match_links):
+        matches_df['Match Link'] = match_links
+        return
+
+    for i, match_row in matches_df.iterrows():
+        row_found = False
+        match_row_indices_to_delete = []
+        for match_link in match_links:
+            match_link_details = match_link.split('/')[-1].split('-')
+            link_date = convert_date_format('-'.join(match_link_details[-5:-2]))
+            link_league = '-'.join(match_link_details[-2:])
+            if match_row['Date'] == link_date and match_row['League'] == link_league:
+                row_found = True
+                break
+
+        if row_found:
+            matches_df.loc[i, 'Match Link'] = match_link
+            match_links.remove(match_link)
+        else:
+            match_row_indices_to_delete.append(i)
 
 
 def arrange_matches_data(tables, league, season):
@@ -119,8 +149,7 @@ def get_team_player_data(df):
                   df).iloc[:-1]
 
 
-def export_data(matches):
-    os.makedirs(OUTPUT_PATH, exist_ok=True)
-    matches.reset_index(drop=True).to_csv(f'{OUTPUT_PATH}/matches_data.csv',
-                                          header=True,
-                                          index=False, mode='w')
+def convert_date_format(date_str):
+    date_obj = datetime.strptime(date_str, "%B-%d-%Y")
+    new_date_str = date_obj.strftime("%Y-%m-%d")
+    return new_date_str

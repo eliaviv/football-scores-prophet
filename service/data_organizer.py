@@ -8,12 +8,13 @@ OUTPUT_PATH = 'output'
 
 def add_players_data(db_client):
     matches_df = load_matches_df(db_client)
+    all_fifa_dict = load_all_fifa()
     add_columns_to_match_df(matches_df)
 
     statistics = [0, 0, 0]
 
     for i, match_row in matches_df.iterrows():
-        fifa_df = load_fifa(match_row['Season'])
+        fifa_df = get_relevant_fifa(all_fifa_dict, match_row['Season'])
         home_team_players_df = load_team_player_data(db_client, match_row['Game ID'], 1)
         away_team_players_df = load_team_player_data(db_client, match_row['Game ID'], 0)
 
@@ -38,12 +39,20 @@ def load_matches_df(db_client):
     return db_client.find_all_matches()
 
 
-def load_fifa(season):
+def load_all_fifa():
+    all_fifa_dict = {}
+    fifa_folder = RESOURCES_PATH + '/fifa'
+    for filename in os.listdir(fifa_folder):
+        fifa_input_file = fifa_folder + '/' + filename
+        all_fifa_dict['_'.join(filename.split('_')[:2])] = pd.read_csv(fifa_input_file)
+
+    return all_fifa_dict
+
+
+def get_relevant_fifa(all_fifa_dict, season):
     year = season.split('-')[1]
     year_shortcut = year[2] + year[3]
-    fifa_input_file = RESOURCES_PATH + f'/fifa_{year_shortcut}_ratings.csv'
-    fifa_df = pd.read_csv(fifa_input_file)
-    return fifa_df
+    return all_fifa_dict[f'fifa_{year_shortcut}']
 
 
 def load_team_player_data(db_client, match_id, is_home):

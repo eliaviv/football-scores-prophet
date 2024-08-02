@@ -7,33 +7,59 @@ from db.sqlite_client import SQLiteClient
 RESOURCES_PATH = 'resources'
 OUTPUT_PATH = 'output'
 
+from concurrent.futures import ThreadPoolExecutor, as_completed
+
+
+def process_match_row(i, match_row, all_fifa_dict):
+    db_client = SQLiteClient()
+    statistics = [0, 0, 0]
+    season = match_row['Season']
+    game_id = match_row['Game ID']
+
+    fifa_df = get_relevant_fifa(all_fifa_dict, season)
+
+    home_team_players_df = load_team_player_data(db_client, game_id, 1)
+    away_team_players_df = load_team_player_data(db_client, game_id, 0)
+
+    home_team_avg_score = calculate_avg_score(home_team_players_df['Player'].tolist(), fifa_df, season, statistics)
+    away_team_avg_score = calculate_avg_score(away_team_players_df['Player'].tolist(), fifa_df, season, statistics)
+    home_star_player_count = count_star_players(home_team_players_df['Player'].tolist(), fifa_df, season)
+    away_star_player_count = count_star_players(away_team_players_df['Player'].tolist(), fifa_df, season)
+
+    result = {
+        'index': i,
+        'Home Avg Players Score': home_team_avg_score,
+        'Away Avg Players Score': away_team_avg_score,
+        'Home Star Player Count': home_star_player_count,
+        'Away Star Player Count': away_star_player_count,
+        'Players Found %': round(((statistics[1] + statistics[2]) / (statistics[0] + statistics[1] + statistics[2])), 2)
+    }
+
+    return result
+
 
 def add_players_data(matches_df, db_client):
     all_fifa_dict = load_all_fifa()
     add_columns_to_match_df(matches_df)
 
-    statistics = [0, 0, 0]
+    results = []
 
-    for i, match_row in matches_df.iterrows():
-        fifa_df = get_relevant_fifa(all_fifa_dict, match_row['Season'])
-        home_team_players_df = load_team_player_data(db_client, match_row['Game ID'], 1)
-        away_team_players_df = load_team_player_data(db_client, match_row['Game ID'], 0)
+    with ThreadPoolExecutor(max_workers=12) as executor:
+        futures = [executor.submit(process_match_row, i, row, all_fifa_dict) for i, row in
+                   matches_df.iterrows()]
 
-        home_team_avg_score = calculate_avg_score(home_team_players_df['Player'].tolist(), fifa_df, statistics)
-        away_team_avg_score = calculate_avg_score(away_team_players_df['Player'].tolist(), fifa_df, statistics)
-        home_star_player_count = count_star_players(home_team_players_df['Player'].tolist(), fifa_df)
-        away_star_player_count = count_star_players(away_team_players_df['Player'].tolist(), fifa_df)
+        for future in as_completed(futures):
+            result = future.result()
+            if result:
+                results.append(result)
+                print(f'Done match number: {result["index"] + 1}')
 
-        matches_df.loc[i, 'Home Avg Players Score'] = home_team_avg_score
-        matches_df.loc[i, 'Away Avg Players Score'] = away_team_avg_score
-        matches_df.loc[i, 'Home Star Player Count'] = home_star_player_count
-        matches_df.loc[i, 'Away Star Player Count'] = away_star_player_count
-
-        matches_df.loc[i, 'Players Found %'] = round(((statistics[1] + statistics[2]) /
-                                                      (statistics[0] + statistics[1] + statistics[2])), 2)
-        statistics = [0, 0, 0]
-
-        print(f'Done match number: {i + 1}')
+    for result in results:
+        matches_df.loc[result['index'], 'Home Avg Players Score'] = result['Home Avg Players Score']
+        matches_df.loc[result['index'], 'Away Avg Players Score'] = result['Away Avg Players Score']
+        matches_df.loc[result['index'], 'Home Star Player Count'] = result['Home Star Player Count']
+        matches_df.loc[result['index'], 'Away Star Player Count'] = result['Away Star Player Count']
+        matches_df.loc[result['index'], 'Players Found %'] = result['Players Found %']
 
     return matches_df
 
@@ -70,10 +96,10 @@ def add_columns_to_match_df(matches_df):
     matches_df['Players Found %'] = ''
 
 
-def count_star_players(players, fifa_df):
+def count_star_players(players, fifa_df, season):
     count = 0
     for player_name in players:
-        player = find_player(player_name, fifa_df)
+        player = find_player(player_name, fifa_df, season)
         if player['Overall'].empty:
             player_overall = 70
         elif player['Overall'].shape[0] > 1:
@@ -86,11 +112,11 @@ def count_star_players(players, fifa_df):
     return count
 
 
-def calculate_avg_score(players, fifa_df, statistics):
+def calculate_avg_score(players, fifa_df, season, statistics):
     total_score = 0
     extra_weights = 0
     for player_name in players:
-        player = find_player(player_name, fifa_df)
+        player = find_player(player_name, fifa_df, season)
         if player['Overall'].empty:
             player_overall = 70
             statistics[0] += 1
@@ -100,7 +126,6 @@ def calculate_avg_score(players, fifa_df, statistics):
         else:
             player_overall = int(player['Overall'].values[0])
             statistics[2] += 1
-        total_score += player_overall
 
         # 1 weight is already counted
         if player_overall >= 90:
@@ -115,9 +140,20 @@ def calculate_avg_score(players, fifa_df, statistics):
     return round(total_score / (len(players) + extra_weights), 2)
 
 
-def find_player(player_name, fifa_df):
-    return fifa_df[fifa_df['Name'].apply(lambda x: all(part.lower() in x.lower() for part in player_name.split()))]
+# Global cache dictionary
+player_cache = {}
 
+def find_player(player_name, fifa_df, season):
+    cache_key = (player_name, season)
+    if cache_key in player_cache:
+        return player_cache[cache_key]
+
+    # Perform the lookup
+    found_player = fifa_df[fifa_df['Name'].apply(lambda x: all(part.lower() in x.lower() for part in player_name.split()))]
+
+    # Cache the result
+    player_cache[cache_key] = found_player
+    return found_player
 
 def match_prev_league():
     years = [2019, 2020, 2021, 2022, 2023]

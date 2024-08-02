@@ -376,7 +376,7 @@ def agg_prev_games():
     df = df.round(2)
 
     # Save the updated DataFrame to a new CSV file
-    output_file_name = f'./output/matches_withs_players.csv'
+    output_file_name = f'./output/matches_with_players.csv'
 
     # Check if the file exists and remove it if it does
     if os.path.exists(output_file_name):

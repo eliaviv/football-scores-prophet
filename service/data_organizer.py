@@ -2,12 +2,13 @@ import os
 
 import pandas as pd
 
+from db.sqlite_client import SQLiteClient
+
 RESOURCES_PATH = 'resources'
 OUTPUT_PATH = 'output'
 
 
-def add_players_data(db_client):
-    matches_df = load_matches_df(db_client)
+def add_players_data(matches_df, db_client):
     add_columns_to_match_df(matches_df)
 
     statistics = [0, 0, 0]
@@ -32,6 +33,8 @@ def add_players_data(db_client):
         statistics = [0, 0, 0]
 
         print(f'Done match number: {i + 1}')
+
+    return matches_df
 
 
 def load_matches_df(db_client):
@@ -90,16 +93,15 @@ def calculate_avg_score(players, fifa_df, statistics):
             statistics[2] += 1
         total_score += player_overall
 
-        # TODO: Check this with Orel
-        # # 1 weight is already counted
-        # if player_overall >= 90:
-        #     extra_weights += 9
-        #     total_score += player_overall * 10
-        # elif player_overall >= 85:
-        #     extra_weights += 4
-        #     total_score += player_overall * 5
-        # else:
-        #     total_score += player_overall
+        # 1 weight is already counted
+        if player_overall >= 90:
+            extra_weights += 9
+            total_score += player_overall * 10
+        elif player_overall >= 85:
+            extra_weights += 4
+            total_score += player_overall * 5
+        else:
+            total_score += player_overall
 
     return round(total_score / (len(players) + extra_weights), 2)
 
@@ -162,7 +164,9 @@ def load_premier_league_data(start_year, end_year, base_path='./resources'):
 
 
 def agg_prev_games():
-    df = load_premier_league_data(2019, 2023)
+    # df = load_premier_league_data(2019, 2023)
+    db_client = SQLiteClient()
+    df = db_client.find_all_matches()
 
     # Function to calculate points from score
     def calculate_points(row):
@@ -323,10 +327,12 @@ def agg_prev_games():
     df['Home Head-to-Head Goals Against'] = home_head_to_head_goals_against
     df['Away Head-to-Head Goals Against'] = away_head_to_head_goals_against
 
+    df = add_players_data(df, db_client)
+
     df = df.round(2)
 
     # Save the updated DataFrame to a new CSV file
-    output_file_name = f'./resources/premier-league_matches_merged.csv'
+    output_file_name = f'./output/matches_withs_players.csv'
 
     # Check if the file exists and remove it if it does
     if os.path.exists(output_file_name):

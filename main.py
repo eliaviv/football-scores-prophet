@@ -17,6 +17,7 @@ def scrap_data(db_client, retries):
         if retries < MAX_RETRIES:
             scrap_data(db_client, retries)
 
+
 def naive_score():
     df = pd.read_csv('output/matches_with_players.csv')
 
@@ -26,15 +27,17 @@ def naive_score():
     # Print the accuracy
     print(f"Baseline Accuracy: {accuracy:.2%}")
 
+
 def main():
-    # db_client = sqlite_client.SQLiteClient()
+    db_client = sqlite_client.SQLiteClient()
 
     # scrap_data(db_client, 0)
     # add_players_data(db_client)
-    # agg_prev_games()
+    # agg_prev_games(db_client)
     # fix_xscore()
     # naive_score()
-    update_database('db/matches.db')
+    # update_database('db/matches.db')
+
 
 if __name__ == '__main__':
     main()

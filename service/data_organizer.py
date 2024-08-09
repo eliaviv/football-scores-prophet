@@ -214,18 +214,44 @@ def load_premier_league_data(start_year, end_year, base_path='./resources'):
 
 # Function to calculate expected score from xG
 def calculate_xscore(row):
-    diff = row['xG Home'] - row['xG Away']
-    buffer = 0.5
-    if diff > buffer:
-        return 1  # Home win
-    elif diff < -buffer:
-        return -1  # Away win
+    if row['B365H'] < row['B365D'] and row['B365H'] < row['B365A']:
+        return 1
+    elif row['B365A'] < row['B365D'] and row['B365A'] < row['B365H']:
+        return -1
     else:
-        return 0  # Draw
+        return 0
 
 
-def agg_prev_games():
-    db_client = SQLiteClient()
+def load_bets():
+    all_bets_dict = {}
+    bets_folder = RESOURCES_PATH + '/bets'
+    for filename in os.listdir(bets_folder):
+        bets_input_file = bets_folder + '/' + filename
+        all_bets_dict[filename.split('.')[0]] = pd.read_csv(bets_input_file)
+
+    return all_bets_dict
+
+
+
+def add_bets(df):
+    all_bets_dict = load_bets()
+
+    for bets_key in all_bets_dict:
+        season = '-'.join(bets_key.split('-')[-2:])
+        league = '-'.join(bets_key.split('-')[:-2])
+        bets_df = all_bets_dict[bets_key]
+
+        condition = (df['League'] == league) & (df['Season'] == season)
+        filtered_df = df[condition]
+        if filtered_df.shape[0] == bets_df.shape[0]:
+            df.loc[condition, 'B365H'] = bets_df['B365H'].tolist()
+            df.loc[condition, 'B365D'] = bets_df['B365D'].tolist()
+            df.loc[condition, 'B365A'] = bets_df['B365A'].tolist()
+
+    return df.dropna()
+
+
+def agg_prev_games(db_client):
     df = db_client.find_all_matches()
 
     # Function to calculate points from score
@@ -239,6 +265,8 @@ def agg_prev_games():
 
     # Calculate points and xScore for each match
     df[['Home Points', 'Away Points']] = df.apply(calculate_points, axis=1, result_type='expand')
+
+    df = add_bets(df)
     df['xScore'] = df.apply(calculate_xscore, axis=1)
 
     # Combine Home and Away points into a single dictionary
@@ -302,6 +330,7 @@ def agg_prev_games():
         home_matches_played.append(len(team_stats_history[home_team]['points']))
         away_matches_played.append(len(team_stats_history[away_team]['points']))
 
+        # home_points_per_match - points / amount of games
         if len(team_stats_history[home_team]['points']) == 0:
             home_points_per_match.append(0)
         else:

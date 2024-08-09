@@ -12,8 +12,8 @@ LEAGUES = {
     # 'Premier-League': '9',
     # 'Serie-A': '11',
     # 'La-Liga': '12',
-    'Ligue-1': '13',
-    'Bundesliga': '20'
+    # 'Ligue-1': '13',
+    # 'Bundesliga': '20'
 }
 SEASONS = ['2019-2020', '2020-2021', '2021-2022', '2022-2023', '2023-2024']
 
@@ -31,9 +31,9 @@ def scrap_fbref(db_client):
                     continue
 
                 home_team_players_df, away_team_players_df = get_players_data(match_row['Match Link'])
-                # db_client.persist_match(match_row)
-                # db_client.persist_players(home_team_players_df, match_row['Game ID'], 1)
-                # db_client.persist_players(away_team_players_df, match_row['Game ID'], 0)
+                db_client.persist_match(match_row)
+                db_client.persist_players(home_team_players_df, match_row['Game ID'], 1)
+                db_client.persist_players(away_team_players_df, match_row['Game ID'], 0)
 
                 print(f'Done match number: {i + 1}')
 
@@ -67,8 +67,9 @@ def add_match_links_to_match_df(match_links, matches_df):
         match_row_indices_to_delete = []
         for match_link in match_links:
             match_link_details = match_link.split('/')[-1].split('-')
-            link_date = convert_date_format('-'.join(match_link_details[-5:-2]))
-            link_league = '-'.join(match_link_details[-2:])
+            league_length = len(match_row['League'].split('-'))
+            link_date = convert_date_format('-'.join(match_link_details[-league_length - 3:-league_length]))
+            link_league = '-'.join(match_link_details[-league_length:])
             if match_row['Date'] == link_date and match_row['League'] == link_league:
                 row_found = True
                 break

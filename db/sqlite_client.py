@@ -144,7 +144,7 @@ class SQLiteClient:
         return self._rename_player_columns(players_df)
 
     def find_all_matches(self):
-        sql = '''SELECT * FROM matches order by date'''
+        sql = '''SELECT * FROM matches order by date, time'''
         matches_df = pd.read_sql_query(sql, self.conn)
         return self._rename_matche_columns(matches_df)
 

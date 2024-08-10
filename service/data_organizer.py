@@ -143,17 +143,21 @@ def calculate_avg_score(players, fifa_df, season, statistics):
 # Global cache dictionary
 player_cache = {}
 
+
 def find_player(player_name, fifa_df, season):
     cache_key = (player_name, season)
     if cache_key in player_cache:
         return player_cache[cache_key]
 
     # Perform the lookup
-    found_player = fifa_df[fifa_df['Name'].apply(lambda x: all(part.lower() in x.lower() for part in player_name.split()))]
+    found_player = fifa_df[
+        fifa_df['Name'].apply(lambda x: all(part.lower() in x.lower() for part in player_name.split()))
+    ]
 
     # Cache the result
     player_cache[cache_key] = found_player
     return found_player
+
 
 def match_prev_league():
     years = [2019, 2020, 2021, 2022, 2023]
@@ -208,6 +212,18 @@ def load_premier_league_data(start_year, end_year, base_path='./resources'):
     return df
 
 
+# Function to calculate expected score from xG
+def calculate_xscore(row):
+    diff = row['xG Home'] - row['xG Away']
+    buffer = 0.5
+    if diff > buffer:
+        return 1  # Home win
+    elif diff < -buffer:
+        return -1  # Away win
+    else:
+        return 0  # Draw
+
+
 def agg_prev_games():
     db_client = SQLiteClient()
     df = db_client.find_all_matches()
@@ -220,15 +236,6 @@ def agg_prev_games():
             return 0, 3  # Away win
         else:
             return 1, 1  # Draw
-
-    # Function to calculate expected score from xG
-    def calculate_xscore(row):
-        if row['xG Home'] > row['xG Away']:
-            return 1  # Home win
-        elif row['xG Home'] < row['xG Away']:
-            return -1  # Away win
-        else:
-            return 0  # Draw
 
     # Calculate points and xScore for each match
     df[['Home Points', 'Away Points']] = df.apply(calculate_points, axis=1, result_type='expand')
@@ -384,6 +391,16 @@ def agg_prev_games():
 
     df.to_csv(output_file_name, index=False)
     print('merged and added aggregate')
+
+
+def fix_xscore():
+    output_file_name = f'./output/matches_with_players.csv'
+    df = pd.read_csv(output_file_name)
+
+    df['xScore'] = df.apply(calculate_xscore, axis=1)
+
+    df.to_csv(output_file_name, index=False)
+    print('fixed xScore')
 
 
 def export_data(matches_df, league, season):

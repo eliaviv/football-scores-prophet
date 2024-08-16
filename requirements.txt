@@ -4,3 +4,4 @@ pandas==2.0.1
 urllib3
 numpy==1.26.4
 lxml
+fuzzywuzzy~=0.18.0

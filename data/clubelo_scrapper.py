@@ -7,24 +7,25 @@ import time
 from fuzzywuzzy import process
 
 # Setup caching for requests
-requests_cache.install_cache('elo_cache', expire_after=3600)  # Cache expires after 1 hour
+requests_cache.install_cache('elo_cache', expire_after=None)
 
 # Fetch Elo ratings from the API for a given date with caching
 def fetch_elo_ratings(date):
-    url = f"http://clubelo.com/API/{date}"
+    url = f"http://api.clubelo.com/{date}"
     response = requests.get(url)
     response.raise_for_status()
-    return pd.read_csv(StringIO(response.text), delimiter='\t')
+    return pd.read_csv(StringIO(response.text))
 
-# Match team names using fuzzy matching
-def match_team_name(name, choices):
-    match, score = process.extractOne(name, choices)
+# Match team names using fuzzy matching from Elo results
+def match_team_name(name, elo_data):
+    teams = elo_data['Club'].tolist()
+    match, score = process.extractOne(name, teams)
     if score > 80:  # Adjust the threshold as needed
         return match
     return None
 
 # Update SQLite database with home and away Elo ratings for each match
-def update_database(db_path):
+def scrap_clubelo_to_database(db_path):
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
@@ -37,37 +38,34 @@ def update_database(db_path):
         pass
 
     # Fetch existing matches
-    query = "SELECT id, home, away, date FROM matches"
+    query = "SELECT game_id, home, away, date FROM matches"
     matches = pd.read_sql_query(query, conn)
 
-    # Create a set of all team names from matches for fuzzy matching
-    team_names = set(matches['home'].unique()).union(set(matches['away'].unique()))
-
     for _, match in matches.iterrows():
-        match_id = match['id']
+        game_id = match['game_id']
         home = match['home']
         away = match['away']
         date = match['date']
-        print(f"fetching for match {match_id}")
+        print(f"Fetching Elo ratings for match {game_id}, {date}, {home} vs {away}")
+
         # Fetch Elo ratings for the specific match date
         elo_data = fetch_elo_ratings(date)
 
-        # Process Elo ratings into a dictionary for quick lookups
-        elo_dict = {}
-        for _, row in elo_data.iterrows():
-            elo_dict[row['Club']] = row['Elo']
+        # Match team names to Elo data
+        home_elo_team = match_team_name(home, elo_data)
+        away_elo_team = match_team_name(away, elo_data)
 
-        # Find best match for home and away teams
-        home_elo_team = match_team_name(home, team_names)
-        away_elo_team = match_team_name(away, team_names)
+        # Get Elo ratings from the matched teams
+        home_elo = elo_data.loc[elo_data['Club'] == home_elo_team, 'Elo'].values
+        away_elo = elo_data.loc[elo_data['Club'] == away_elo_team, 'Elo'].values
 
-        home_elo = elo_dict.get(home_elo_team, None) if home_elo_team else None
-        away_elo = elo_dict.get(away_elo_team, None) if away_elo_team else None
+        home_elo_value = home_elo[0] if len(home_elo) > 0 else None
+        away_elo_value = away_elo[0] if len(away_elo) > 0 else None
 
         # Update Elo ratings in the database
         cursor.execute(
-            "UPDATE matches SET home_elo = ?, away_elo = ? WHERE id = ?",
-            (home_elo, away_elo, match_id)
+            "UPDATE matches SET home_elo = ?, away_elo = ? WHERE game_id = ?",
+            (home_elo_value, away_elo_value, game_id)
         )
 
         # Throttle the requests to avoid hitting the API too hard
@@ -76,4 +74,4 @@ def update_database(db_path):
     # Commit and close connection
     conn.commit()
     conn.close()
-    print("done")
+    print("Clubelo update complete")

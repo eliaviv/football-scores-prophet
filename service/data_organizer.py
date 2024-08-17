@@ -232,7 +232,6 @@ def load_bets():
     return all_bets_dict
 
 
-
 def add_bets(df):
     all_bets_dict = load_bets()
 

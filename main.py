@@ -1,6 +1,6 @@
 import pandas as pd
 
-from data.clubelo_scrapper import update_database
+from data.clubelo_scrapper import scrap_clubelo_to_database
 from data.fbref_scraper import scrap_fbref
 from db import sqlite_client
 from service.data_organizer import add_players_data, agg_prev_games, fix_xscore
@@ -36,7 +36,7 @@ def main():
     # agg_prev_games(db_client)
     # fix_xscore()
     # naive_score()
-    # update_database('db/matches.db')
+    scrap_clubelo_to_database('db/matches.db')
 
 
 if __name__ == '__main__':

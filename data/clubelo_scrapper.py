@@ -16,8 +16,19 @@ def fetch_elo_ratings(date):
     response.raise_for_status()
     return pd.read_csv(StringIO(response.text))
 
+special_matches = {
+    "Arminia": "Bielefeld",
+    "Athletic Club": "Bilbao",
+    "Atlético Madrid": "Atletico",
+    "Greuther Fürth": "Fuerth",
+    "Köln": "Koeln",
+    "Manchester Utd": "Man United"
+}
+
 # Match team names using fuzzy matching from Elo results
 def match_team_name(name, elo_data):
+    if name in special_matches:
+        return special_matches[name]
     teams = elo_data['Club'].tolist()
     match, score = process.extractOne(name, teams)
     if score > 80:  # Adjust the threshold as needed
@@ -59,8 +70,10 @@ def scrap_clubelo_to_database(db_path):
         home_elo = elo_data.loc[elo_data['Club'] == home_elo_team, 'Elo'].values
         away_elo = elo_data.loc[elo_data['Club'] == away_elo_team, 'Elo'].values
 
-        home_elo_value = home_elo[0] if len(home_elo) > 0 else None
-        away_elo_value = away_elo[0] if len(away_elo) > 0 else None
+        home_elo_value = home_elo[0] if len(home_elo) > 0 else 0
+        away_elo_value = away_elo[0] if len(away_elo) > 0 else 0
+
+        print(f"Elo values: {home_elo_value}, {away_elo_value}")
 
         # Update Elo ratings in the database
         cursor.execute(

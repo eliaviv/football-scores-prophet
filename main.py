@@ -22,7 +22,8 @@ def naive_score():
     df = pd.read_csv('output/matches_with_players.csv')
 
     # Calculate accuracy
-    accuracy = (df['Score'] == df['xScore']).mean()
+    # accuracy = (df['Score'] == df['xScore']).mean()
+    accuracy = (df['Score'] == df['xScoreElo']).mean()
 
     # Print the accuracy
     print(f"Baseline Accuracy: {accuracy:.2%}")
@@ -35,8 +36,8 @@ def main():
     # add_players_data(db_client)
     # agg_prev_games(db_client)
     # fix_xscore()
-    # naive_score()
-    scrap_clubelo_to_database('db/matches.db')
+    naive_score()
+    # scrap_clubelo_to_database('db/matches.db')
 
 
 if __name__ == '__main__':

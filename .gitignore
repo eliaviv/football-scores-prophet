@@ -2,4 +2,3 @@
 .pytest_cache/
 venv/
 __pycache__
-elo_cache.sqlite

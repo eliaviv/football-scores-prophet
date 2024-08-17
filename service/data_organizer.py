@@ -212,7 +212,7 @@ def load_premier_league_data(start_year, end_year, base_path='./resources'):
     return df
 
 
-# Function to calculate expected score from xG
+# Function to calculate expected score from Bets
 def calculate_xscore(row):
     if row['B365H'] < row['B365D'] and row['B365H'] < row['B365A']:
         return 1
@@ -220,6 +220,24 @@ def calculate_xscore(row):
         return -1
     else:
         return 0
+
+
+# Function to calculate expected score from Elo score
+def calculate_elo_xscore(row):
+    home_win_threshold = 0.52
+    away_win_threshold = 0.48
+    home_elo, away_elo = row['home_elo'], row['away_elo']
+
+    # Calculate the probability of a home win using the Elo formula
+    probability_home_win = 1 / (1 + 10 ** ((away_elo - home_elo) / 400))
+
+    # Determine the expected score based on the probability
+    if probability_home_win > home_win_threshold:
+        return 1  # Home win
+    elif probability_home_win < away_win_threshold:
+        return -1  # Away win
+    else:
+        return 0  # Draw
 
 
 def load_bets():
@@ -267,6 +285,7 @@ def agg_prev_games(db_client):
 
     df = add_bets(df)
     df['xScore'] = df.apply(calculate_xscore, axis=1)
+    df['xScoreElo'] = df.apply(calculate_elo_xscore, axis=1)
 
     # Combine Home and Away points into a single dictionary
     team_stats_history = {team: {'points': [], 'goals_for': [], 'goals_against': []} for team in

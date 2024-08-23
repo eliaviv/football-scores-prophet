@@ -14,16 +14,23 @@ class SQLiteClient:
         self.conn = self.create_connection()
         self.create_table_if_not_exists()
 
+    def __del__(self):
+        """ Destructor to close the database connection when the object is destroyed """
+        if self.conn:
+            self.conn.close()
+
     def create_connection(self):
         """ create a database connection to the SQLite database """
         conn = None
         try:
             conn = sqlite3.connect(DB_NAME)
-            print(f"Connected to SQLite database '{DB_NAME}'")
         except Error as e:
             print(e)
 
         return conn
+
+    def commit_changes(self):
+        self.conn.commit()
 
     def create_table_if_not_exists(self):
         create_matches_table_sql = """
@@ -138,22 +145,26 @@ class SQLiteClient:
         self.conn.commit()
         return cur.lastrowid
 
+    def find_all_matches(self):
+        sql = '''SELECT * FROM matches order by date, time'''
+        matches_df = pd.read_sql_query(sql, self.conn)
+        return self._rename_matches_columns(matches_df)
+
+    def find_all_matches_filtered(self):
+        sql = '''SELECT game_id, home, away, date FROM matches'''
+        return pd.read_sql_query(sql, self.conn)
+
     def find_players_by_match_id_and_is_home(self, match_id, is_home):
         sql = '''SELECT * FROM players WHERE match_id = ? AND is_home = ?'''
         players_df = pd.read_sql_query(sql, self.conn, params=(match_id, is_home))
         return self._rename_player_columns(players_df)
 
-    def find_all_matches(self):
-        sql = '''SELECT * FROM matches order by date, time'''
-        matches_df = pd.read_sql_query(sql, self.conn)
-        return self._rename_matche_columns(matches_df)
-
     def find_matches_by_date_time_home_away(self, date, time, home, away):
         sql = '''SELECT * FROM matches WHERE date = ? AND time = ? AND home = ? AND away = ?'''
         matches_df = pd.read_sql_query(sql, self.conn, params=(date, time, home, away))
-        return self._rename_matche_columns(matches_df)
+        return self._rename_matches_columns(matches_df)
 
-    def _rename_matche_columns(self, matches_df):
+    def _rename_matches_columns(self, matches_df):
         return matches_df.rename(columns={'game_id': 'Game ID', 'wk': 'Wk', 'day': 'Day', 'date': 'Date',
                                           'time': 'Time', 'home': 'Home', 'xg_home': 'xG Home', 'g_home': 'G Home',
                                           'away': 'Away', 'xg_away': 'xG Away', 'g_away': 'G Away', 'league': 'League',
@@ -173,3 +184,19 @@ class SQLiteClient:
                                           'prgp': 'Progressive Passes', 'carries': 'Carries',
                                           'prgc': 'Progressive Carries', 'succ_dribbles': 'Successful Dribbles',
                                           'match_id': 'Game ID', 'is_home': 'Is Home'})
+
+    def add_elo_columns_if_not_exists(self):
+        c = self.conn.cursor()
+        try:
+            c.execute("ALTER TABLE matches ADD COLUMN home_elo REAL")
+            c.execute("ALTER TABLE matches ADD COLUMN away_elo REAL")
+        except sqlite3.OperationalError:
+            # Columns may already exist; ignore error
+            pass
+
+    def update_elo_ratings(self, home_elo_value, away_elo_value, game_id):
+        c = self.conn.cursor()
+        c.execute(
+            "UPDATE matches SET home_elo = ?, away_elo = ? WHERE game_id = ?",
+            (home_elo_value, away_elo_value, game_id)
+        )

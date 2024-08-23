@@ -16,7 +16,7 @@ FIFA_IDENTIFIERS = {
 }
 
 
-def scrap_fifa():
+def scrap_sofifa():
     base_url = 'https://sofifa.com/players?r={fifa_identifier}&col=oa&sort=desc'
     for fifa_name in FIFA_IDENTIFIERS:
         done, fifa_df, ids_map, offset = init()

@@ -1,4 +1,5 @@
 import os
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 import pandas as pd
 
@@ -7,7 +8,122 @@ from db.sqlite_client import SQLiteClient
 RESOURCES_PATH = 'resources'
 OUTPUT_PATH = 'output'
 
-from concurrent.futures import ThreadPoolExecutor, as_completed
+
+def prepare_matches_for_modeling(db_client):
+    matches_df = load_matches_df(db_client)
+
+    add_team_points(matches_df)
+    add_bets(matches_df)
+    add_xscore(matches_df)
+    add_elo_xscore(matches_df)
+    add_aggregated_data(matches_df)
+    add_players_data(matches_df)
+
+    matches_df = matches_df.round(2)
+
+    export_data(matches_df, f'{OUTPUT_PATH}/matches_for_modeling.csv')
+
+    print('All data was added to matches.df')
+
+
+def load_matches_df(db_client):
+    return db_client.find_all_matches()
+
+
+def add_team_points(matches_df):
+    print('Adding team points')
+
+    def calculate_points(row):
+        if row['G Home'] > row['G Away']:
+            return 3, 0  # Home win
+        elif row['G Home'] < row['G Away']:
+            return 0, 3  # Away win
+        else:
+            return 1, 1  # Draw
+
+    matches_df[['Home Points', 'Away Points']] = matches_df.apply(calculate_points, axis=1, result_type='expand')
+
+
+def add_bets(matches_df):
+    print('Adding bets')
+
+    all_bets_dict = load_bets()
+
+    for bets_key in all_bets_dict:
+        season = '-'.join(bets_key.split('-')[-2:])
+        league = '-'.join(bets_key.split('-')[:-2])
+        bets_df = all_bets_dict[bets_key]
+
+        condition = (matches_df['League'] == league) & (matches_df['Season'] == season)
+        filtered_df = matches_df[condition]
+        if filtered_df.shape[0] == bets_df.shape[0]:
+            matches_df.loc[condition, 'B365H'] = bets_df['B365H'].tolist()
+            matches_df.loc[condition, 'B365D'] = bets_df['B365D'].tolist()
+            matches_df.loc[condition, 'B365A'] = bets_df['B365A'].tolist()
+
+    matches_df.dropna()
+
+
+def add_xscore(matches_df):
+    print('Adding xscore')
+
+    def calculate_xscore(row):
+        if row['B365H'] < row['B365D'] and row['B365H'] < row['B365A']:
+            return 1
+        elif row['B365A'] < row['B365D'] and row['B365A'] < row['B365H']:
+            return -1
+        else:
+            return 0
+
+    matches_df['xScore'] = matches_df.apply(calculate_xscore, axis=1)
+
+
+def add_elo_xscore(matches_df):
+    print('Adding elo score')
+
+    def calculate_elo_xscore(row):
+        home_win_threshold = 0.52
+        away_win_threshold = 0.48
+        home_elo, away_elo = row['home_elo'], row['away_elo']
+
+        # Calculate the probability of a home win using the Elo formula
+        probability_home_win = 1 / (1 + 10 ** ((away_elo - home_elo) / 400))
+
+        # Determine the expected score based on the probability
+        if probability_home_win > home_win_threshold:
+            return 1  # Home win
+        elif probability_home_win < away_win_threshold:
+            return -1  # Away win
+        else:
+            return 0  # Draw
+
+    matches_df['xScoreElo'] = matches_df.apply(calculate_elo_xscore, axis=1)
+
+
+def add_players_data(matches_df):
+    print('Adding players data')
+
+    all_fifa_dict = load_all_fifa()
+
+    init_players_data_columns(matches_df)
+
+    results = []
+    with ThreadPoolExecutor(max_workers=12) as executor:
+        futures = [executor.submit(process_match_row, i, row, all_fifa_dict) for i, row in
+                   matches_df.iterrows()]
+
+        for future in as_completed(futures):
+            result = future.result()
+            if result:
+                results.append(result)
+                print(f'Done Adding players data for match {result["index"] + 1}')
+
+    for result in results:
+        matches_df.loc[result['index'], 'Home Avg Players Score'] = result['Home Avg Players Score']
+        matches_df.loc[result['index'], 'Away Avg Players Score'] = result['Away Avg Players Score']
+        matches_df.loc[result['index'], 'Home Star Player Count'] = result['Home Star Player Count']
+        matches_df.loc[result['index'], 'Away Star Player Count'] = result['Away Star Player Count']
+        matches_df.loc[result['index'], 'Players Found %'] = result['Players Found %']
 
 
 def process_match_row(i, match_row, all_fifa_dict):
@@ -38,36 +154,6 @@ def process_match_row(i, match_row, all_fifa_dict):
     return result
 
 
-def add_players_data(matches_df, db_client):
-    all_fifa_dict = load_all_fifa()
-    add_columns_to_match_df(matches_df)
-
-    results = []
-
-    with ThreadPoolExecutor(max_workers=12) as executor:
-        futures = [executor.submit(process_match_row, i, row, all_fifa_dict) for i, row in
-                   matches_df.iterrows()]
-
-        for future in as_completed(futures):
-            result = future.result()
-            if result:
-                results.append(result)
-                print(f'Done match number: {result["index"] + 1}')
-
-    for result in results:
-        matches_df.loc[result['index'], 'Home Avg Players Score'] = result['Home Avg Players Score']
-        matches_df.loc[result['index'], 'Away Avg Players Score'] = result['Away Avg Players Score']
-        matches_df.loc[result['index'], 'Home Star Player Count'] = result['Home Star Player Count']
-        matches_df.loc[result['index'], 'Away Star Player Count'] = result['Away Star Player Count']
-        matches_df.loc[result['index'], 'Players Found %'] = result['Players Found %']
-
-    return matches_df
-
-
-def load_matches_df(db_client):
-    return db_client.find_all_matches()
-
-
 def load_all_fifa():
     all_fifa_dict = {}
     fifa_folder = RESOURCES_PATH + '/fifa'
@@ -78,6 +164,14 @@ def load_all_fifa():
     return all_fifa_dict
 
 
+def init_players_data_columns(matches_df):
+    matches_df['Home Avg Players Score'] = ''
+    matches_df['Away Avg Players Score'] = ''
+    matches_df['Home Star Player Count'] = ''
+    matches_df['Away Star Player Count'] = ''
+    matches_df['Players Found %'] = ''
+
+
 def get_relevant_fifa(all_fifa_dict, season):
     year = season.split('-')[1]
     year_shortcut = year[2] + year[3]
@@ -86,14 +180,6 @@ def get_relevant_fifa(all_fifa_dict, season):
 
 def load_team_player_data(db_client, match_id, is_home):
     return db_client.find_players_by_match_id_and_is_home(match_id, is_home)
-
-
-def add_columns_to_match_df(matches_df):
-    matches_df['Home Avg Players Score'] = ''
-    matches_df['Away Avg Players Score'] = ''
-    matches_df['Home Star Player Count'] = ''
-    matches_df['Away Star Player Count'] = ''
-    matches_df['Players Found %'] = ''
 
 
 def count_star_players(players, fifa_df, season):
@@ -140,7 +226,6 @@ def calculate_avg_score(players, fifa_df, season, statistics):
     return round(total_score / (len(players) + extra_weights), 2)
 
 
-# Global cache dictionary
 player_cache = {}
 
 
@@ -157,6 +242,9 @@ def find_player(player_name, fifa_df, season):
     # Cache the result
     player_cache[cache_key] = found_player
     return found_player
+
+
+# Function to calculate expected score from Bets
 
 
 def match_prev_league():
@@ -199,6 +287,9 @@ def match_prev_league():
         print(f'Merged stats for year {year}-{year + 1} and saved to {output_file_name}')
 
 
+# Function to calculate expected score from Elo score
+
+
 def load_premier_league_data(start_year, end_year, base_path='./resources'):
     # Initialize DataFrame with the first year's data
     df = pd.read_csv(f'{base_path}/premier-league_{start_year}-{start_year + 1}_matches_data.csv')
@@ -212,34 +303,6 @@ def load_premier_league_data(start_year, end_year, base_path='./resources'):
     return df
 
 
-# Function to calculate expected score from Bets
-def calculate_xscore(row):
-    if row['B365H'] < row['B365D'] and row['B365H'] < row['B365A']:
-        return 1
-    elif row['B365A'] < row['B365D'] and row['B365A'] < row['B365H']:
-        return -1
-    else:
-        return 0
-
-
-# Function to calculate expected score from Elo score
-def calculate_elo_xscore(row):
-    home_win_threshold = 0.52
-    away_win_threshold = 0.48
-    home_elo, away_elo = row['home_elo'], row['away_elo']
-
-    # Calculate the probability of a home win using the Elo formula
-    probability_home_win = 1 / (1 + 10 ** ((away_elo - home_elo) / 400))
-
-    # Determine the expected score based on the probability
-    if probability_home_win > home_win_threshold:
-        return 1  # Home win
-    elif probability_home_win < away_win_threshold:
-        return -1  # Away win
-    else:
-        return 0  # Draw
-
-
 def load_bets():
     all_bets_dict = {}
     bets_folder = RESOURCES_PATH + '/bets'
@@ -250,144 +313,70 @@ def load_bets():
     return all_bets_dict
 
 
-def add_bets(df):
-    all_bets_dict = load_bets()
+def add_aggregated_data(matches_df):
+    print('Adding aggregated data')
 
-    for bets_key in all_bets_dict:
-        season = '-'.join(bets_key.split('-')[-2:])
-        league = '-'.join(bets_key.split('-')[:-2])
-        bets_df = all_bets_dict[bets_key]
-
-        condition = (df['League'] == league) & (df['Season'] == season)
-        filtered_df = df[condition]
-        if filtered_df.shape[0] == bets_df.shape[0]:
-            df.loc[condition, 'B365H'] = bets_df['B365H'].tolist()
-            df.loc[condition, 'B365D'] = bets_df['B365D'].tolist()
-            df.loc[condition, 'B365A'] = bets_df['B365A'].tolist()
-
-    return df.dropna()
-
-
-def agg_prev_games(db_client):
-    df = db_client.find_all_matches()
-
-    # Function to calculate points from score
-    def calculate_points(row):
-        if row['G Home'] > row['G Away']:
-            return 3, 0  # Home win
-        elif row['G Home'] < row['G Away']:
-            return 0, 3  # Away win
-        else:
-            return 1, 1  # Draw
-
-    # Calculate points and xScore for each match
-    df[['Home Points', 'Away Points']] = df.apply(calculate_points, axis=1, result_type='expand')
-
-    df = add_bets(df)
-    df['xScore'] = df.apply(calculate_xscore, axis=1)
-    df['xScoreElo'] = df.apply(calculate_elo_xscore, axis=1)
-
-    # Combine Home and Away points into a single dictionary
-    team_stats_history = {team: {'points': [], 'goals_for': [], 'goals_against': []} for team in
-                          pd.concat([df['Home'], df['Away']]).unique()}
-
-    # Function to calculate average of last N matches
     def calculate_avg(lst, n=50):
         if len(lst) == 0:
             return 0
         else:
             return sum(lst[-n:]) / len(lst[-n:])
 
-    # Initialize head-to-head statistics
-    head_to_head_stats = {(home, away): {'points': [], 'goals_for': [], 'goals_against': []} for home in
-                          df['Home'].unique() for away in df['Away'].unique()}
+    team_stats_history = {
+        team: {'points': [], 'goals_for': [], 'goals_against': []}
+        for team in pd.concat([matches_df['Home'], matches_df['Away']]).unique()
+    }
 
-    # Lists to store the aggregated stats for each match
-    home_avg_points = []
-    away_avg_points = []
-    home_avg_goals_for = []
-    away_avg_goals_for = []
-    home_avg_goals_against = []
-    away_avg_goals_against = []
-    home_matches_played = []
-    away_matches_played = []
-    home_points_per_match = []
-    away_points_per_match = []
+    head_to_head_stats = {
+        (home, away): {'points': [], 'goals_for': [], 'goals_against': []}
+        for home in matches_df['Home'].unique() for away in matches_df['Away'].unique()
+    }
 
-    # Form indicators
-    home_form_points = []
-    away_form_points = []
-    home_form_goals_for = []
-    away_form_goals_for = []
-    home_form_goals_against = []
-    away_form_goals_against = []
+    initialize_aggregated_columns(matches_df)
 
-    # Head-to-head statistics
-    home_head_to_head_points = []
-    away_head_to_head_points = []
-    home_head_to_head_goals_for = []
-    away_head_to_head_goals_for = []
-    home_head_to_head_goals_against = []
-    away_head_to_head_goals_against = []
-
-    # Iterate over each match and calculate aggregated stats
-    for index, row in df.iterrows():
+    for index, row in matches_df.iterrows():
         home_team = row['Home']
         away_team = row['Away']
 
-        # Calculate averages
-        home_avg_points.append(calculate_avg(team_stats_history[home_team]['points']))
-        away_avg_points.append(calculate_avg(team_stats_history[away_team]['points']))
+        matches_df.iloc[index, matches_df.columns.get_loc('Home Avg Points')] = calculate_avg(team_stats_history[home_team]['points'])
+        matches_df.iloc[index, matches_df.columns.get_loc('Away Avg Points')] = calculate_avg(team_stats_history[away_team]['points'])
+        matches_df.iloc[index, matches_df.columns.get_loc('Home Avg Goals For')] = calculate_avg(team_stats_history[home_team]['goals_for'])
+        matches_df.iloc[index, matches_df.columns.get_loc('Away Avg Goals For')] = calculate_avg(team_stats_history[away_team]['goals_for'])
+        matches_df.iloc[index, matches_df.columns.get_loc('Home Avg Goals Against')] = calculate_avg(team_stats_history[home_team]['goals_against'])
+        matches_df.iloc[index, matches_df.columns.get_loc('Away Avg Goals Against')] = calculate_avg(team_stats_history[away_team]['goals_against'])
+        matches_df.iloc[index, matches_df.columns.get_loc('Home Matches Played')] = len(team_stats_history[home_team]['points'])
+        matches_df.iloc[index, matches_df.columns.get_loc('Away Matches Played')] = len(team_stats_history[away_team]['points'])
 
-        home_avg_goals_for.append(calculate_avg(team_stats_history[home_team]['goals_for']))
-        away_avg_goals_for.append(calculate_avg(team_stats_history[away_team]['goals_for']))
-
-        home_avg_goals_against.append(calculate_avg(team_stats_history[home_team]['goals_against']))
-        away_avg_goals_against.append(calculate_avg(team_stats_history[away_team]['goals_against']))
-
-        home_matches_played.append(len(team_stats_history[home_team]['points']))
-        away_matches_played.append(len(team_stats_history[away_team]['points']))
-
-        # home_points_per_match - points / amount of games
         if len(team_stats_history[home_team]['points']) == 0:
-            home_points_per_match.append(0)
+            matches_df.iloc[index, matches_df.columns.get_loc('Home Points/Match')] = 0
         else:
-            home_points_per_match.append(
-                sum(team_stats_history[home_team]['points']) / len(team_stats_history[home_team]['points']))
+            matches_df.iloc[index, matches_df.columns.get_loc('Home Points/Match')] = sum(team_stats_history[home_team]['points']) / len(team_stats_history[home_team]['points'])
 
         if len(team_stats_history[away_team]['points']) == 0:
-            away_points_per_match.append(0)
+            matches_df.iloc[index, matches_df.columns.get_loc('Away Points/Match')] = 0
         else:
-            away_points_per_match.append(
-                sum(team_stats_history[away_team]['points']) / len(team_stats_history[away_team]['points']))
+            matches_df.iloc[index, matches_df.columns.get_loc('Away Points/Match')] = sum(team_stats_history[away_team]['points']) / len(team_stats_history[away_team]['points'])
 
         # Calculate form indicators (last 5 matches)
-        home_form_points.append(calculate_avg(team_stats_history[home_team]['points'], 5))
-        away_form_points.append(calculate_avg(team_stats_history[away_team]['points'], 5))
-
-        home_form_goals_for.append(calculate_avg(team_stats_history[home_team]['goals_for'], 5))
-        away_form_goals_for.append(calculate_avg(team_stats_history[away_team]['goals_for'], 5))
-
-        home_form_goals_against.append(calculate_avg(team_stats_history[home_team]['goals_against'], 5))
-        away_form_goals_against.append(calculate_avg(team_stats_history[away_team]['goals_against'], 5))
+        matches_df.iloc[index, matches_df.columns.get_loc('Home Form Points')] = calculate_avg(team_stats_history[home_team]['points'], 5)
+        matches_df.iloc[index, matches_df.columns.get_loc('Away Form Points')] = calculate_avg(team_stats_history[away_team]['points'], 5)
+        matches_df.iloc[index, matches_df.columns.get_loc('Home Form Goals For')] = calculate_avg(team_stats_history[home_team]['goals_for'], 5)
+        matches_df.iloc[index, matches_df.columns.get_loc('Away Form Goals For')] = calculate_avg(team_stats_history[away_team]['goals_for'], 5)
+        matches_df.iloc[index, matches_df.columns.get_loc('Home Form Goals Against')] = calculate_avg(team_stats_history[home_team]['goals_against'], 5)
+        matches_df.iloc[index, matches_df.columns.get_loc('Away Form Goals Against')] = calculate_avg(team_stats_history[away_team]['goals_against'], 5)
 
         # Calculate head-to-head statistics (last 5 matches)
-        home_head_to_head_points.append(calculate_avg(head_to_head_stats[(home_team, away_team)]['points'], 5))
-        away_head_to_head_points.append(calculate_avg(head_to_head_stats[(away_team, home_team)]['points'], 5))
-
-        home_head_to_head_goals_for.append(calculate_avg(head_to_head_stats[(home_team, away_team)]['goals_for'], 5))
-        away_head_to_head_goals_for.append(calculate_avg(head_to_head_stats[(away_team, home_team)]['goals_for'], 5))
-
-        home_head_to_head_goals_against.append(
-            calculate_avg(head_to_head_stats[(home_team, away_team)]['goals_against'], 5))
-        away_head_to_head_goals_against.append(
-            calculate_avg(head_to_head_stats[(away_team, home_team)]['goals_against'], 5))
+        matches_df.iloc[index, matches_df.columns.get_loc('Home Head-to-Head Points')] = calculate_avg(head_to_head_stats[(home_team, away_team)]['points'], 5)
+        matches_df.iloc[index, matches_df.columns.get_loc('Away Head-to-Head Points')] = calculate_avg(head_to_head_stats[(away_team, home_team)]['points'], 5)
+        matches_df.iloc[index, matches_df.columns.get_loc('Home Head-to-Head Goals For')] = calculate_avg(head_to_head_stats[(home_team, away_team)]['goals_for'], 5)
+        matches_df.iloc[index, matches_df.columns.get_loc('Away Head-to-Head Goals For')] = calculate_avg(head_to_head_stats[(away_team, home_team)]['goals_for'], 5)
+        matches_df.iloc[index, matches_df.columns.get_loc('Home Head-to-Head Goals Against')] = calculate_avg(head_to_head_stats[(home_team, away_team)]['goals_against'], 5)
+        matches_df.iloc[index, matches_df.columns.get_loc('Away Head-to-Head Goals Against')] = calculate_avg(head_to_head_stats[(away_team, home_team)]['goals_against'], 5)
 
         # Update stats history
         team_stats_history[home_team]['points'].append(row['Home Points'])
         team_stats_history[home_team]['goals_for'].append(row['G Home'])
         team_stats_history[home_team]['goals_against'].append(row['G Away'])
-
         team_stats_history[away_team]['points'].append(row['Away Points'])
         team_stats_history[away_team]['goals_for'].append(row['G Away'])
         team_stats_history[away_team]['goals_against'].append(row['G Home'])
@@ -396,63 +385,36 @@ def agg_prev_games(db_client):
         head_to_head_stats[(home_team, away_team)]['points'].append(row['Home Points'])
         head_to_head_stats[(home_team, away_team)]['goals_for'].append(row['G Home'])
         head_to_head_stats[(home_team, away_team)]['goals_against'].append(row['G Away'])
-
         head_to_head_stats[(away_team, home_team)]['points'].append(row['Away Points'])
         head_to_head_stats[(away_team, home_team)]['goals_for'].append(row['G Away'])
         head_to_head_stats[(away_team, home_team)]['goals_against'].append(row['G Home'])
 
-    # Add aggregated stats columns to the DataFrame
-    df['Home Avg Points'] = home_avg_points
-    df['Away Avg Points'] = away_avg_points
-    df['Home Avg Goals For'] = home_avg_goals_for
-    df['Away Avg Goals For'] = away_avg_goals_for
-    df['Home Avg Goals Against'] = home_avg_goals_against
-    df['Away Avg Goals Against'] = away_avg_goals_against
-    df['Home Matches Played'] = home_matches_played
-    df['Away Matches Played'] = away_matches_played
-    df['Home Points/Match'] = home_points_per_match
-    df['Away Points/Match'] = away_points_per_match
-    df['Home Form Points'] = home_form_points
-    df['Away Form Points'] = away_form_points
-    df['Home Form Goals For'] = home_form_goals_for
-    df['Away Form Goals For'] = away_form_goals_for
-    df['Home Form Goals Against'] = home_form_goals_against
-    df['Away Form Goals Against'] = away_form_goals_against
-    df['Home Head-to-Head Points'] = home_head_to_head_points
-    df['Away Head-to-Head Points'] = away_head_to_head_points
-    df['Home Head-to-Head Goals For'] = home_head_to_head_goals_for
-    df['Away Head-to-Head Goals For'] = away_head_to_head_goals_for
-    df['Home Head-to-Head Goals Against'] = home_head_to_head_goals_against
-    df['Away Head-to-Head Goals Against'] = away_head_to_head_goals_against
 
-    df = add_players_data(df, db_client)
-
-    df = df.round(2)
-
-    # Save the updated DataFrame to a new CSV file
-    output_file_name = f'./output/matches_with_players.csv'
-
-    # Check if the file exists and remove it if it does
-    if os.path.exists(output_file_name):
-        os.remove(output_file_name)
-
-    df.to_csv(output_file_name, index=False)
-    print('merged and added aggregate')
+def initialize_aggregated_columns(matches_df):
+    matches_df['Home Avg Points'] = 0
+    matches_df['Away Avg Points'] = 0
+    matches_df['Home Avg Goals For'] = 0
+    matches_df['Away Avg Goals For'] = 0
+    matches_df['Home Avg Goals Against'] = 0
+    matches_df['Away Avg Goals Against'] = 0
+    matches_df['Home Matches Played'] = 0
+    matches_df['Away Matches Played'] = 0
+    matches_df['Home Points/Match'] = 0
+    matches_df['Away Points/Match'] = 0
+    matches_df['Home Form Points'] = 0
+    matches_df['Away Form Points'] = 0
+    matches_df['Home Form Goals For'] = 0
+    matches_df['Away Form Goals For'] = 0
+    matches_df['Home Form Goals Against'] = 0
+    matches_df['Away Form Goals Against'] = 0
+    matches_df['Home Head-to-Head Points'] = 0
+    matches_df['Away Head-to-Head Points'] = 0
+    matches_df['Home Head-to-Head Goals For'] = 0
+    matches_df['Away Head-to-Head Goals For'] = 0
+    matches_df['Home Head-to-Head Goals Against'] = 0
+    matches_df['Away Head-to-Head Goals Against'] = 0
 
 
-def fix_xscore():
-    output_file_name = f'./output/matches_with_players.csv'
-    df = pd.read_csv(output_file_name)
-
-    df['xScore'] = df.apply(calculate_xscore, axis=1)
-
-    df.to_csv(output_file_name, index=False)
-    print('fixed xScore')
-
-
-def export_data(matches_df, league, season):
-    # export data
+def export_data(matches_df, path):
     os.makedirs(OUTPUT_PATH, exist_ok=True)
-    matches_df.reset_index(drop=True).to_csv(f'{OUTPUT_PATH}/{league.lower()}_{season.lower()}_matches_data.csv',
-                                             header=True,
-                                             index=False, mode='w')
+    matches_df.reset_index(drop=True).to_csv(path, header=True, index=False, mode='w')

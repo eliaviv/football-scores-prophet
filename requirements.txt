@@ -5,3 +5,4 @@ urllib3
 numpy==1.26.4
 lxml
 fuzzywuzzy~=0.18.0
+requests-cache

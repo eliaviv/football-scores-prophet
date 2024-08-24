@@ -1,5 +1,6 @@
 import os
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from sklearn.preprocessing import MinMaxScaler
 
 import pandas as pd
 
@@ -12,12 +13,10 @@ OUTPUT_PATH = 'output'
 def prepare_matches_for_modeling(db_client):
     matches_df = load_matches_df(db_client)
 
-    add_team_points(matches_df)
     add_bets(matches_df)
-    add_xscore(matches_df)
     add_elo_xscore(matches_df)
-    add_aggregated_data(matches_df)
     add_players_data(matches_df)
+    add_aggregated_data(matches_df)
 
     matches_df = matches_df.round(2)
 
@@ -28,20 +27,6 @@ def prepare_matches_for_modeling(db_client):
 
 def load_matches_df(db_client):
     return db_client.find_all_matches()
-
-
-def add_team_points(matches_df):
-    print('Adding team points')
-
-    def calculate_points(row):
-        if row['G Home'] > row['G Away']:
-            return 3, 0  # Home win
-        elif row['G Home'] < row['G Away']:
-            return 0, 3  # Away win
-        else:
-            return 1, 1  # Draw
-
-    matches_df[['Home Points', 'Away Points']] = matches_df.apply(calculate_points, axis=1, result_type='expand')
 
 
 def add_bets(matches_df):
@@ -62,10 +47,6 @@ def add_bets(matches_df):
             matches_df.loc[condition, 'B365A'] = bets_df['B365A'].tolist()
 
     matches_df.dropna()
-
-
-def add_xscore(matches_df):
-    print('Adding xscore')
 
     def calculate_xscore(row):
         if row['B365H'] < row['B365D'] and row['B365H'] < row['B365A']:
@@ -124,6 +105,31 @@ def add_players_data(matches_df):
         matches_df.loc[result['index'], 'Home Star Player Count'] = result['Home Star Player Count']
         matches_df.loc[result['index'], 'Away Star Player Count'] = result['Away Star Player Count']
         matches_df.loc[result['index'], 'Players Found %'] = result['Players Found %']
+
+    scaler = MinMaxScaler()
+    columns_to_normalize = ['Home Avg Players Score', 'Away Avg Players Score']
+    matches_df[columns_to_normalize] = scaler.fit_transform(matches_df[columns_to_normalize])
+    matches_df[columns_to_normalize] *= 100
+
+    def calculate_xpower(row):
+        if row['Home Avg Players Score'] - row['Away Avg Players Score'] > 10:
+            return 1
+        elif row['Away Avg Players Score'] - row['Home Avg Players Score'] > 10:
+            return -1
+        else:
+            return 0
+
+    matches_df['xPower'] = matches_df.apply(calculate_xpower, axis=1)
+
+    def calculate_xsuperpower(row):
+        if row['Home Star Player Count'] > row['Away Star Player Count']:
+            return 1
+        elif row['Away Star Player Count'] > row['Home Star Player Count']:
+            return -1
+        else:
+            return 0
+
+    matches_df['xSuperPower'] = matches_df.apply(calculate_xsuperpower, axis=1)
 
 
 def process_match_row(i, match_row, all_fifa_dict):
@@ -315,6 +321,16 @@ def load_bets():
 
 def add_aggregated_data(matches_df):
     print('Adding aggregated data')
+
+    def calculate_points(row):
+        if row['G Home'] > row['G Away']:
+            return 3, 0  # Home win
+        elif row['G Home'] < row['G Away']:
+            return 0, 3  # Away win
+        else:
+            return 1, 1  # Draw
+
+    matches_df[['Home Points', 'Away Points']] = matches_df.apply(calculate_points, axis=1, result_type='expand')
 
     def calculate_avg(lst, n=50):
         if len(lst) == 0:

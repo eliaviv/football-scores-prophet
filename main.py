@@ -4,6 +4,7 @@ from data.clubelo_scrapper import scrap_clubelo_to_database
 from data.fbref_scraper import scrap_fbref
 from db import sqlite_client
 from service.data_organizer import add_players_data, agg_prev_games, fix_xscore
+from service.spi_matcher import extend_matches_with_spi
 
 MAX_RETRIES = 10
 
@@ -36,8 +37,9 @@ def main():
     # add_players_data(db_client)
     # agg_prev_games(db_client)
     # fix_xscore()
-    naive_score()
+    # naive_score()
     # scrap_clubelo_to_database('db/matches.db')
+    extend_matches_with_spi()
 
 
 if __name__ == '__main__':

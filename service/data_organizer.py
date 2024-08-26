@@ -179,7 +179,7 @@ def init_players_data_columns(matches_df):
 
 
 def get_relevant_fifa(all_fifa_dict, season):
-    year = season.split('-')[1]
+    year = season.split('-')[0]
     year_shortcut = year[2] + year[3]
     return all_fifa_dict[f'fifa_{year_shortcut}']
 

@@ -9,15 +9,16 @@ COLUMN = ['ID', 'Name', 'Age', 'Position', 'Overall', 'Potential', 'Team']
 
 FIFA_IDENTIFIERS = {
     # 'fifa_24': '240047',
-    'fifa_23': '230054',
-    'fifa_22': '220069',
-    'fifa_21': '210064',
-    'fifa_20': '200061'
+    # 'fifa_23': '230054',
+    # 'fifa_22': '220069',
+    # 'fifa_21': '210064',
+    # 'fifa_20': '200061',
+    # 'fifa_19': '190075'
 }
 
 
 def scrap_sofifa():
-    base_url = 'https://sofifa.com/players?r={fifa_identifier}&col=oa&sort=desc'
+    base_url = 'https://sofifa.com/players?r={fifa_identifier}&col=oa&sort=desc&set=true'
     for fifa_name in FIFA_IDENTIFIERS:
         done, fifa_df, ids_map, offset = init()
         extended_url = base_url.format(fifa_identifier=FIFA_IDENTIFIERS[fifa_name])

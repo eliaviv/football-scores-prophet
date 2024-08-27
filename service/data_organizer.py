@@ -1,6 +1,5 @@
 import os
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from sklearn.preprocessing import MinMaxScaler
 
 import pandas as pd
 
@@ -107,11 +106,6 @@ def add_players_data(matches_df):
         matches_df.loc[result['index'], 'Home Star Player Count'] = result['Home Star Player Count']
         matches_df.loc[result['index'], 'Away Star Player Count'] = result['Away Star Player Count']
         matches_df.loc[result['index'], 'Players Found %'] = result['Players Found %']
-
-    scaler = MinMaxScaler()
-    columns_to_normalize = ['Home Avg Players Score', 'Away Avg Players Score']
-    matches_df[columns_to_normalize] = scaler.fit_transform(matches_df[columns_to_normalize])
-    matches_df[columns_to_normalize] *= 100
 
     def calculate_xpower(row):
         if row['Home Avg Players Score'] - row['Away Avg Players Score'] > 10:

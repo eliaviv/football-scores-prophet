@@ -5,6 +5,7 @@ from sklearn.preprocessing import MinMaxScaler
 import pandas as pd
 
 from db.sqlite_client import SQLiteClient
+from service.spi_matcher import add_fivethirtyeight_spi_data
 
 RESOURCES_PATH = 'resources'
 OUTPUT_PATH = 'output'
@@ -16,6 +17,7 @@ def prepare_matches_for_modeling(db_client):
     add_bets(matches_df)
     add_elo_xscore(matches_df)
     add_players_data(matches_df)
+    add_fivethirtyeight_spi_data(matches_df)
     add_aggregated_data(matches_df)
 
     matches_df = matches_df.round(2)
@@ -331,6 +333,8 @@ def add_aggregated_data(matches_df):
             return 1, 1  # Draw
 
     matches_df[['Home Points', 'Away Points']] = matches_df.apply(calculate_points, axis=1, result_type='expand')
+    matches_df['xG Home Diff'] = matches_df['G Home'] - matches_df['xG Home']
+    matches_df['xG Away Diff'] = matches_df['G Away'] - matches_df['xG Away']
 
     def calculate_avg(lst, n=50):
         if len(lst) == 0:
@@ -339,7 +343,7 @@ def add_aggregated_data(matches_df):
             return sum(lst[-n:]) / len(lst[-n:])
 
     team_stats_history = {
-        team: {'points': [], 'goals_for': [], 'goals_against': []}
+        team: {'points': [], 'goals_for': [], 'goals_against': [], 'xG_diff': []}
         for team in pd.concat([matches_df['Home'], matches_df['Away']]).unique()
     }
 
@@ -362,6 +366,8 @@ def add_aggregated_data(matches_df):
         matches_df.iloc[index, matches_df.columns.get_loc('Away Avg Goals Against')] = calculate_avg(team_stats_history[away_team]['goals_against'])
         matches_df.iloc[index, matches_df.columns.get_loc('Home Matches Played')] = len(team_stats_history[home_team]['points'])
         matches_df.iloc[index, matches_df.columns.get_loc('Away Matches Played')] = len(team_stats_history[away_team]['points'])
+        matches_df.iloc[index, matches_df.columns.get_loc('xG Home Avg Diff')] = calculate_avg(team_stats_history[home_team]['xG_diff'])
+        matches_df.iloc[index, matches_df.columns.get_loc('xG Away Avg Diff')] = calculate_avg(team_stats_history[away_team]['xG_diff'])
 
         if len(team_stats_history[home_team]['points']) == 0:
             matches_df.iloc[index, matches_df.columns.get_loc('Home Points/Match')] = 0
@@ -380,6 +386,8 @@ def add_aggregated_data(matches_df):
         matches_df.iloc[index, matches_df.columns.get_loc('Away Form Goals For')] = calculate_avg(team_stats_history[away_team]['goals_for'], 5)
         matches_df.iloc[index, matches_df.columns.get_loc('Home Form Goals Against')] = calculate_avg(team_stats_history[home_team]['goals_against'], 5)
         matches_df.iloc[index, matches_df.columns.get_loc('Away Form Goals Against')] = calculate_avg(team_stats_history[away_team]['goals_against'], 5)
+        matches_df.iloc[index, matches_df.columns.get_loc('xG Home Form Diff')] = calculate_avg(team_stats_history[home_team]['xG_diff'], 5)
+        matches_df.iloc[index, matches_df.columns.get_loc('xG Away Form Diff')] = calculate_avg(team_stats_history[away_team]['xG_diff'], 5)
 
         # Calculate head-to-head statistics (last 5 matches)
         matches_df.iloc[index, matches_df.columns.get_loc('Home Head-to-Head Points')] = calculate_avg(head_to_head_stats[(home_team, away_team)]['points'], 5)
@@ -393,9 +401,11 @@ def add_aggregated_data(matches_df):
         team_stats_history[home_team]['points'].append(row['Home Points'])
         team_stats_history[home_team]['goals_for'].append(row['G Home'])
         team_stats_history[home_team]['goals_against'].append(row['G Away'])
+        team_stats_history[home_team]['xG_diff'].append(row['xG Home Diff'])
         team_stats_history[away_team]['points'].append(row['Away Points'])
         team_stats_history[away_team]['goals_for'].append(row['G Away'])
         team_stats_history[away_team]['goals_against'].append(row['G Home'])
+        team_stats_history[away_team]['xG_diff'].append(row['xG Away Diff'])
 
         # Update head-to-head stats history
         head_to_head_stats[(home_team, away_team)]['points'].append(row['Home Points'])
@@ -429,6 +439,10 @@ def initialize_aggregated_columns(matches_df):
     matches_df['Away Head-to-Head Goals For'] = 0
     matches_df['Home Head-to-Head Goals Against'] = 0
     matches_df['Away Head-to-Head Goals Against'] = 0
+    matches_df['xG Home Avg Diff'] = 0
+    matches_df['xG Home Form Diff'] = 0
+    matches_df['xG Away Avg Diff'] = 0
+    matches_df['xG Away Form Diff'] = 0
 
 
 def export_data(matches_df, path):

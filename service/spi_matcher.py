@@ -63,14 +63,7 @@ def __extend_df_with_spi(df1, df2):
 
     return df1
 
-def extend_matches_with_spi():
-    output_file_name = f'./output/matches_with_players.csv'
-    df1 = pd.read_csv(output_file_name)
-
+def add_fivethirtyeight_spi_data(matches_df):
     df2 = pd.read_csv(f'./resources/soccer-spi/spi_matches.csv')
 
-    extended_df = __extend_df_with_spi(df1, df2)
-
-    extended_df.to_csv(f'./output/matches_with_players_spi.csv', index=False)
-
-    print("done adding spi data")
+    __extend_df_with_spi(matches_df, df2)

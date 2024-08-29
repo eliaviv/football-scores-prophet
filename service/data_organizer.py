@@ -23,7 +23,7 @@ def prepare_matches_for_modeling(db_client):
 
     export_data(matches_df, f'{OUTPUT_PATH}/matches_for_modeling.csv')
 
-    print('All data was added to matches.df')
+    print('All data was added to matches_for_modeling.csv')
 
 
 def load_matches_df(db_client):

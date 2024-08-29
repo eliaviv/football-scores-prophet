@@ -6,7 +6,7 @@ MAX_RETRIES = 10
 def scrap_data(db_client):
     sofifa_scraper.scrap_sofifa()
     scrap_fbref_with_retries(db_client, 0)
-    clubelo_scrapper.scrap_clubelo_to_database('db/matches.db')
+    clubelo_scrapper.scrap_clubelo_to_database(db_client)
 
 
 def scrap_fbref_with_retries(db_client, retries):

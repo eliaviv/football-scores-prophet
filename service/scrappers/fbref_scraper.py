@@ -9,11 +9,11 @@ import requests
 from bs4 import BeautifulSoup as soup
 
 LEAGUES = {
-    # 'Premier-League': '9',
-    # 'Serie-A': '11',
-    # 'La-Liga': '12',
-    # 'Ligue-1': '13',
-    # 'Bundesliga': '20'
+    'Premier-League': '9',
+    'Serie-A': '11',
+    'La-Liga': '12',
+    'Ligue-1': '13',
+    'Bundesliga': '20'
 }
 SEASONS = ['2019-2020', '2020-2021', '2021-2022', '2022-2023', '2023-2024']
 
